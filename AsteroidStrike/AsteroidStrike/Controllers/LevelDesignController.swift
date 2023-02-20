@@ -201,6 +201,6 @@ extension LevelDesignController {
 
 extension LevelDesignController: GameboardDelegate {
     func getGameBoard() -> Gameboard? {
-        levelDesigner.gameboard
+        levelDesigner.gameboard.copy()
     }
 }

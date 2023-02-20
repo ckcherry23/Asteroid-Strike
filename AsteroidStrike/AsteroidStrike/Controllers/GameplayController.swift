@@ -39,7 +39,6 @@ class GameplayController: UIViewController {
     private func setupGameEngine() {
         let gameboard = gameboardDelegate?.getGameBoard() ?? Gameboard.getDefaultGameboard(of: gameplayArea.bounds.size)
         gameEngine = GameEngine(gameboard: gameboard, gameplayArea: gameplayArea.bounds, rendererDelegate: self)
-        print(gameEngine.gameboard.pegs.map({ $0.location }))
     }
 
     private func addGameplayElements() {
@@ -68,7 +67,6 @@ class GameplayController: UIViewController {
             }
             addPegToView(pegView: createPegViewFromPeg(peg))
         }
-        print(gameplayArea.subviews.map({ $0.center }))
     }
 
     private func addPegToView(pegView: PegView) {

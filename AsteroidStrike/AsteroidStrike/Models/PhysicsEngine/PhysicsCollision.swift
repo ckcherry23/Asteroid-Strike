@@ -41,6 +41,10 @@ class PhysicsCollision {
             self.init(firstBody: firstBody, secondBody: secondBody)
         case let (firstBody as CirclePhysicsBody, secondBody as EdgePhysicsBody):
             self.init(firstBody: firstBody, secondBody: secondBody)
+//        case let (firstBody as RectanglePhysicsBody, secondBody as CirclePhysicsBody):
+//            self.init(firstBody: firstBody, secondBody: secondBody)
+//        case let (firstBody as CirclePhysicsBody, secondBody as RectanglePhysicsBody):
+//            self.init(firstBody: firstBody, secondBody: secondBody)
         case (_, _):
             return nil
         }
@@ -62,6 +66,18 @@ class PhysicsCollision {
         let normal: CGVector = edge.normalTowards(other: firstBody.velocity).normalized()
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
+
+//    convenience init?(firstBody: CirclePhysicsBody, secondBody: RectanglePhysicsBody) {
+//        let edge = CGVector(dx: secondBody.rect.getEdges().top.destination.x, dy: secondBody.rect.getEdges().top.destination.y)
+//        let normal: CGVector = edge.normalTowards(other: firstBody.velocity).normalized()
+//        self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
+//    }
+//
+//    convenience init?(firstBody: RectanglePhysicsBody, secondBody: CirclePhysicsBody) {
+//        let edge = CGVector(dx: firstBody.rect.getEdges().top.destination.x, dy: firstBody.rect.getEdges().top.destination.y)
+//        let normal: CGVector = edge.normalTowards(other: firstBody.velocity).normalized()
+//        self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
+//    }
 
     func resolveCollision(resolvers: [CollisionResolver]) {
         resolvers.forEach({ $0.resolve(collision: self) })

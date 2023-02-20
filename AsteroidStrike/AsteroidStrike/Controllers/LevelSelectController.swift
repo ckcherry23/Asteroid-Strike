@@ -95,7 +95,7 @@ class LevelSelectController: UITableViewController {
 
 extension LevelSelectController: GameboardDelegate {
     func getGameBoard() -> Gameboard? {
-        loadedLevel?.gameBoard
+        loadedLevel?.gameBoard.copy()
     }
 }
 

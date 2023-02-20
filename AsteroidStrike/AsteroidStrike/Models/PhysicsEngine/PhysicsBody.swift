@@ -74,6 +74,11 @@ class PhysicsBody {
         addGravityEffects()
     }
 
+    fileprivate init(rect: CGRect) {
+        hitBox = CGPath(rect: rect, transform: nil)
+        addGravityEffects()
+    }
+
     func contains(point: CGPoint) -> Bool {
         hitBox.contains(point)
     }
@@ -157,5 +162,13 @@ class EdgePhysicsBody: PhysicsBody {
         self.source = source
         self.destination = destination
         super.init(source: source, destination: destination)
+    }
+}
+
+class RectanglePhysicsBody: PhysicsBody {
+    var rect: CGRect
+    override init(rect: CGRect) {
+        self.rect = rect
+        super.init(rect: rect)
     }
 }

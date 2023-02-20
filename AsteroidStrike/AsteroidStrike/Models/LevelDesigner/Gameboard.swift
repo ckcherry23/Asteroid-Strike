@@ -58,6 +58,12 @@ struct Gameboard: Codable {
         self.board = CGPath(rect: CGRect(origin: CGPoint(), size: boardSize), transform: nil)
     }
 
+    func copy() -> Gameboard {
+        var copy = Gameboard(board: board)
+        pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, color: $0.color)) })
+        return copy
+    }
+
     private func pegCanBeAdded(addedPeg: Peg) -> Bool {
         isPegNotOverlapped(peg: addedPeg) && isPegInsideCanvas(peg: addedPeg)
     }
