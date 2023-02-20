@@ -32,4 +32,11 @@ struct LevelDesigner {
     mutating func updateCanvasSize(_ canvasSize: CGSize) {
         gameboard.updateBoard(to: canvasSize)
     }
+
+}
+
+extension LevelDesigner {
+    mutating func updateGameboardFromLoadedLevel(savedLevel: SavedLevel) {
+        gameboard = savedLevel.gameBoard
+    }
 }

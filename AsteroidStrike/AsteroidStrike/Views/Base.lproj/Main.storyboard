@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SEN-vs-nxF">
-    <device id="ipad11_0rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="ipad7_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <accessibilityOverrides/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,21 +15,21 @@
             <objects>
                 <viewController storyboardIdentifier="LevelDesignController" title="Level Design View Controller" id="BYZ-38-t0r" customClass="LevelDesignController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="rYb-Dy-ZZg">
-                                <rect key="frame" x="0.0" y="74" width="834" height="905.5"/>
+                                <rect key="frame" x="0.0" y="74" width="744" height="844.5"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="3sY-oi-6no" appends="YES" id="4qk-Eq-1Gg"/>
                                 </connections>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OpU-YA-oLj" userLabel="Level Designer Tools">
-                                <rect key="frame" x="20" y="999.5" width="794" height="154.5"/>
+                                <rect key="frame" x="20" y="938.5" width="704" height="154.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="434" translatesAutoresizingMaskIntoConstraints="NO" id="ows-Wq-pFK" userLabel="Palette">
-                                        <rect key="frame" x="0.0" y="0.0" width="794" height="100"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ows-Wq-pFK" userLabel="Palette">
+                                        <rect key="frame" x="0.0" y="0.0" width="704" height="100"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FCD-da-yVc" userLabel="Peg Options">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="100"/>
@@ -60,7 +61,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
-                                                <rect key="frame" x="694" y="0.0" width="100" height="100"/>
+                                                <rect key="frame" x="604" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="oHH-70-wMy"/>
                                                     <constraint firstAttribute="height" constant="100" id="ySV-DL-djU"/>
@@ -74,44 +75,52 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NZx-a3-EEc" userLabel="Storage">
-                                        <rect key="frame" x="0.0" y="120" width="794" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="120" width="704" height="34.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="401-o0-b9r">
-                                                <rect key="frame" x="0.0" y="0.0" width="67.5" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="401-o0-b9r">
+                                                <rect key="frame" x="0.0" y="0.0" width="72" height="34.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Reset"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Reset">
+                                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="onTapResetButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rOz-sg-O8S"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HET-Cw-bXi">
-                                                <rect key="frame" x="87.5" y="0.0" width="61.5" height="34.5"/>
+                                                <rect key="frame" x="92" y="0.0" width="69" height="34.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Load"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Load">
+                                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="onTapLoadButton:" destination="TvM-ki-iBP" eventType="touchUpInside" id="NVV-gt-hti"/>
                                                     <segue destination="ivu-ae-LuX" kind="presentation" id="r6A-2u-Bvj"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Level Name" textAlignment="justified" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SdD-TA-tf4">
-                                                <rect key="frame" x="169" y="0.0" width="462.5" height="34.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Level Name" textAlignment="justified" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SdD-TA-tf4">
+                                                <rect key="frame" x="181" y="0.0" width="355.5" height="34.5"/>
+                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcW-f4-Iog">
-                                                <rect key="frame" x="651.5" y="0.0" width="61" height="34.5"/>
+                                                <rect key="frame" x="556.5" y="0.0" width="62" height="34.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Save"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Save">
+                                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="onTapSaveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mnt-hp-8Os"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lP3-9H-O4G">
-                                                <rect key="frame" x="732.5" y="0.0" width="61.5" height="34.5"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lP3-9H-O4G">
+                                                <rect key="frame" x="638.5" y="0.0" width="65.5" height="34.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="tinted" title="Start"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Start">
+                                                    <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
+                                                </buttonConfiguration>
                                                 <connections>
-                                                    <segue destination="Hde-6i-thd" kind="show" id="oi6-CD-dWD"/>
+                                                    <segue destination="Hde-6i-thd" kind="show" identifier="showSegueWithGameboard" id="oi6-CD-dWD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -125,14 +134,13 @@
                         <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OpU-YA-oLj" secondAttribute="trailing" constant="20" id="1rs-XJ-87U"/>
                             <constraint firstItem="OpU-YA-oLj" firstAttribute="top" secondItem="rYb-Dy-ZZg" secondAttribute="bottom" constant="20" id="WFR-FK-dJA"/>
                             <constraint firstItem="OpU-YA-oLj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="a4H-nj-IAx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OpU-YA-oLj" secondAttribute="bottom" constant="20" id="cLz-q7-beK"/>
                             <constraint firstItem="rYb-Dy-ZZg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dvZ-Gp-JCV"/>
                             <constraint firstItem="rYb-Dy-ZZg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jxM-Hh-esr"/>
                             <constraint firstItem="rYb-Dy-ZZg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="kdv-HD-wQe"/>
-                            <constraint firstItem="OpU-YA-oLj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wBq-TE-wfu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OpU-YA-oLj" secondAttribute="trailing" constant="20" id="uGA-DF-oY5"/>
                             <constraint firstItem="rYb-Dy-ZZg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yjK-j5-9qq"/>
                         </constraints>
                     </view>
@@ -163,18 +171,18 @@
             <objects>
                 <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="3op-Jh-mrj" userLabel="Levels Table View">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicStyleCell" id="bgb-8U-jeW" userLabel="Level Table View Cell">
-                                <rect key="frame" x="0.0" y="50" width="704" height="43.5"/>
+                                <rect key="frame" x="0.0" y="50" width="744" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgb-8U-jeW" id="K7n-DV-y8a">
-                                    <rect key="frame" x="0.0" y="0.0" width="704" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="744" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="uxH-BA-tKy" kind="unwind" identifier="unwindToLevelDesign" unwindAction="unwindToLevelDesignWithSender:" id="U7c-Hm-Hab"/>
+                                    <segue destination="uxH-BA-tKy" kind="unwind" identifier="unwindToLevelDesign" unwindAction="unwindToLevelDesignWithSender:" id="qDY-N8-Cd4"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -185,22 +193,25 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Level" customizationIdentifier="" id="lbc-vi-b0b"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="Hde-6i-thd" kind="show" identifier="showSegueWithLoadedLevel" id="VWM-AO-OkF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLn-Jl-AOS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="uxH-BA-tKy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="870" y="677"/>
+            <point key="canvasLocation" x="927" y="350"/>
         </scene>
         <!--Gameplay-->
         <scene sceneID="94i-ps-nAv">
             <objects>
                 <viewController id="Hde-6i-thd" customClass="GameplayController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iqr-nH-rPJ">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="iPD-H4-fcE">
-                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
+                                <rect key="frame" x="0.0" y="74" width="744" height="1039"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="QoY-DB-ZqH" appends="YES" id="ArO-Kr-clA"/>
@@ -208,7 +219,7 @@
                                 </connections>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-2U-3AE" customClass="CannonView" customModule="AsteroidStrike" customModuleProvider="target">
-                                <rect key="frame" x="342" y="74" width="150" height="150"/>
+                                <rect key="frame" x="297" y="74" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="9f4-N6-LPP"/>
                                     <constraint firstAttribute="width" constant="150" id="yfD-sk-e2F"/>
@@ -244,34 +255,43 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="870" y="-26"/>
+            <point key="canvasLocation" x="1707" y="677"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Xv3-7m-Uv8">
             <objects>
                 <viewController title="Home View Controller" id="WZn-Xd-JEA" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c0f-bS-6GE">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-vO-QBI">
-                                <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                                <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Qw9-yY-I9j">
-                                <rect key="frame" x="356.5" y="532.5" width="121" height="129"/>
+                                <rect key="frame" x="157.5" y="418" width="429.5" height="297.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-2A-dYn">
-                                        <rect key="frame" x="0.0" y="0.0" width="121" height="34.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asteroid Strike" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2G-i3-BRr">
+                                        <rect key="frame" x="0.0" y="0.0" width="429.5" height="63.5"/>
+                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="50"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-2A-dYn">
+                                        <rect key="frame" x="0.0" y="123.5" width="429.5" height="57"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Start Game"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Start Game">
+                                            <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="34"/>
+                                        </buttonConfiguration>
                                         <connections>
-                                            <segue destination="Hde-6i-thd" kind="show" id="Lam-7l-NvX"/>
+                                            <segue destination="ivu-ae-LuX" kind="show" id="uFi-ms-JOw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5N-ac-89k">
-                                        <rect key="frame" x="0.0" y="94.5" width="121" height="34.5"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Design Level"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u5N-ac-89k">
+                                        <rect key="frame" x="0.0" y="240.5" width="429.5" height="57"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Design Level">
+                                            <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="34"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="djr-8z-tZF"/>
                                         </connections>
@@ -302,7 +322,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SEN-vs-nxF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qvs-zd-cCe">
-                        <rect key="frame" x="0.0" y="24" width="834" height="50"/>
+                        <rect key="frame" x="0.0" y="24" width="744" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -316,17 +336,18 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Lam-7l-NvX"/>
+        <segue reference="VWM-AO-OkF"/>
+        <segue reference="uFi-ms-JOw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AccentColor"/>
     <resources>
-        <image name="background" width="1536" height="1536"/>
+        <image name="background" width="1920" height="1080"/>
         <image name="cannon" width="512" height="512"/>
         <image name="delete" width="256" height="256"/>
         <image name="peg-blue" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
         <namedColor name="AccentColor">
-            <color red="0.53725490196078429" green="0.46666666666666667" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.54199999570846558" green="0.25999999046325684" blue="0.57099997997283936" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

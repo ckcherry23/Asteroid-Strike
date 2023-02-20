@@ -22,6 +22,7 @@ class GameplayController: UIViewController {
     private var isDisappearAnimationComplete = true
 
     private var gameEngine: GameEngine!
+    var gameboardDelegate: GameboardDelegate?
 
     override func viewDidLayoutSubviews() {
         setupGameEngine()
@@ -36,7 +37,7 @@ class GameplayController: UIViewController {
     }
 
     private func setupGameEngine() {
-        let gameboard = Gameboard.getDefaultGameboard(of: gameplayArea.bounds.size)
+        let gameboard = gameboardDelegate?.getGameBoard() ?? Gameboard.getDefaultGameboard(of: gameplayArea.bounds.size)
         gameEngine = GameEngine(gameboard: gameboard, gameplayArea: gameplayArea.bounds, rendererDelegate: self)
     }
 

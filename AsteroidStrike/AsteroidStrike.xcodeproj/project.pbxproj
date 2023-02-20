@@ -22,7 +22,7 @@
 		C76463AD299F74F400AF0413 /* CGVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764638B299F74F300AF0413 /* CGVector.swift */; };
 		C76463AE299F74F400AF0413 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764638C299F74F300AF0413 /* CGPoint.swift */; };
 		C76463AF299F74F400AF0413 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764638D299F74F300AF0413 /* CGRect.swift */; };
-		C76463B0299F74F400AF0413 /* LevelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646390299F74F300AF0413 /* LevelStorage.swift */; };
+		C76463B0299F74F400AF0413 /* JSONLevelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646390299F74F300AF0413 /* JSONLevelStorage.swift */; };
 		C76463B1299F74F400AF0413 /* SavedLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646391299F74F300AF0413 /* SavedLevel.swift */; };
 		C76463B2299F74F400AF0413 /* LevelDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646393299F74F300AF0413 /* LevelDesigner.swift */; };
 		C76463B3299F74F400AF0413 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646394299F74F300AF0413 /* Peg.swift */; };
@@ -77,7 +77,7 @@
 		C764638B299F74F300AF0413 /* CGVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVector.swift; sourceTree = "<group>"; };
 		C764638C299F74F300AF0413 /* CGPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		C764638D299F74F300AF0413 /* CGRect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
-		C7646390299F74F300AF0413 /* LevelStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelStorage.swift; sourceTree = "<group>"; };
+		C7646390299F74F300AF0413 /* JSONLevelStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONLevelStorage.swift; sourceTree = "<group>"; };
 		C7646391299F74F300AF0413 /* SavedLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedLevel.swift; sourceTree = "<group>"; };
 		C7646393299F74F300AF0413 /* LevelDesigner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigner.swift; sourceTree = "<group>"; };
 		C7646394299F74F300AF0413 /* Peg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		C764638F299F74F300AF0413 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				C7646390299F74F300AF0413 /* LevelStorage.swift */,
+				C7646390299F74F300AF0413 /* JSONLevelStorage.swift */,
 				C7646391299F74F300AF0413 /* SavedLevel.swift */,
 			);
 			path = Storage;
@@ -461,7 +461,7 @@
 				C76463A5299F74F400AF0413 /* PegView.swift in Sources */,
 				C76463B1299F74F400AF0413 /* SavedLevel.swift in Sources */,
 				C76463A6299F74F400AF0413 /* PaletteButton.swift in Sources */,
-				C76463B0299F74F400AF0413 /* LevelStorage.swift in Sources */,
+				C76463B0299F74F400AF0413 /* JSONLevelStorage.swift in Sources */,
 				C76463BB299F74F400AF0413 /* GameEngine.swift in Sources */,
 				C76463AE299F74F400AF0413 /* CGPoint.swift in Sources */,
 				C76463A7299F74F400AF0413 /* BallView.swift in Sources */,

@@ -8,10 +8,12 @@
 import UIKit
 
 class LevelSelectController: UITableViewController {
-    private let numberOfSections = 1
-    private let sectionTitle = "Select Level"
+    private let numberOfSections = 2
+    private let sectionTitles = ["Default Levels", "Your Saved Levels"]
     private var savedLevelNames: [String] = []
     private(set) var loadedLevel: SavedLevel?
+
+    private var levelStorage: LevelStorage = JSONLevelStorage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class LevelSelectController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitle
+        return sectionTitles[section]
     }
 
     override func tableView(_ tableView: UITableView,
@@ -40,7 +42,7 @@ class LevelSelectController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedLevelName = savedLevelNames[indexPath.row]
-        LevelStorage.loadLevel(levelName: selectedLevelName, completion: { result in
+        levelStorage.loadLevel(levelName: selectedLevelName, completion: { result in
             switch result {
             case .failure(let error):
                 print(error)
@@ -49,12 +51,21 @@ class LevelSelectController: UITableViewController {
             }
         })
         self.performSegue(withIdentifier: "unwindToLevelDesign", sender: self)
+        self.performSegue(withIdentifier: "showSegueWithLoadedLevel", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showSegueWithLoadedLevel",
+              let gameplayController: GameplayController = segue.destination as? GameplayController else {
+            return
+        }
+        gameplayController.gameboardDelegate = self
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            LevelStorage.deleteLevel(levelName: savedLevelNames[indexPath.row], completion: { result in
+            levelStorage.deleteLevel(levelName: savedLevelNames[indexPath.row], completion: { result in
                 switch result {
                 case .failure(let error):
                     print(error)
@@ -71,7 +82,7 @@ class LevelSelectController: UITableViewController {
     }
 
     private func getSavedLevelNames() {
-        LevelStorage.getAllLevelNames { result in
+        levelStorage.getAllLevelNames { result in
             switch result {
             case .failure(let error):
                 print(error)
@@ -80,4 +91,14 @@ class LevelSelectController: UITableViewController {
             }
         }
     }
+}
+
+extension LevelSelectController: GameboardDelegate {
+    func getGameBoard() -> Gameboard? {
+        loadedLevel?.gameBoard
+    }
+}
+
+protocol GameboardDelegate: AnyObject {
+    func getGameBoard() -> Gameboard?
 }

@@ -25,6 +25,7 @@ class LevelDesignController: UIViewController {
             updateCanvas()
         }
     }
+    private var levelStorage: LevelStorage = JSONLevelStorage()
 
     @IBOutlet weak var bluePegButton: PaletteButton!
     @IBOutlet weak var orangePegButton: PaletteButton!
@@ -142,7 +143,7 @@ extension LevelDesignController {
             return
         }
         let newLevel: SavedLevel = SavedLevel(gameBoard: levelDesigner.gameboard, levelName: levelName)
-        LevelStorage.saveLevel(level: newLevel) {result in
+        levelStorage.saveLevel(level: newLevel) {result in
             switch result {
             case .failure(let error):
                 print(error)
@@ -158,8 +159,16 @@ extension LevelDesignController {
         else {
             return
         }
-        levelDesigner = LevelDesigner(gameboard: loadedLevel.gameBoard)
+        levelDesigner.updateGameboardFromLoadedLevel(savedLevel: loadedLevel)
         levelNameTextField.text = loadedLevel.levelName
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showSegueWithGameboard",
+              let gameplayController: GameplayController = segue.destination as? GameplayController else {
+            return
+        }
+        gameplayController.gameboardDelegate = self
     }
 
     // Move view with keyboard
@@ -186,5 +195,11 @@ extension LevelDesignController {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+    }
+}
+
+extension LevelDesignController: GameboardDelegate {
+    func getGameBoard() -> Gameboard? {
+        levelDesigner.gameboard
     }
 }
