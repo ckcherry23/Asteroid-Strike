@@ -10,7 +10,6 @@ import UIKit
 class BallView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.image = UIImage(named: "ball")
         self.customize()
     }
 
@@ -19,6 +18,8 @@ class BallView: UIImageView {
     }
 
     private func customize() {
+        self.image = UIImage(named: "ball")
+        self.contentMode = .scaleAspectFill
         self.layer.cornerRadius = bounds.size.width / 2
         self.layer.zPosition = ZIndices.ballView
     }

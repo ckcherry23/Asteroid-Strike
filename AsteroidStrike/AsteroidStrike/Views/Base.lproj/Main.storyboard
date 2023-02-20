@@ -12,7 +12,7 @@
         <!--Level Design View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LevelDesignController" title="Level Design View Controller" id="BYZ-38-t0r" customClass="LevelDesignController" customModule="CoreGameplay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelDesignController" title="Level Design View Controller" id="BYZ-38-t0r" customClass="LevelDesignController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -33,7 +33,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FCD-da-yVc" userLabel="Peg Options">
                                                 <rect key="frame" x="0.0" y="0.0" width="220" height="100"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpN-Of-cAT" customClass="PaletteButton" customModule="CoreGameplay" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpN-Of-cAT" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="CPW-11-Agf"/>
@@ -45,7 +45,7 @@
                                                             <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3d9-8S-bqd"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J43-cx-TLp" userLabel="Orange Peg Button" customClass="PaletteButton" customModule="CoreGameplay" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J43-cx-TLp" userLabel="Orange Peg Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                         <rect key="frame" x="120" y="0.0" width="100" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="GeA-0V-1SR"/>
@@ -59,7 +59,7 @@
                                                     </button>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="PaletteButton" customModule="CoreGameplay" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                 <rect key="frame" x="694" y="0.0" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="oHH-70-wMy"/>
@@ -161,7 +161,7 @@
         <!--Level Select View Controller-->
         <scene sceneID="0mc-Gy-mCj">
             <objects>
-                <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="CoreGameplay" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="3op-Jh-mrj" userLabel="Levels Table View">
                         <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
         <!--Gameplay-->
         <scene sceneID="94i-ps-nAv">
             <objects>
-                <viewController id="Hde-6i-thd" customClass="GameplayController" customModule="CoreGameplay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Hde-6i-thd" customClass="GameplayController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iqr-nH-rPJ">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -207,7 +207,7 @@
                                     <outletCollection property="gestureRecognizers" destination="vf5-Vj-GJl" appends="YES" id="JxM-WC-XkE"/>
                                 </connections>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-2U-3AE" customClass="CannonView" customModule="CoreGameplay" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-2U-3AE" customClass="CannonView" customModule="AsteroidStrike" customModuleProvider="target">
                                 <rect key="frame" x="342" y="74" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="9f4-N6-LPP"/>
@@ -316,17 +316,17 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oi6-CD-dWD"/>
+        <segue reference="Lam-7l-NvX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AccentColor"/>
     <resources>
-        <image name="background" width="4000" height="3000"/>
+        <image name="background" width="1536" height="1536"/>
         <image name="cannon" width="512" height="512"/>
         <image name="delete" width="256" height="256"/>
         <image name="peg-blue" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
         <namedColor name="AccentColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.53725490196078429" green="0.46666666666666667" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
