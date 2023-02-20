@@ -39,6 +39,7 @@ class GameplayController: UIViewController {
     private func setupGameEngine() {
         let gameboard = gameboardDelegate?.getGameBoard() ?? Gameboard.getDefaultGameboard(of: gameplayArea.bounds.size)
         gameEngine = GameEngine(gameboard: gameboard, gameplayArea: gameplayArea.bounds, rendererDelegate: self)
+        print(gameEngine.gameboard.pegs.map({ $0.location }))
     }
 
     private func addGameplayElements() {
@@ -67,6 +68,7 @@ class GameplayController: UIViewController {
             }
             addPegToView(pegView: createPegViewFromPeg(peg))
         }
+        print(gameplayArea.subviews.map({ $0.center }))
     }
 
     private func addPegToView(pegView: PegView) {
@@ -94,7 +96,8 @@ class GameplayController: UIViewController {
             return
         }
         let removedPegs = pegViews.filter({ pegView in
-            !gameEngine.gameboard.pegs.map({ $0.location }).contains(pegView.center)})
+            !gameEngine.gameboard.pegs.compactMap({ $0.location }).contains(pegView.location)
+        })
         fadeOutViews(views: removedPegs)
     }
 
@@ -119,7 +122,7 @@ class GameplayController: UIViewController {
     }
 
     private func getPegViewForPeg(_ peg: Peg) -> PegView? {
-        pegViews.first(where: { $0.center == peg.location })
+        pegViews.first(where: { $0.location == peg.location })
     }
 
     private func setupDisplayRefreshLoop() {

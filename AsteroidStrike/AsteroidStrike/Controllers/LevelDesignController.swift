@@ -61,7 +61,8 @@ class LevelDesignController: UIViewController {
     }
 
     private func addNewViews() {
-        for peg in levelDesigner.gameboard.pegs where !canvas.subviews.map({ $0.center }).contains(peg.location) {
+        for peg in levelDesigner.gameboard.pegs
+        where !canvas.subviews.compactMap({ ($0 as? PegView)?.location }).contains(peg.location) {
             let pegViewToAdd: PegView
             switch peg.color {
             case .blue:
@@ -76,7 +77,7 @@ class LevelDesignController: UIViewController {
 
     private func removeErasedViews() {
         for pegView in canvas.subviews
-        where !levelDesigner.gameboard.pegs.map({ $0.location }).contains(pegView.center) {
+        where !levelDesigner.gameboard.pegs.compactMap({ $0.location }).contains((pegView as? PegView)?.location) {
             pegView.removeFromSuperview()
         }
     }
