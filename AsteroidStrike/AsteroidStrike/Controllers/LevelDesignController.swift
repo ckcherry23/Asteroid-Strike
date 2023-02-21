@@ -26,6 +26,7 @@ class LevelDesignController: UIViewController {
         }
     }
     private var levelStorage: LevelStorage = JSONLevelStorage()
+    private var selectedCanvasObject: (any CanvasObject)?
 
     @IBOutlet weak var bluePegButton: PaletteButton!
     @IBOutlet weak var orangePegButton: PaletteButton!
@@ -75,6 +76,7 @@ class LevelDesignController: UIViewController {
             }
             setupCanvasObjectGestures(canvasObject: pegViewToAdd)
             canvas.addSubview(pegViewToAdd)
+            selectedCanvasObject = pegViewToAdd
         }
 
         for block in levelDesigner.gameboard.blocks
@@ -82,6 +84,7 @@ class LevelDesignController: UIViewController {
             let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size)
             setupCanvasObjectGestures(canvasObject: blockViewToAdd)
             canvas.addSubview(blockViewToAdd)
+            selectedCanvasObject = blockViewToAdd
         }
     }
 
@@ -90,6 +93,9 @@ class LevelDesignController: UIViewController {
         where !levelDesigner.gameboard.pegs.compactMap({ $0.location })
             .contains((canvasObject as? (any CanvasObject))?.location) {
             canvasObject.removeFromSuperview()
+            if canvasObject == selectedCanvasObject {
+                selectedCanvasObject = nil
+            }
         }
     }
 
@@ -114,6 +120,7 @@ class LevelDesignController: UIViewController {
         guard let draggedCanvasObject = gestureRecognizer.view as? (any CanvasObject) else {
             return
         }
+        selectedCanvasObject = draggedCanvasObject
         let oldLocation: CGPoint = draggedCanvasObject.center
         let newLocation = gestureRecognizer.location(in: canvas)
 

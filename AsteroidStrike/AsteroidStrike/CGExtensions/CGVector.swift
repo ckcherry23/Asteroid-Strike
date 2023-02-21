@@ -82,6 +82,11 @@ extension CGVector {
         return CGVector.vector(fromPoint: closestEdge.destination) - CGVector.vector(fromPoint: closestEdge.source)
     }
 
+    //
+    // Find distance of point from line
+    // Referenced from: https://stackoverflow.com/questions/70795702/
+    //                  is-there-an-efficient-way-to-find-the-nearest-line-segment-to-a-point-in-3-dimen
+    //
     private static func findSquaredDistanceFromCircle(edge: RectangleEdges.Edge,
                                                       circleBody: CirclePhysicsBody) -> CGFloat {
         let edgeVector = CGVector.vector(fromPoint: edge.destination) - CGVector.vector(fromPoint: edge.source)
