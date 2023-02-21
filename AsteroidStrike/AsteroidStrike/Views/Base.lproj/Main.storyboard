@@ -31,35 +31,68 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ows-Wq-pFK" userLabel="Palette">
                                         <rect key="frame" x="0.0" y="0.0" width="704" height="100"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FCD-da-yVc" userLabel="Peg Options">
-                                                <rect key="frame" x="0.0" y="0.0" width="220" height="100"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTm-mi-G1h">
+                                                <rect key="frame" x="0.0" y="0.0" width="340" height="100"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpN-Of-cAT" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FCD-da-yVc" userLabel="Peg Options">
+                                                        <rect key="frame" x="0.0" y="0.0" width="340" height="100"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpN-Of-cAT" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="CPW-11-Agf"/>
+                                                                    <constraint firstAttribute="height" constant="100" id="XcH-Id-5OC"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="peg-blue"/>
+                                                                <connections>
+                                                                    <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3d9-8S-bqd"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J43-cx-TLp" userLabel="Orange Peg Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                                <rect key="frame" x="120" y="0.0" width="100" height="100"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="100" id="GeA-0V-1SR"/>
+                                                                    <constraint firstAttribute="height" constant="100" id="UFa-iC-kH0"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="peg-orange"/>
+                                                                <connections>
+                                                                    <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rP6-ty-RWP"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhb-UN-4WD" userLabel="Block Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                                <rect key="frame" x="240" y="0.0" width="100" height="100"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="100" id="gFa-Yf-p95"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="n9A-Fc-EpT"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" image="block">
+                                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7BJ-7t-b61"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="100" id="CPW-11-Agf"/>
-                                                            <constraint firstAttribute="height" constant="100" id="XcH-Id-5OC"/>
+                                                            <constraint firstAttribute="width" constant="340" id="jbb-AI-Ot9"/>
+                                                            <constraint firstAttribute="height" constant="100" id="yXa-H8-vzf"/>
                                                         </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="peg-blue"/>
-                                                        <connections>
-                                                            <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3d9-8S-bqd"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J43-cx-TLp" userLabel="Orange Peg Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
-                                                        <rect key="frame" x="120" y="0.0" width="100" height="100"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="100" id="GeA-0V-1SR"/>
-                                                            <constraint firstAttribute="height" constant="100" id="UFa-iC-kH0"/>
-                                                        </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" image="peg-orange"/>
-                                                        <connections>
-                                                            <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rP6-ty-RWP"/>
-                                                        </connections>
-                                                    </button>
+                                                    </stackView>
                                                 </subviews>
-                                            </stackView>
+                                                <constraints>
+                                                    <constraint firstItem="FCD-da-yVc" firstAttribute="leading" secondItem="Q3W-lf-VmQ" secondAttribute="leading" id="3CJ-Km-4np"/>
+                                                    <constraint firstItem="FCD-da-yVc" firstAttribute="centerX" secondItem="nTm-mi-G1h" secondAttribute="centerX" id="JeB-Sq-Yui"/>
+                                                    <constraint firstItem="FCD-da-yVc" firstAttribute="bottom" secondItem="Q3W-lf-VmQ" secondAttribute="bottom" id="Txf-kD-Mll"/>
+                                                    <constraint firstItem="FCD-da-yVc" firstAttribute="centerY" secondItem="nTm-mi-G1h" secondAttribute="centerY" id="ZU9-Qb-V6f"/>
+                                                    <constraint firstItem="Q3W-lf-VmQ" firstAttribute="trailing" secondItem="FCD-da-yVc" secondAttribute="trailing" id="jHA-mD-NCC"/>
+                                                    <constraint firstItem="FCD-da-yVc" firstAttribute="top" secondItem="Q3W-lf-VmQ" secondAttribute="top" id="nld-Ks-TOW"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="bqA-1s-z5t"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="Q3W-lf-VmQ"/>
+                                            </scrollView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                 <rect key="frame" x="604" y="0.0" width="100" height="100"/>
                                                 <constraints>
@@ -146,14 +179,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="Design Level" id="p8w-l5-Lep"/>
                     <connections>
+                        <outlet property="blockButton" destination="Nhb-UN-4WD" id="a8D-RA-apf"/>
                         <outlet property="bluePegButton" destination="LpN-Of-cAT" id="Iev-5u-EYe"/>
                         <outlet property="canvas" destination="rYb-Dy-ZZg" id="hvu-kp-pq5"/>
                         <outlet property="eraseButton" destination="bK6-xx-LXr" id="MMW-IM-cth"/>
                         <outlet property="levelNameTextField" destination="SdD-TA-tf4" id="SUk-fP-jk8"/>
                         <outlet property="orangePegButton" destination="J43-cx-TLp" id="xxf-Ow-2C9"/>
-                        <outletCollection property="paletteButtons" destination="LpN-Of-cAT" collectionClass="NSMutableArray" id="cmi-dU-u6z"/>
-                        <outletCollection property="paletteButtons" destination="J43-cx-TLp" collectionClass="NSMutableArray" id="qjx-8Y-Jhr"/>
                         <outletCollection property="paletteButtons" destination="bK6-xx-LXr" collectionClass="NSMutableArray" id="lVs-5e-HBL"/>
+                        <outletCollection property="paletteButtons" destination="J43-cx-TLp" collectionClass="NSMutableArray" id="qjx-8Y-Jhr"/>
+                        <outletCollection property="paletteButtons" destination="LpN-Of-cAT" collectionClass="NSMutableArray" id="cmi-dU-u6z"/>
+                        <outletCollection property="paletteButtons" destination="Nhb-UN-4WD" collectionClass="NSMutableArray" id="Dti-t6-gD0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -164,14 +199,14 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="138.84892086330936" y="676.8844221105528"/>
+            <point key="canvasLocation" x="138.70967741935485" y="676.52250661959397"/>
         </scene>
         <!--Level Select View Controller-->
         <scene sceneID="0mc-Gy-mCj">
             <objects>
                 <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="3op-Jh-mrj" userLabel="Levels Table View">
-                        <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
+                        <rect key="frame" x="0.0" y="0.0" width="744" height="1113"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicStyleCell" id="bgb-8U-jeW" userLabel="Level Table View Cell">
@@ -336,15 +371,16 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VWM-AO-OkF"/>
-        <segue reference="uFi-ms-JOw"/>
+        <segue reference="oi6-CD-dWD"/>
+        <segue reference="r6A-2u-Bvj"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AccentColor"/>
     <resources>
-        <image name="background" width="1920" height="1080"/>
+        <image name="background" width="1920" height="1229"/>
+        <image name="block" width="320" height="320"/>
         <image name="cannon" width="512" height="512"/>
         <image name="delete" width="256" height="256"/>
-        <image name="launch" width="1920" height="1152"/>
+        <image name="launch" width="1280" height="1920"/>
         <image name="peg-blue" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
         <namedColor name="AccentColor">

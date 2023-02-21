@@ -15,7 +15,7 @@ struct Peg: GameboardObject {
     private(set) var location: CGPoint
     private(set) var color: PegColor
 
-    var physicsBody: PhysicsBody
+    var physicsBody: CirclePhysicsBody
     var isHit: Bool {
         physicsBody.hitCounter > 0
     }
@@ -32,14 +32,6 @@ struct Peg: GameboardObject {
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false
         self.physicsBody.mass = Peg.defaultMass
-    }
-
-    func isOverlapping(gameboardObject: GameboardObject) -> Bool {
-        self.hitBox.intersects(gameboardObject.hitBox)
-    }
-
-    func isWithin(path: CGPath) -> Bool {
-        self.hitBox.subtracting(path).isEmpty
     }
 }
 

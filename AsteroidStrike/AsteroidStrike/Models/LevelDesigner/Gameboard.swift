@@ -7,14 +7,10 @@
 
 import CoreGraphics
 
-struct Gameboard: Codable {
+struct Gameboard {
     private(set) var pegs: Set<Peg> = Set<Peg>()
+    private(set) var blocks: Set<Block> = Set<Block>()
     private(set) var board: CGPath?
-
-    private enum CodingKeys: String, CodingKey {
-        // `board` is not stored as it is different for each screen size
-        case pegs
-    }
 
     mutating func addPeg(addedPeg: Peg) {
         guard pegCanBeAdded(addedPeg: addedPeg) else {
@@ -54,22 +50,13 @@ struct Gameboard: Codable {
         pegs.first(where: { $0.hitBox.contains(location) }) ?? nil
     }
 
-    mutating func updateBoard(to boardSize: CGSize) {
-        self.board = CGPath(rect: CGRect(origin: CGPoint(), size: boardSize), transform: nil)
-    }
-
-    func copy() -> Gameboard {
-        var copy = Gameboard(board: board)
-        pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, color: $0.color)) })
-        return copy
-    }
-
     private func pegCanBeAdded(addedPeg: Peg) -> Bool {
         isPegNotOverlapped(peg: addedPeg) && isPegInsideCanvas(peg: addedPeg)
     }
 
     private func isPegNotOverlapped(peg: Peg) -> Bool {
         pegs.allSatisfy({ !$0.isOverlapping(gameboardObject: peg) })
+        && blocks.allSatisfy({ !$0.isOverlapping(gameboardObject: peg) })
     }
 
     private func isPegInsideCanvas(peg: Peg) -> Bool {
@@ -81,6 +68,80 @@ struct Gameboard: Codable {
 
     private func contains(peg: Peg) -> Bool {
         return pegs.contains(peg)
+    }
+}
+
+// Blocks
+extension Gameboard {
+    mutating func addBlock(addedBlock: Block) {
+        guard blockCanBeAdded(addedBlock: addedBlock) else {
+            return
+        }
+
+        blocks.insert(addedBlock)
+    }
+
+    mutating func moveBlock(movedBlock: Block, to newLocation: CGPoint) -> Bool {
+        let initialBlockCount = blocks.count
+        let blockAtNewPosition = Block(location: newLocation)
+
+        guard contains(block: movedBlock) else {
+            return false
+        }
+
+        deleteBlock(deletedBlock: movedBlock)
+
+        guard blockCanBeAdded(addedBlock: blockAtNewPosition) else {
+            // add back deleted block since new position is invalid
+            addBlock(addedBlock: movedBlock)
+            return false
+        }
+
+        addBlock(addedBlock: blockAtNewPosition)
+        let finalBlockCount = blocks.count
+        assert(initialBlockCount == finalBlockCount)
+        return true
+    }
+
+    mutating func deleteBlock(deletedBlock: Block) {
+        blocks.remove(deletedBlock)
+    }
+
+    func findBlock(at location: CGPoint) -> Block? {
+        blocks.first(where: { $0.hitBox.contains(location) }) ?? nil
+    }
+
+    private func blockCanBeAdded(addedBlock: Block) -> Bool {
+        isBlockNotOverlapped(block: addedBlock) && isBlockInsideCanvas(block: addedBlock)
+    }
+
+    private func isBlockNotOverlapped(block: Block) -> Bool {
+        pegs.allSatisfy({ !$0.isOverlapping(gameboardObject: block) })
+        && blocks.allSatisfy({ !$0.isOverlapping(gameboardObject: block) })
+    }
+
+    private func isBlockInsideCanvas(block: Block) -> Bool {
+        guard let board = board else {
+            return false
+        }
+        return block.isWithin(path: board)
+    }
+
+    private func contains(block: Block) -> Bool {
+        return blocks.contains(block)
+    }
+}
+
+// Utility functions
+extension Gameboard {
+    mutating func updateBoard(to boardSize: CGSize) {
+        self.board = CGPath(rect: CGRect(origin: CGPoint(), size: boardSize), transform: nil)
+    }
+
+    func copy() -> Gameboard {
+        var copy = Gameboard(board: board)
+        pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, color: $0.color)) })
+        return copy
     }
 
     static func getDefaultGameboard(of size: CGSize) -> Gameboard {
@@ -121,5 +182,12 @@ struct Gameboard: Codable {
                                                          Peg(location: CGPoint(x: 700, y: 150), color: .orange)]))
         defaultGameboard.updateBoard(to: size)
         return defaultGameboard
+    }
+}
+
+extension Gameboard: Codable {
+    private enum CodingKeys: String, CodingKey {
+        // `board` is not stored as it is different for each screen size
+        case pegs
     }
 }

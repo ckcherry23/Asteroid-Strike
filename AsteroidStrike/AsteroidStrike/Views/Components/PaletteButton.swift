@@ -14,16 +14,6 @@ class PaletteButton: UIButton {
         }
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        customize()
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        customize()
-    }
-
     private func updatePaletteButtonAppearance() {
         if isSelected {
             layer.borderWidth = 2.0
@@ -32,9 +22,5 @@ class PaletteButton: UIButton {
             layer.borderWidth = 0.0
             layer.borderColor = UIColor.clear.cgColor
         }
-    }
-
-    private func customize() {
-        layer.cornerRadius = bounds.size.width / 2
     }
 }

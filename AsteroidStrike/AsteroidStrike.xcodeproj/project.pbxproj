@@ -42,6 +42,8 @@
 		C796C34B299D3AEB00ADC141 /* AsteroidStrikeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C34A299D3AEB00ADC141 /* AsteroidStrikeTests.swift */; };
 		C796C355299D3AEB00ADC141 /* AsteroidStrikeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C354299D3AEB00ADC141 /* AsteroidStrikeUITests.swift */; };
 		C796C357299D3AEB00ADC141 /* AsteroidStrikeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C356299D3AEB00ADC141 /* AsteroidStrikeUITestsLaunchTests.swift */; };
+		C7F056DA29A50FA100F035CD /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056D929A50FA100F035CD /* BlockView.swift */; };
+		C7F056DC29A5145400F035CD /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DB29A5145400F035CD /* Block.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		C796C350299D3AEB00ADC141 /* AsteroidStrikeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsteroidStrikeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C796C354299D3AEB00ADC141 /* AsteroidStrikeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidStrikeUITests.swift; sourceTree = "<group>"; };
 		C796C356299D3AEB00ADC141 /* AsteroidStrikeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidStrikeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C7F056D929A50FA100F035CD /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
+		C7F056DB29A5145400F035CD /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 				C7646382299F74F200AF0413 /* PaletteButton.swift */,
 				C7646383299F74F200AF0413 /* BallView.swift */,
 				C7646384299F74F200AF0413 /* CannonView.swift */,
+				C7F056D929A50FA100F035CD /* BlockView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				C7646394299F74F300AF0413 /* Peg.swift */,
 				C7646395299F74F300AF0413 /* GameboardObject.swift */,
 				C7646396299F74F300AF0413 /* Gameboard.swift */,
+				C7F056DB29A5145400F035CD /* Block.swift */,
 			);
 			path = LevelDesigner;
 			sourceTree = "<group>";
@@ -454,6 +460,8 @@
 				C76463AC299F74F400AF0413 /* CGPath.swift in Sources */,
 				C76463B6299F74F400AF0413 /* PhysicsBodyProtocols.swift in Sources */,
 				C76463BC299F74F400AF0413 /* Wall.swift in Sources */,
+				C7F056DC29A5145400F035CD /* Block.swift in Sources */,
+				C7F056DA29A50FA100F035CD /* BlockView.swift in Sources */,
 				C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */,
 				C76463AB299F74F400AF0413 /* GameplayController.swift in Sources */,
 				C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */,

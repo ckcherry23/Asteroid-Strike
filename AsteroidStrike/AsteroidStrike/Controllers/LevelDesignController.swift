@@ -29,6 +29,7 @@ class LevelDesignController: UIViewController {
 
     @IBOutlet weak var bluePegButton: PaletteButton!
     @IBOutlet weak var orangePegButton: PaletteButton!
+    @IBOutlet weak var blockButton: PaletteButton!
     @IBOutlet weak var eraseButton: PaletteButton!
     @IBOutlet var paletteButtons: [PaletteButton]!
     @IBOutlet weak var canvas: UIImageView!
@@ -48,6 +49,8 @@ class LevelDesignController: UIViewController {
             levelDesigner.addPegToGameboard(pegLocation: taplocation, pegColor: .blue)
         case orangePegButton:
             levelDesigner.addPegToGameboard(pegLocation: taplocation, pegColor: .orange)
+        case blockButton:
+            levelDesigner.addBlockToGameboard(blockLocation: taplocation)
         case eraseButton:
             levelDesigner.erasePegFromGameboard(tappedLocation: taplocation)
         default:

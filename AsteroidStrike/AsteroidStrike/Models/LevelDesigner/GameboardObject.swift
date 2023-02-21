@@ -12,3 +12,13 @@ protocol GameboardObject: Codable {
     func isOverlapping(gameboardObject: GameboardObject) -> Bool
     func isWithin(path: CGPath) -> Bool
 }
+
+extension GameboardObject {
+    func isOverlapping(gameboardObject: GameboardObject) -> Bool {
+        self.hitBox.intersects(gameboardObject.hitBox)
+    }
+
+    func isWithin(path: CGPath) -> Bool {
+        self.hitBox.subtracting(path).isEmpty
+    }
+}

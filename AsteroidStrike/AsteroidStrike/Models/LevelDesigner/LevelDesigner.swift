@@ -29,13 +29,17 @@ struct LevelDesigner {
         gameboard.deletePeg(deletedPeg: erasedPeg)
     }
 
+    mutating func addBlockToGameboard(blockLocation: CGPoint) {
+        let addedBlock = Block(location: blockLocation)
+        gameboard.addBlock(addedBlock: addedBlock)
+    }
+}
+
+extension LevelDesigner {
     mutating func updateCanvasSize(_ canvasSize: CGSize) {
         gameboard.updateBoard(to: canvasSize)
     }
 
-}
-
-extension LevelDesigner {
     mutating func updateGameboardFromLoadedLevel(savedLevel: SavedLevel) {
         gameboard = savedLevel.gameBoard
     }
