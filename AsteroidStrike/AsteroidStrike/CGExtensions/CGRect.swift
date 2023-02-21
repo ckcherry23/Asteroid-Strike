@@ -20,6 +20,8 @@ extension CGRect {
         let bottomRight = CGPoint(x: maxX, y: maxY)
         let topRight = CGPoint(x: maxX, y: minY)
 
+        // TODO: Rotation - `CGPointApplyAffineTransform()`
+
         return RectangleCorners(topLeft: topLeft, bottomLeft: bottomLeft, bottomRight: bottomRight, topRight: topRight)
     }
 
@@ -39,6 +41,9 @@ struct RectangleCorners {
     var bottomLeft: CGPoint
     var bottomRight: CGPoint
     var topRight: CGPoint
+    var corners: [CGPoint] {
+        [topLeft, bottomLeft, bottomRight, topRight]
+    }
 }
 
 struct RectangleEdges {
@@ -47,4 +52,6 @@ struct RectangleEdges {
     var bottom: Edge
     var right: Edge
     var top: Edge
-}
+    var edges: [Edge] {
+        [left, bottom, right, top]
+    }}

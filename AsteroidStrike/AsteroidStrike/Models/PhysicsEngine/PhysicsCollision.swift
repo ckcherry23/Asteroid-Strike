@@ -41,10 +41,10 @@ class PhysicsCollision {
             self.init(firstBody: firstBody, secondBody: secondBody)
         case let (firstBody as CirclePhysicsBody, secondBody as EdgePhysicsBody):
             self.init(firstBody: firstBody, secondBody: secondBody)
-//        case let (firstBody as RectanglePhysicsBody, secondBody as CirclePhysicsBody):
-//            self.init(firstBody: firstBody, secondBody: secondBody)
-//        case let (firstBody as CirclePhysicsBody, secondBody as RectanglePhysicsBody):
-//            self.init(firstBody: firstBody, secondBody: secondBody)
+        case let (firstBody as RectanglePhysicsBody, secondBody as CirclePhysicsBody):
+            self.init(firstBody: firstBody, secondBody: secondBody)
+        case let (firstBody as CirclePhysicsBody, secondBody as RectanglePhysicsBody):
+            self.init(firstBody: firstBody, secondBody: secondBody)
         case (_, _):
             return nil
         }
@@ -57,27 +57,56 @@ class PhysicsCollision {
 
     convenience init?(firstBody: EdgePhysicsBody, secondBody: CirclePhysicsBody) {
         let edge = CGVector.vector(fromPoint: firstBody.destination) - CGVector.vector(fromPoint: firstBody.source)
-        let normal: CGVector = edge.normalTowards(other: secondBody.velocity).normalized()
+        let normal: CGVector = edge.normal().normalized()
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 
     convenience init?(firstBody: CirclePhysicsBody, secondBody: EdgePhysicsBody) {
         let edge = CGVector.vector(fromPoint: secondBody.destination) - CGVector.vector(fromPoint: secondBody.source)
-        let normal: CGVector = edge.normalTowards(other: firstBody.velocity).normalized()
+        let normal: CGVector = edge.normal().normalized()
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 
-//    convenience init?(firstBody: CirclePhysicsBody, secondBody: RectanglePhysicsBody) {
-//        let edge = CGVector(dx: secondBody.rect.getEdges().top.destination.x, dy: secondBody.rect.getEdges().top.destination.y)
-//        let normal: CGVector = edge.normalTowards(other: firstBody.velocity).normalized()
-//        self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
-//    }
-//
-//    convenience init?(firstBody: RectanglePhysicsBody, secondBody: CirclePhysicsBody) {
-//        let edge = CGVector(dx: firstBody.rect.getEdges().top.destination.x, dy: firstBody.rect.getEdges().top.destination.y)
-//        let normal: CGVector = edge.normalTowards(other: firstBody.velocity).normalized()
-//        self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
-//    }
+    convenience init?(firstBody: CirclePhysicsBody, secondBody: RectanglePhysicsBody) {
+        var closestEdge = secondBody.rect.getEdges().left
+        var closestEdgeDistance = CGFloat.infinity
+        for edge in secondBody.rect.getEdges().edges {
+            let edgeVector = CGVector.vector(fromPoint: edge.destination) - CGVector.vector(fromPoint: edge.source)
+            let sourceToCircle = firstBody.position - CGVector.vector(fromPoint: edge.source)
+            let destToCircle = firstBody.position - CGVector.vector(fromPoint: edge.destination)
+
+            let projection = edgeVector * ((sourceToCircle * edgeVector) / (edgeVector * destToCircle))
+            let orthoComplement = sourceToCircle - projection
+
+            let sourceToCircleDistSquared = sourceToCircle * sourceToCircle
+            let destToCircleDistSquared = destToCircle * destToCircle
+            let pointRectDistance = orthoComplement * orthoComplement
+
+            let coefficient = projection * edgeVector
+            var squaredDistance: CGFloat
+
+            if coefficient < 0 {
+                squaredDistance = sourceToCircleDistSquared
+            } else if coefficient < edgeVector * edgeVector {
+                squaredDistance = pointRectDistance
+            } else {
+                squaredDistance = destToCircleDistSquared
+            }
+
+            if squaredDistance < closestEdgeDistance {
+                closestEdgeDistance = squaredDistance
+                closestEdge = edge
+            }
+        }
+        let closestEdgeVector = CGVector.vector(fromPoint: closestEdge.destination)
+        - CGVector.vector(fromPoint: closestEdge.source)
+        let normal: CGVector = closestEdgeVector.normal().normalized()
+        self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
+    }
+
+    convenience init?(firstBody: RectanglePhysicsBody, secondBody: CirclePhysicsBody) {
+        self.init(firstBody: secondBody, secondBody: firstBody)
+    }
 
     func resolveCollision(resolvers: [CollisionResolver]) {
         resolvers.forEach({ $0.resolve(collision: self) })

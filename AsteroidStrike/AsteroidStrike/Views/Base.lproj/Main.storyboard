@@ -265,7 +265,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-vO-QBI">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-vO-QBI">
                                 <rect key="frame" x="0.0" y="0.0" width="744" height="1133"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Qw9-yY-I9j">
@@ -344,6 +344,7 @@
         <image name="background" width="1920" height="1080"/>
         <image name="cannon" width="512" height="512"/>
         <image name="delete" width="256" height="256"/>
+        <image name="launch" width="1920" height="1152"/>
         <image name="peg-blue" width="128" height="128"/>
         <image name="peg-orange" width="128" height="128"/>
         <namedColor name="AccentColor">

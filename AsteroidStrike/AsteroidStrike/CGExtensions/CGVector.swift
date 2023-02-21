@@ -58,17 +58,7 @@ extension CGVector {
         return self / self.length()
     }
 
-    func normalTowards(other: CGVector) -> CGVector {
-        let counterclockwiseNormal = CGVector(dx: -dy, dy: dx)
-        if counterclockwiseNormal.isMovingTowards(other: other) {
-            return counterclockwiseNormal
-        } else {
-            let clockwiseNormal = CGVector(dx: dy, dy: -dx)
-            return clockwiseNormal
-        }
-    }
-
-    private func isMovingTowards(other: CGVector) -> Bool {
-        return self * other > 0
+    func normal() -> CGVector {
+        return CGVector(dx: -dy, dy: dx)
     }
 }

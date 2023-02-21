@@ -201,6 +201,7 @@ extension LevelDesignController {
 
 extension LevelDesignController: GameboardDelegate {
     func getGameBoard() -> Gameboard? {
+        // Copy the gameboard to reset hits from previous plays
         levelDesigner.gameboard.copy()
     }
 }
