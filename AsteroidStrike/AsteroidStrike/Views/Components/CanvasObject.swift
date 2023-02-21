@@ -8,5 +8,5 @@
 import UIKit
 
 protocol CanvasObject: UIImageView, Hashable {
-    var location: CGPoint? { get }
+    var location: CGPoint? { get set }
 }

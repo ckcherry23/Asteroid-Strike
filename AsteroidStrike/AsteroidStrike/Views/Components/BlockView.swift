@@ -23,5 +23,6 @@ class BlockView: UIImageView, CanvasObject {
 
     private func customize() {
         self.isUserInteractionEnabled = true
+        image = UIImage(named: "block")
     }
 }

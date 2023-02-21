@@ -46,13 +46,13 @@ class LevelDesignController: UIViewController {
 
         switch selectedPaletteButton {
         case bluePegButton:
-            levelDesigner.addPegToGameboard(pegLocation: taplocation, pegColor: .blue)
+            levelDesigner.addPegToGameboard(pegLocation: taplocation, pegType: .blue)
         case orangePegButton:
-            levelDesigner.addPegToGameboard(pegLocation: taplocation, pegColor: .orange)
+            levelDesigner.addPegToGameboard(pegLocation: taplocation, pegType: .orange)
         case blockButton:
             levelDesigner.addBlockToGameboard(blockLocation: taplocation)
         case eraseButton:
-            levelDesigner.erasePegFromGameboard(tappedLocation: taplocation)
+            levelDesigner.eraseObjectFromGameboard(tappedLocation: taplocation)
         default:
             break
         }
@@ -67,62 +67,71 @@ class LevelDesignController: UIViewController {
         for peg in levelDesigner.gameboard.pegs
         where !canvas.subviews.compactMap({ ($0 as? PegView)?.location }).contains(peg.location) {
             let pegViewToAdd: PegView
-            switch peg.color {
+            switch peg.type {
             case .blue:
                 pegViewToAdd = BluePegView(at: peg.location, radius: peg.radius)
             case .orange:
                 pegViewToAdd = OrangePegView(at: peg.location, radius: peg.radius)
             }
-            setupPegGestures(pegView: pegViewToAdd)
+            setupCanvasObjectGestures(canvasObject: pegViewToAdd)
             canvas.addSubview(pegViewToAdd)
+        }
+
+        for block in levelDesigner.gameboard.blocks
+        where !canvas.subviews.compactMap({ ($0 as? BlockView)?.location }).contains(block.location) {
+            let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size)
+            setupCanvasObjectGestures(canvasObject: blockViewToAdd)
+            canvas.addSubview(blockViewToAdd)
         }
     }
 
     private func removeErasedViews() {
-        for pegView in canvas.subviews
-        where !levelDesigner.gameboard.pegs.compactMap({ $0.location }).contains((pegView as? PegView)?.location) {
-            pegView.removeFromSuperview()
+        for canvasObject in canvas.subviews
+        where !levelDesigner.gameboard.pegs.compactMap({ $0.location })
+            .contains((canvasObject as? (any CanvasObject))?.location) {
+            canvasObject.removeFromSuperview()
         }
     }
 
-    private func setupPegGestures(pegView: PegView) {
-        makePegDraggable(pegView: pegView)
-        allowPegLongPress(pegView: pegView)
+    private func setupCanvasObjectGestures(canvasObject: any CanvasObject) {
+        makeCanvasObjectDraggable(canvasObject: canvasObject)
+        allowCanvasObjectLongPress(canvasObject: canvasObject)
     }
 
-    private func makePegDraggable(pegView: PegView) {
-        let pegDragGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(onDragPeg(_:)))
-        pegView.addGestureRecognizer(pegDragGestureRecognizer)
+    private func makeCanvasObjectDraggable(canvasObject: any CanvasObject) {
+        let canvasObjectDragGestureRecognizer = UIPanGestureRecognizer(
+            target: self, action: #selector(onDragCanvasObject(_:)))
+        canvasObject.addGestureRecognizer(canvasObjectDragGestureRecognizer)
     }
 
-    private func allowPegLongPress(pegView: PegView) {
-        let pegLongPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
-                                                                         action: #selector(onLongPressPeg(_:)))
-        pegView.addGestureRecognizer(pegLongPressGestureRecognizer)
+    private func allowCanvasObjectLongPress(canvasObject: any CanvasObject) {
+        let canvasObjectLongPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
+                                                                         action: #selector(onLongPressCanvasObject(_:)))
+        canvasObject.addGestureRecognizer(canvasObjectLongPressGestureRecognizer)
     }
 
-    @IBAction func onDragPeg(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard let draggedPeg = gestureRecognizer.view as? PegView else {
+    @IBAction func onDragCanvasObject(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard let draggedCanvasObject = gestureRecognizer.view as? (any CanvasObject) else {
             return
         }
-        let oldLocation: CGPoint = draggedPeg.center
+        let oldLocation: CGPoint = draggedCanvasObject.center
         let newLocation = gestureRecognizer.location(in: canvas)
 
         // Move peg view location on canvas
-        draggedPeg.center = newLocation
-        draggedPeg.location = newLocation
+        draggedCanvasObject.center = newLocation
+        draggedCanvasObject.location = newLocation
 
-        let isMoveValid = levelDesigner.movePegOnGameboard(oldLocation: oldLocation, newLocation: newLocation)
+        let isMoveValid = levelDesigner.moveObjectOnGameboard(oldLocation: oldLocation, newLocation: newLocation)
         if !isMoveValid {
             // Undo move of peg view on canvas
-            draggedPeg.center = oldLocation
-            draggedPeg.location = oldLocation
+            draggedCanvasObject.center = oldLocation
+            draggedCanvasObject.location = oldLocation
         }
     }
 
-    @IBAction func onLongPressPeg(_ gestureRecognizer: UILongPressGestureRecognizer) {
+    @IBAction func onLongPressCanvasObject(_ gestureRecognizer: UILongPressGestureRecognizer) {
         let longPressLocation = gestureRecognizer.location(in: canvas)
-        levelDesigner.erasePegFromGameboard(tappedLocation: longPressLocation)
+        levelDesigner.eraseObjectFromGameboard(tappedLocation: longPressLocation)
     }
 
     private func clearAllSelections() {

@@ -13,7 +13,7 @@ struct Peg: GameboardObject {
 
     private(set) var radius: CGFloat = Peg.defaultRadius
     private(set) var location: CGPoint
-    private(set) var color: PegColor
+    private(set) var type: PegType
 
     var physicsBody: CirclePhysicsBody
     var isHit: Bool {
@@ -25,9 +25,9 @@ struct Peg: GameboardObject {
         return CGPath(ellipseIn: boundingBox, transform: nil)
     }
 
-    init(location: CGPoint, color: PegColor) {
+    init(location: CGPoint, type: PegType) {
         self.location = location
-        self.color = color
+        self.type = type
         self.physicsBody = CirclePhysicsBody(radius: radius, center: location)
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false
@@ -35,7 +35,7 @@ struct Peg: GameboardObject {
     }
 }
 
-enum PegColor: Codable {
+enum PegType: Codable {
     case blue
     case orange
 }
@@ -44,13 +44,13 @@ extension Peg: Hashable {
     static func == (lhs: Peg, rhs: Peg) -> Bool {
         lhs.radius == rhs.radius &&
         lhs.location == rhs.location &&
-        lhs.color == rhs.color
+        lhs.type == rhs.type
     }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(radius)
         hasher.combine(location)
-        hasher.combine(color)
+        hasher.combine(type)
     }
 }
 
@@ -58,12 +58,12 @@ extension Peg: Codable {
     private enum CodingKeys: String, CodingKey {
         case radius
         case location
-        case color
+        case type
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.init(location: try values.decode(CGPoint.self, forKey: .location),
-                  color: try values.decode(PegColor.self, forKey: .color))
+                  type: try values.decode(PegType.self, forKey: .type))
     }
 }

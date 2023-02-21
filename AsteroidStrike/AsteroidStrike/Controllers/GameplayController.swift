@@ -55,14 +55,14 @@ class GameplayController: UIViewController {
         gameplayArea.addSubview(ballView)
     }
 
-    private let pegColorToViewMapping: [PegColor: (Peg) -> (PegView) ] = [
+    private let pegTypeToViewMapping: [PegType: (Peg) -> (PegView) ] = [
         .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius) },
         .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius) }
     ]
 
     private func addGameboardElements() {
         for peg in gameEngine.gameboard.pegs {
-            guard let createPegViewFromPeg = pegColorToViewMapping[peg.color] else {
+            guard let createPegViewFromPeg = pegTypeToViewMapping[peg.type] else {
                 continue
             }
             addPegToView(pegView: createPegViewFromPeg(peg))
