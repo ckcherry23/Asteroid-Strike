@@ -15,7 +15,7 @@ struct Block: GameboardObject {
     private(set) var location: CGPoint
 
     var hitBox: CGPath {
-        let rect = CGRect(origin: location, size: size)
+        let rect = CGRect.centeredRectangle(center: location, size: size)
         return CGPath(rect: rect, transform: nil)
     }
 
@@ -23,7 +23,7 @@ struct Block: GameboardObject {
 
     init(location: CGPoint) {
         self.location = location
-        self.physicsBody = RectanglePhysicsBody(rect: CGRect(origin: location, size: size))
+        self.physicsBody = RectanglePhysicsBody(rect: CGRect.centeredRectangle(center: location, size: size))
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false
         self.physicsBody.mass = Block.defaultMass

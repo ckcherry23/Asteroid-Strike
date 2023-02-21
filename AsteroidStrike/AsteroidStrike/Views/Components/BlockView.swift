@@ -11,7 +11,7 @@ class BlockView: UIImageView, CanvasObject {
     var location: CGPoint?
 
     init(at location: CGPoint, size: CGSize) {
-        let boundingBox = CGRect(origin: location, size: size)
+        let boundingBox = CGRect.centeredRectangle(center: location, size: size)
         super.init(frame: boundingBox)
         self.location = location
         self.customize()

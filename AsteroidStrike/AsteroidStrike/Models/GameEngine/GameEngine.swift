@@ -93,6 +93,7 @@ class GameEngine {
         setupWalls()
         setupBall()
         setupPegs()
+        setupBlocks()
     }
 
     private func setupWalls() {
@@ -113,5 +114,9 @@ class GameEngine {
 
     private func setupPegs() {
         gameboard.pegs.forEach({ physicsWorld.addPhysicsBody(phyicsBody: $0.physicsBody) })
+    }
+
+    private func setupBlocks() {
+        gameboard.blocks.forEach({ physicsWorld.addPhysicsBody(phyicsBody: $0.physicsBody) })
     }
 }

@@ -141,6 +141,7 @@ extension Gameboard {
     func copy() -> Gameboard {
         var copy = Gameboard(board: board)
         pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, type: $0.type)) })
+        blocks.forEach({ copy.addBlock(addedBlock: Block(location: $0.location)) })
         return copy
     }
 
@@ -189,5 +190,6 @@ extension Gameboard: Codable {
     private enum CodingKeys: String, CodingKey {
         // `board` is not stored as it is different for each screen size
         case pegs
+        case blocks
     }
 }

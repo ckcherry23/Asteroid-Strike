@@ -17,6 +17,7 @@ class GameplayController: UIViewController {
     @IBOutlet weak var cannonView: CannonView!
     private var ballView: BallView!
     private var pegViews: [PegView] = []
+    private var blockViews: [BlockView] = []
     private var glowingPegViews: [PegView] = []
     private var displayLink: CADisplayLink!
     private var isDisappearAnimationComplete = true
@@ -60,7 +61,16 @@ class GameplayController: UIViewController {
         .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius) }
     ]
 
+    private func createBlockViewFromBlock(block: Block) -> BlockView {
+        BlockView(at: block.location, size: block.size)
+    }
+
     private func addGameboardElements() {
+        addPegs()
+        addBlocks()
+    }
+
+    private func addPegs() {
         for peg in gameEngine.gameboard.pegs {
             guard let createPegViewFromPeg = pegTypeToViewMapping[peg.type] else {
                 continue
@@ -69,9 +79,20 @@ class GameplayController: UIViewController {
         }
     }
 
+    private func addBlocks() {
+        for block in gameEngine.gameboard.blocks {
+            addBlockToView(blockView: createBlockViewFromBlock(block: block))
+        }
+    }
+
     private func addPegToView(pegView: PegView) {
         gameplayArea.addSubview(pegView)
         pegViews.append(pegView)
+    }
+
+    private func addBlockToView(blockView: BlockView) {
+        gameplayArea.addSubview(blockView)
+        blockViews.append(blockView)
     }
 
     private func updateBall() {

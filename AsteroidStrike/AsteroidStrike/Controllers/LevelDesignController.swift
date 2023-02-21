@@ -117,15 +117,18 @@ class LevelDesignController: UIViewController {
         let oldLocation: CGPoint = draggedCanvasObject.center
         let newLocation = gestureRecognizer.location(in: canvas)
 
-        // Move peg view location on canvas
+        // Move view location on canvas
         draggedCanvasObject.center = newLocation
-        draggedCanvasObject.location = newLocation
 
-        let isMoveValid = levelDesigner.moveObjectOnGameboard(oldLocation: oldLocation, newLocation: newLocation)
-        if !isMoveValid {
-            // Undo move of peg view on canvas
-            draggedCanvasObject.center = oldLocation
-            draggedCanvasObject.location = oldLocation
+        if gestureRecognizer.state == .ended {
+            let isMoveValid = levelDesigner.moveObjectOnGameboard(
+                oldLocation: draggedCanvasObject.location ?? oldLocation, newLocation: newLocation)
+            if isMoveValid {
+                draggedCanvasObject.location = newLocation
+            } else {
+                // Undo move of view on canvas
+                draggedCanvasObject.center = draggedCanvasObject.location ?? oldLocation
+            }
         }
     }
 

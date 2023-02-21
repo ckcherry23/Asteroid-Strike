@@ -68,44 +68,15 @@ class PhysicsCollision {
     }
 
     convenience init?(firstBody: CirclePhysicsBody, secondBody: RectanglePhysicsBody) {
-        var closestEdge = secondBody.rect.getEdges().left
-        var closestEdgeDistance = CGFloat.infinity
-        for edge in secondBody.rect.getEdges().edges {
-            let edgeVector = CGVector.vector(fromPoint: edge.destination) - CGVector.vector(fromPoint: edge.source)
-            let sourceToCircle = firstBody.position - CGVector.vector(fromPoint: edge.source)
-            let destToCircle = firstBody.position - CGVector.vector(fromPoint: edge.destination)
-
-            let projection = edgeVector * ((sourceToCircle * edgeVector) / (edgeVector * destToCircle))
-            let orthoComplement = sourceToCircle - projection
-
-            let sourceToCircleDistSquared = sourceToCircle * sourceToCircle
-            let destToCircleDistSquared = destToCircle * destToCircle
-            let pointRectDistance = orthoComplement * orthoComplement
-
-            let coefficient = projection * edgeVector
-            var squaredDistance: CGFloat
-
-            if coefficient < 0 {
-                squaredDistance = sourceToCircleDistSquared
-            } else if coefficient < edgeVector * edgeVector {
-                squaredDistance = pointRectDistance
-            } else {
-                squaredDistance = destToCircleDistSquared
-            }
-
-            if squaredDistance < closestEdgeDistance {
-                closestEdgeDistance = squaredDistance
-                closestEdge = edge
-            }
-        }
-        let closestEdgeVector = CGVector.vector(fromPoint: closestEdge.destination)
-        - CGVector.vector(fromPoint: closestEdge.source)
+        let closestEdgeVector = CGVector.getClosestEdgeVector(rectangleBody: secondBody, circleBody: firstBody)
         let normal: CGVector = closestEdgeVector.normal().normalized()
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 
     convenience init?(firstBody: RectanglePhysicsBody, secondBody: CirclePhysicsBody) {
-        self.init(firstBody: secondBody, secondBody: firstBody)
+        let closestEdgeVector = CGVector.getClosestEdgeVector(rectangleBody: firstBody, circleBody: secondBody)
+        let normal: CGVector = closestEdgeVector.normal().normalized()
+        self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 
     func resolveCollision(resolvers: [CollisionResolver]) {

@@ -50,8 +50,12 @@ extension CGVector {
 
 // Vector Properties
 extension CGVector {
+    func squaredLength() -> CGFloat {
+        return dx * dx + dy * dy
+    }
+
     func length() -> CGFloat {
-        return sqrt(dx * dx + dy * dy)
+        return sqrt(squaredLength())
     }
 
     func normalized() -> CGVector {
@@ -60,5 +64,47 @@ extension CGVector {
 
     func normal() -> CGVector {
         return CGVector(dx: -dy, dy: dx)
+    }
+}
+
+extension CGVector {
+    static func getClosestEdgeVector(rectangleBody: RectanglePhysicsBody, circleBody: CirclePhysicsBody) -> CGVector {
+        var closestEdge = rectangleBody.rect.getEdges().left
+        var closestEdgeDistance = CGFloat.infinity
+
+        for edge in rectangleBody.rect.getEdges().edges {
+            let squaredDistance = findSquaredDistanceFromCircle(edge: edge, circleBody: circleBody)
+            if squaredDistance < closestEdgeDistance {
+                closestEdgeDistance = squaredDistance
+                closestEdge = edge
+            }
+        }
+        return CGVector.vector(fromPoint: closestEdge.destination) - CGVector.vector(fromPoint: closestEdge.source)
+    }
+
+    private static func findSquaredDistanceFromCircle(edge: RectangleEdges.Edge,
+                                                      circleBody: CirclePhysicsBody) -> CGFloat {
+        let edgeVector = CGVector.vector(fromPoint: edge.destination) - CGVector.vector(fromPoint: edge.source)
+        let sourceToCircle = circleBody.position - CGVector.vector(fromPoint: edge.source)
+        let destToCircle = circleBody.position - CGVector.vector(fromPoint: edge.destination)
+
+        let projection = edgeVector * ((sourceToCircle * edgeVector) / (edgeVector * edgeVector))
+        let orthoComplement = sourceToCircle - projection
+
+        let sourceToCircleDistSquared = sourceToCircle * sourceToCircle
+        let destToCircleDistSquared = destToCircle * destToCircle
+        let pointRectDistance = orthoComplement * orthoComplement
+
+        let coefficient = projection * edgeVector
+        var squaredDistance: CGFloat
+
+        if coefficient > 0 {
+            squaredDistance = sourceToCircleDistSquared
+        } else if coefficient > edgeVector * edgeVector {
+            squaredDistance = pointRectDistance
+        } else {
+            squaredDistance = destToCircleDistSquared
+        }
+        return squaredDistance
     }
 }

@@ -8,6 +8,11 @@
 import CoreGraphics
 
 extension CGRect {
+    static func centeredRectangle(center: CGPoint, size: CGSize) -> CGRect {
+        let rectOrigin = CGPoint(x: Int(center.x) - Int(size.width / 2), y: Int(center.y) - Int(size.height / 2))
+        return CGRect(origin: rectOrigin, size: size)
+    }
+
     static func boundingBoxForCircle(center: CGPoint, radius: CGFloat) -> CGRect {
         let diameter = Int(radius) * 2
         let boundingBoxOrigin = (x: Int(center.x) - Int(radius), y: Int(center.y) - Int(radius))
