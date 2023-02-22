@@ -95,30 +95,96 @@
                                                 <viewLayoutGuide key="contentLayoutGuide" id="bqA-1s-z5t"/>
                                                 <viewLayoutGuide key="frameLayoutGuide" id="Q3W-lf-VmQ"/>
                                             </scrollView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Ax-Hc-dxt" userLabel="Global Controls">
-                                                <rect key="frame" x="658" y="0.0" width="326" height="80"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Ax-Hc-dxt" userLabel="Global Controls">
+                                                <rect key="frame" x="576" y="0.0" width="408" height="80"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t9x-bj-bH1" userLabel="Size Controls">
-                                                        <rect key="frame" x="0.0" y="0.0" width="226" height="80"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ntf-t9-fOg" userLabel="Peg Styles">
+                                                        <rect key="frame" x="0.0" y="0.0" width="308" height="80"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4d-9h-jOM">
-                                                                <rect key="frame" x="0.0" y="0.0" width="226" height="36"/>
-                                                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="100" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="xL5-Az-lZT">
-                                                                <rect key="frame" x="-2" y="44" width="230" height="37"/>
-                                                            </slider>
+                                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t9x-bj-bH1" userLabel="Size Controls">
+                                                                <rect key="frame" x="0.0" y="-4" width="308" height="0.0"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4d-9h-jOM">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="0.0"/>
+                                                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xL5-Az-lZT">
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="1"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="150" id="4Sb-rL-GeL"/>
+                                                                        </constraints>
+                                                                    </slider>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="xL5-Az-lZT" secondAttribute="trailing" id="LqL-zR-OQG"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKH-co-Rcd" userLabel="Width Controls">
+                                                                <rect key="frame" x="0.0" y="0.0" width="308" height="21.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvt-PI-0dh">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="21.5"/>
+                                                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="nnq-xN-0h7">
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="22.5"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="150" id="kcb-I9-Ii5"/>
+                                                                        </constraints>
+                                                                    </slider>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="nnq-xN-0h7" secondAttribute="trailing" id="taO-60-n4t"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0Vb-62-E2F" userLabel="Height Controls">
+                                                                <rect key="frame" x="0.0" y="29.5" width="308" height="21.5"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YK-1d-70F">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="21.5"/>
+                                                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vLs-mv-cL9">
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="22.5"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="150" id="CGL-kt-pgB"/>
+                                                                        </constraints>
+                                                                    </slider>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="vLs-mv-cL9" secondAttribute="trailing" id="Mif-OD-KE9"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MVf-5M-45z" userLabel="Rotation Controls">
+                                                                <rect key="frame" x="0.0" y="59" width="308" height="21"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZN-qP-0Hm">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="21"/>
+                                                                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="Lwy-IB-d0X">
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="22"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="150" id="vp8-Ce-ACT"/>
+                                                                        </constraints>
+                                                                    </slider>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="Lwy-IB-d0X" secondAttribute="trailing" id="2zm-xI-1Zq"/>
+                                                                </constraints>
+                                                            </stackView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="EcO-ez-Imn"/>
-                                                            <constraint firstAttribute="trailing" secondItem="xL5-Az-lZT" secondAttribute="trailing" id="LqL-zR-OQG"/>
-                                                            <constraint firstItem="xL5-Az-lZT" firstAttribute="leading" secondItem="t9x-bj-bH1" secondAttribute="leading" id="b4H-5t-Fvp"/>
-                                                        </constraints>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
-                                                        <rect key="frame" x="246" y="0.0" width="80" height="80"/>
+                                                        <rect key="frame" x="328" y="0.0" width="80" height="80"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="oHH-70-wMy"/>
                                                             <constraint firstAttribute="height" constant="80" id="ySV-DL-djU"/>
@@ -202,9 +268,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="OpU-YA-oLj" secondAttribute="trailing" constant="20" id="uGA-DF-oY5"/>
                             <constraint firstItem="rYb-Dy-ZZg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yjK-j5-9qq"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="dGc-1k-Jny" appends="YES" id="WEH-SU-NKo"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Design Level" id="p8w-l5-Lep"/>
                     <connections>
@@ -227,7 +290,6 @@
                         <action selector="onTapCanvas:" destination="BYZ-38-t0r" id="wYP-bZ-vKc"/>
                     </connections>
                 </tapGestureRecognizer>
-                <rotationGestureRecognizer id="dGc-1k-Jny"/>
             </objects>
             <point key="canvasLocation" x="138.70967741935485" y="676.52250661959397"/>
         </scene>

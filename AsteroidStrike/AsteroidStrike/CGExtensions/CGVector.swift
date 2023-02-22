@@ -68,7 +68,7 @@ extension CGVector {
 }
 
 extension CGVector {
-    static func getClosestEdgeVector(rectangleBody: RectanglePhysicsBody, circleBody: CirclePhysicsBody) -> CGVector {
+    static func getClosestEdgeVector(rectangleBody: RectanglePhysicsBody, circleBody: CirclePhysicsBody) -> CGVector? {
         var closestEdge = rectangleBody.rect.getEdges().left
         var closestEdgeDistance = CGFloat.infinity
 
@@ -77,6 +77,9 @@ extension CGVector {
             if squaredDistance < closestEdgeDistance {
                 closestEdgeDistance = squaredDistance
                 closestEdge = edge
+            } else if squaredDistance == closestEdgeDistance {
+                // closest point at corner not edge
+                return nil
             }
         }
         return CGVector.vector(fromPoint: closestEdge.destination) - CGVector.vector(fromPoint: closestEdge.source)
@@ -103,9 +106,9 @@ extension CGVector {
         let coefficient = projection * edgeVector
         var squaredDistance: CGFloat
 
-        if coefficient > 0 {
+        if coefficient < 0 {
             squaredDistance = sourceToCircleDistSquared
-        } else if coefficient > edgeVector * edgeVector {
+        } else if coefficient < edgeVector * edgeVector {
             squaredDistance = pointRectDistance
         } else {
             squaredDistance = destToCircleDistSquared

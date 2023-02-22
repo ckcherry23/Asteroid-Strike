@@ -69,13 +69,13 @@ class PhysicsCollision {
 
     convenience init?(firstBody: CirclePhysicsBody, secondBody: RectanglePhysicsBody) {
         let closestEdgeVector = CGVector.getClosestEdgeVector(rectangleBody: secondBody, circleBody: firstBody)
-        let normal: CGVector = closestEdgeVector.normal().normalized()
+        let normal: CGVector = closestEdgeVector?.normal().normalized() ?? -(firstBody.velocity.normalized())
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 
     convenience init?(firstBody: RectanglePhysicsBody, secondBody: CirclePhysicsBody) {
         let closestEdgeVector = CGVector.getClosestEdgeVector(rectangleBody: firstBody, circleBody: secondBody)
-        let normal: CGVector = closestEdgeVector.normal().normalized()
+        let normal: CGVector = closestEdgeVector?.normal().normalized() ?? -(secondBody.velocity.normalized())
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 

@@ -8,8 +8,8 @@
 import CoreGraphics
 
 struct Block: GameboardObject {
-    private static let defaultSize: CGSize = CGSize(width: 100, height: 100)
-    private static let defaultMass: CGFloat = 10
+    private static let defaultSize: CGSize = CGSize(width: 100, height: 50)
+    private static let defaultMass: CGFloat = 1000
 
     private(set) var size: CGSize = Block.defaultSize
     private(set) var location: CGPoint

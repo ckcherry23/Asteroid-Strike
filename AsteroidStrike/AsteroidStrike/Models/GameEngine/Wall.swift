@@ -8,7 +8,7 @@
 import CoreGraphics
 
 struct Wall {
-    private static let defaultMass: CGFloat = 100
+    private static let defaultMass: CGFloat = 10
 
     private(set) var physicsBody: PhysicsBody
 
