@@ -14,6 +14,17 @@ extension LevelDesignController {
         selectedPaletteButton = sender
     }
 
+    @IBAction func onSizeSliderValueChanged(_ sender: UISlider) {
+        guard let pegView = selectedCanvasObject as? PegView else {
+            return
+        }
+        let isResizeValid = levelDesigner.resizePegOnGameboard(pegLocation: pegView.location,
+                                                               newSize: CGFloat(sizeSlider.value))
+        if isResizeValid {
+            pegView.size = CGFloat(sizeSlider.value)
+        }
+    }
+
     func setDefaults() {
         bluePegButton.isSelected = true
         canvas.translatesAutoresizingMaskIntoConstraints = false

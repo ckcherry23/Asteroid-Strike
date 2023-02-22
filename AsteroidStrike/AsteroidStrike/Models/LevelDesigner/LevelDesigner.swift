@@ -25,6 +25,7 @@ class LevelDesigner {
         gameboard.addBlock(addedBlock: addedBlock)
     }
 
+    // TODO: Polymorphism
     func moveObjectOnGameboard(oldLocation: CGPoint, newLocation: CGPoint) -> Bool {
         if let movedPeg = gameboard.findPeg(at: oldLocation) {
             return gameboard.movePeg(movedPeg: movedPeg, to: newLocation)
@@ -40,6 +41,15 @@ class LevelDesigner {
         } else if let erasedBlock = gameboard.findBlock(at: tappedLocation) {
             gameboard.deleteBlock(deletedBlock: erasedBlock)
         }
+    }
+}
+
+extension LevelDesigner {
+    func resizePegOnGameboard(pegLocation: CGPoint, newSize: CGFloat) -> Bool {
+        guard let resizedPeg = gameboard.findPeg(at: pegLocation) else {
+            return false
+        }
+        return gameboard.resizePeg(resizedPeg: resizedPeg, radius: newSize / 2)
     }
 }
 

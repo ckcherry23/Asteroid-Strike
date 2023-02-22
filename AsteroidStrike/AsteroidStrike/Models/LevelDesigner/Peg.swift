@@ -11,7 +11,7 @@ struct Peg: GameboardObject {
     private static let defaultRadius: CGFloat = 25
     private static let defaultMass: CGFloat = 10
 
-    private(set) var radius: CGFloat = Peg.defaultRadius
+    private(set) var radius: CGFloat
     private(set) var location: CGPoint
     private(set) var type: PegType
 
@@ -25,9 +25,10 @@ struct Peg: GameboardObject {
         return CGPath(ellipseIn: boundingBox, transform: nil)
     }
 
-    init(location: CGPoint, type: PegType) {
+    init(location: CGPoint, type: PegType, radius: CGFloat = Peg.defaultRadius) {
         self.location = location
         self.type = type
+        self.radius = radius
         self.physicsBody = CirclePhysicsBody(radius: radius, center: location)
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false

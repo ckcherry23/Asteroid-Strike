@@ -24,29 +24,29 @@ class PaletteButton: UIButton {
         }
     }
 
-    func modifyGameboard(levelDesigner: LevelDesigner, tappedLocation: CGPoint) {}
+    func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {{ _ in () }}
 }
 
 class BluePegButton: PaletteButton {
-    override func modifyGameboard(levelDesigner: LevelDesigner, tappedLocation: CGPoint) {
-        levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .blue)
+    override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
+        { (tappedLocation) in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .blue) }
     }
 }
 
 class OrangePegButton: PaletteButton {
-    override func modifyGameboard(levelDesigner: LevelDesigner, tappedLocation: CGPoint) {
-        levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .orange)
+    override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
+        { (tappedLocation) in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .orange) }
     }
 }
 
 class BlockButton: PaletteButton {
-    override func modifyGameboard(levelDesigner: LevelDesigner, tappedLocation: CGPoint) {
-        levelDesigner.addBlockToGameboard(blockLocation: tappedLocation)
+    override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
+        { (tappedLocation) in levelDesigner.addBlockToGameboard(blockLocation: tappedLocation) }
     }
 }
 
 class EraseButton: PaletteButton {
-    override func modifyGameboard(levelDesigner: LevelDesigner, tappedLocation: CGPoint) {
-        levelDesigner.eraseObjectFromGameboard(tappedLocation: tappedLocation)
+    override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
+        { (tappedLocation) in levelDesigner.eraseObjectFromGameboard(tappedLocation: tappedLocation) }
     }
 }

@@ -160,12 +160,12 @@
 		C764637F299F74F200AF0413 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C7646382299F74F200AF0413 /* PaletteButton.swift */,
 				C7646380299F74F200AF0413 /* CanvasObject.swift */,
 				C7646381299F74F200AF0413 /* PegView.swift */,
-				C7646382299F74F200AF0413 /* PaletteButton.swift */,
+				C7F056D929A50FA100F035CD /* BlockView.swift */,
 				C7646383299F74F200AF0413 /* BallView.swift */,
 				C7646384299F74F200AF0413 /* CannonView.swift */,
-				C7F056D929A50FA100F035CD /* BlockView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";

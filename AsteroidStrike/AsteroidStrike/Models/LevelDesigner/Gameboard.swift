@@ -21,33 +21,42 @@ struct Gameboard {
     }
 
     mutating func movePeg(movedPeg: Peg, to newLocation: CGPoint) -> Bool {
-        let initialPegCount = pegs.count
-        let pegAtNewPosition = Peg(location: newLocation, type: movedPeg.type)
-
-        guard contains(peg: movedPeg) else {
-            return false
-        }
-
-        deletePeg(deletedPeg: movedPeg)
-
-        guard pegCanBeAdded(addedPeg: pegAtNewPosition) else {
-            // add back deleted peg since new position is invalid
-            addPeg(addedPeg: movedPeg)
-            return false
-        }
-
-        addPeg(addedPeg: pegAtNewPosition)
-        let finalPegCount = pegs.count
-        assert(initialPegCount == finalPegCount)
-        return true
+        let pegAtNewPosition = Peg(location: newLocation, type: movedPeg.type, radius: movedPeg.radius)
+        return replacePeg(oldPeg: movedPeg, newPeg: pegAtNewPosition)
     }
 
     mutating func deletePeg(deletedPeg: Peg) {
         pegs.remove(deletedPeg)
     }
 
+    mutating func resizePeg(resizedPeg: Peg, radius: CGFloat) -> Bool {
+        let pegOfNewSize = Peg(location: resizedPeg.location, type: resizedPeg.type, radius: radius)
+        return replacePeg(oldPeg: resizedPeg, newPeg: pegOfNewSize)
+    }
+
     func findPeg(at location: CGPoint) -> Peg? {
         pegs.first(where: { $0.hitBox.contains(location) }) ?? nil
+    }
+
+    private mutating func replacePeg(oldPeg: Peg, newPeg: Peg) -> Bool {
+        let initialPegCount = pegs.count
+
+        guard contains(peg: oldPeg) else {
+            return false
+        }
+
+        deletePeg(deletedPeg: oldPeg)
+
+        guard pegCanBeAdded(addedPeg: newPeg) else {
+            // add back deleted peg since new position is invalid
+            addPeg(addedPeg: oldPeg)
+            return false
+        }
+
+        addPeg(addedPeg: newPeg)
+        let finalPegCount = pegs.count
+        assert(initialPegCount == finalPegCount)
+        return true
     }
 
     private func pegCanBeAdded(addedPeg: Peg) -> Bool {
@@ -140,7 +149,7 @@ extension Gameboard {
 
     func copy() -> Gameboard {
         var copy = Gameboard(board: board)
-        pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, type: $0.type)) })
+        pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, type: $0.type, radius: $0.radius)) })
         blocks.forEach({ copy.addBlock(addedBlock: Block(location: $0.location)) })
         return copy
     }

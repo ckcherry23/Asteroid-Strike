@@ -44,7 +44,11 @@ class LevelDesignController: UIViewController {
 
     @IBAction func onTapCanvas(_ gestureRecognizer: UITapGestureRecognizer) {
         let taplocation: CGPoint = gestureRecognizer.location(in: canvas)
-        selectedPaletteButton?.modifyGameboard(levelDesigner: levelDesigner, tappedLocation: taplocation)
+        guard let modifyGameboard =
+                selectedPaletteButton?.getModifyGameboardClosure(levelDesigner: levelDesigner) else {
+            return
+        }
+        modifyGameboard(taplocation)
     }
 
     private func updateCanvas() {
@@ -52,19 +56,20 @@ class LevelDesignController: UIViewController {
         addNewViews()
     }
 
+    private let pegTypeToViewMapping: [PegType: (Peg) -> (PegView) ] = [
+        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius) },
+        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius) }
+    ]
+
     private func addNewViews() {
         for peg in levelDesigner.gameboard.pegs
         where !canvas.subviews.compactMap({ ($0 as? PegView)?.location }).contains(peg.location) {
-            let pegViewToAdd: PegView
-            switch peg.type {
-            case .blue:
-                pegViewToAdd = BluePegView(at: peg.location, radius: peg.radius)
-            case .orange:
-                pegViewToAdd = OrangePegView(at: peg.location, radius: peg.radius)
+            guard let createPegViewFromPeg = pegTypeToViewMapping[peg.type] else {
+                continue
             }
+            let pegViewToAdd: PegView = createPegViewFromPeg(peg)
             setupCanvasObjectGestures(canvasObject: pegViewToAdd)
             canvas.addSubview(pegViewToAdd)
-            selectedCanvasObject = pegViewToAdd
         }
 
         for block in levelDesigner.gameboard.blocks
@@ -72,7 +77,7 @@ class LevelDesignController: UIViewController {
             let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size)
             setupCanvasObjectGestures(canvasObject: blockViewToAdd)
             canvas.addSubview(blockViewToAdd)
-            selectedCanvasObject = blockViewToAdd
+
         }
     }
 
@@ -81,15 +86,19 @@ class LevelDesignController: UIViewController {
         where !levelDesigner.gameboard.pegs.compactMap({ $0.location })
             .contains((canvasObject as? (any CanvasObject))?.location) {
             canvasObject.removeFromSuperview()
-            if canvasObject == selectedCanvasObject {
-                selectedCanvasObject = nil
-            }
         }
     }
 
     private func setupCanvasObjectGestures(canvasObject: any CanvasObject) {
+        allowCanvasObjectTap(canvasObject: canvasObject)
         makeCanvasObjectDraggable(canvasObject: canvasObject)
         allowCanvasObjectLongPress(canvasObject: canvasObject)
+    }
+
+    private func allowCanvasObjectTap(canvasObject: any CanvasObject) {
+        let canvasObjectTapGestureRecognizer = UITapGestureRecognizer(
+            target: self, action: #selector(onTapCanvasObject(_:)))
+        canvasObject.addGestureRecognizer(canvasObjectTapGestureRecognizer)
     }
 
     private func makeCanvasObjectDraggable(canvasObject: any CanvasObject) {
@@ -104,12 +113,22 @@ class LevelDesignController: UIViewController {
         canvasObject.addGestureRecognizer(canvasObjectLongPressGestureRecognizer)
     }
 
+    @IBAction func onTapCanvasObject(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard let tappedCanvasObject = gestureRecognizer.view as? (any CanvasObject) else {
+            return
+        }
+        if selectedPaletteButton == eraseButton {
+            levelDesigner.eraseObjectFromGameboard(tappedLocation: tappedCanvasObject.location)
+            return
+        }
+        tappedCanvasObject.setupSliderViews(sizeSlider, widthSlider, heightSlider, rotationSlider)
+        selectedCanvasObject = tappedCanvasObject
+    }
+
     @IBAction func onDragCanvasObject(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let draggedCanvasObject = gestureRecognizer.view as? (any CanvasObject) else {
             return
         }
-        selectedCanvasObject = draggedCanvasObject
-        let oldLocation: CGPoint = draggedCanvasObject.center
         let newLocation = gestureRecognizer.location(in: canvas)
 
         // Move view location on canvas
@@ -117,12 +136,12 @@ class LevelDesignController: UIViewController {
 
         if gestureRecognizer.state == .ended {
             let isMoveValid = levelDesigner.moveObjectOnGameboard(
-                oldLocation: draggedCanvasObject.location ?? oldLocation, newLocation: newLocation)
+                oldLocation: draggedCanvasObject.location, newLocation: newLocation)
             if isMoveValid {
                 draggedCanvasObject.location = newLocation
             } else {
                 // Undo move of view on canvas
-                draggedCanvasObject.center = draggedCanvasObject.location ?? oldLocation
+                draggedCanvasObject.center = draggedCanvasObject.location
             }
         }
     }

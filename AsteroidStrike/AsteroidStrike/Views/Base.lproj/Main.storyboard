@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SEN-vs-nxF">
-    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <accessibilityOverrides/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -15,21 +15,21 @@
             <objects>
                 <viewController storyboardIdentifier="LevelDesignController" title="Level Design View Controller" id="BYZ-38-t0r" customClass="LevelDesignController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="LevelDesignView" customModule="AsteroidStrike" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="rYb-Dy-ZZg">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1097.5"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="779.5"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="3sY-oi-6no" appends="YES" id="4qk-Eq-1Gg"/>
                                 </connections>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OpU-YA-oLj" userLabel="Level Designer Tools">
-                                <rect key="frame" x="20" y="1191.5" width="984" height="134.5"/>
+                                <rect key="frame" x="20" y="869.5" width="728" height="134.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ows-Wq-pFK" userLabel="Palette">
-                                        <rect key="frame" x="0.0" y="0.0" width="984" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="80"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTm-mi-G1h">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="80"/>
@@ -96,7 +96,7 @@
                                                 <viewLayoutGuide key="frameLayoutGuide" id="Q3W-lf-VmQ"/>
                                             </scrollView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Ax-Hc-dxt" userLabel="Global Controls">
-                                                <rect key="frame" x="576" y="0.0" width="408" height="80"/>
+                                                <rect key="frame" x="320" y="0.0" width="408" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ntf-t9-fOg" userLabel="Peg Styles">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="80"/>
@@ -115,6 +115,9 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="150" id="6EL-Cf-d6n"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <action selector="onSizeSliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="t0z-p5-Nhn"/>
+                                                                        </connections>
                                                                     </slider>
                                                                 </subviews>
                                                             </stackView>
@@ -127,7 +130,7 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="nnq-xN-0h7">
+                                                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="100" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="nnq-xN-0h7">
                                                                         <rect key="frame" x="156" y="0.0" width="154" height="1"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="150" id="Xzx-7I-7HY"/>
@@ -191,7 +194,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NZx-a3-EEc" userLabel="Action Buttons">
-                                        <rect key="frame" x="0.0" y="100" width="984" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="100" width="728" height="34.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="401-o0-b9r">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="34.5"/>
@@ -215,12 +218,12 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Level Name" textAlignment="justified" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SdD-TA-tf4">
-                                                <rect key="frame" x="181" y="0.0" width="635.5" height="34.5"/>
+                                                <rect key="frame" x="181" y="0.0" width="379.5" height="34.5"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcW-f4-Iog">
-                                                <rect key="frame" x="836.5" y="0.0" width="62" height="34.5"/>
+                                                <rect key="frame" x="580.5" y="0.0" width="62" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Save">
                                                     <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
@@ -230,7 +233,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lP3-9H-O4G">
-                                                <rect key="frame" x="918.5" y="0.0" width="65.5" height="34.5"/>
+                                                <rect key="frame" x="662.5" y="0.0" width="65.5" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Start">
                                                     <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
@@ -293,14 +296,14 @@
             <objects>
                 <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="3op-Jh-mrj" userLabel="Levels Table View">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="995.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicStyleCell" id="bgb-8U-jeW" userLabel="Level Table View Cell">
-                                <rect key="frame" x="0.0" y="50" width="704" height="51.5"/>
+                                <rect key="frame" x="0.0" y="50" width="704" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgb-8U-jeW" id="K7n-DV-y8a">
-                                    <rect key="frame" x="0.0" y="0.0" width="704" height="51.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="704" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -329,11 +332,11 @@
             <objects>
                 <viewController id="Hde-6i-thd" customClass="GameplayController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iqr-nH-rPJ">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="iPD-H4-fcE">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1272"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="954"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="QoY-DB-ZqH" appends="YES" id="ArO-Kr-clA"/>
@@ -341,7 +344,7 @@
                                 </connections>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-2U-3AE" customClass="CannonView" customModule="AsteroidStrike" customModuleProvider="target">
-                                <rect key="frame" x="437" y="74" width="150" height="150"/>
+                                <rect key="frame" x="309" y="70" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="9f4-N6-LPP"/>
                                     <constraint firstAttribute="width" constant="150" id="yfD-sk-e2F"/>
@@ -384,14 +387,14 @@
             <objects>
                 <viewController title="Home View Controller" id="WZn-Xd-JEA" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c0f-bS-6GE">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-vO-QBI">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Qw9-yY-I9j">
-                                <rect key="frame" x="297.5" y="534.5" width="429.5" height="297.5"/>
+                                <rect key="frame" x="169.5" y="363.5" width="429.5" height="297.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asteroid Strike" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2G-i3-BRr">
                                         <rect key="frame" x="0.0" y="0.0" width="429.5" height="63.5"/>
@@ -444,7 +447,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SEN-vs-nxF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qvs-zd-cCe">
-                        <rect key="frame" x="0.0" y="24" width="1024" height="50"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
