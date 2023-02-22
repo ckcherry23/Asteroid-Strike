@@ -110,14 +110,19 @@ class GameplayController: UIViewController {
         })
     }
 
-    private func fadeOutRemovedPegs() {
+    private func fadeOutRemovedObjects() {
         guard gameEngine.ball.isStuck() else {
             return
         }
         let removedPegs = pegViews.filter({ pegView in
             !gameEngine.gameboard.pegs.compactMap({ $0.location }).contains(pegView.location)
         })
+        let removedBlocks = blockViews.filter({ blockView in
+            !gameEngine.gameboard.blocks.compactMap({ $0.location }).contains(blockView.location)
+        })
+
         fadeOutViews(views: removedPegs)
+        fadeOutViews(views: removedBlocks)
     }
 
     private func fadeOutLitPegsOnLaunchEnd() {
@@ -185,7 +190,7 @@ extension GameplayController: RendererDelegate {
     func render() {
         updateBall()
         lightUpHitPegs()
-        fadeOutRemovedPegs()
+        fadeOutRemovedObjects()
         fadeOutLitPegsOnLaunchEnd()
     }
 

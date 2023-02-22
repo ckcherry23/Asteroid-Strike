@@ -43,7 +43,7 @@ class GameEngine {
     }
 
     @objc func updateGame() {
-        removeBlockingPegsWhenBallStuck()
+        removeBlockingObjectsWhenBallStuck()
         removeHitPegsOnLaunchEnd()
         physicsWorld.updateWorld()
         rendererDelegate?.render()
@@ -61,16 +61,19 @@ class GameEngine {
         ball.physicsBody.applyImpulse(impulse: launchVelocity * ball.physicsBody.mass)
     }
 
-    private func removeBlockingPegsWhenBallStuck() {
+    private func removeBlockingObjectsWhenBallStuck() {
         guard ball.isStuck() else {
             return
         }
         physicsWorld.getBodiesInContact(with: ball.physicsBody).forEach({ physicsBody in
-            guard let pegToBeDeleted = gameboard.pegs.first(where: { peg in peg.physicsBody === physicsBody }) else {
-                return
+            if let pegToBeDeleted = gameboard.pegs.first(where: { peg in peg.physicsBody === physicsBody }) {
+                gameboard.deletePeg(deletedPeg: pegToBeDeleted)
+                physicsWorld.removePhysicsBody(physicsBody: physicsBody)
+            } else if let blockToBeDeleted = gameboard.blocks.first(where: { block in
+                block.physicsBody === physicsBody }) {
+                gameboard.deleteBlock(deletedBlock: blockToBeDeleted)
+                physicsWorld.removePhysicsBody(physicsBody: physicsBody)
             }
-            gameboard.deletePeg(deletedPeg: pegToBeDeleted)
-            physicsWorld.removePhysicsBody(physicsBody: physicsBody)
         })
     }
 

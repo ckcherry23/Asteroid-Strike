@@ -12,6 +12,7 @@ class LevelDesignController: UIViewController {
         super.viewDidLoad()
         setDefaults()
         addKeyboardHandlers()
+        observeModel()
     }
 
     override func viewDidLayoutSubviews() {
@@ -22,41 +23,28 @@ class LevelDesignController: UIViewController {
 
     var levelDesigner: LevelDesigner = LevelDesigner() {
         didSet {
-            updateCanvas()
+            observeModel()
         }
     }
-    private var levelStorage: LevelStorage = JSONLevelStorage()
-    private var selectedCanvasObject: (any CanvasObject)?
 
-    @IBOutlet weak var bluePegButton: PaletteButton!
-    @IBOutlet weak var orangePegButton: PaletteButton!
-    @IBOutlet weak var blockButton: PaletteButton!
-    @IBOutlet weak var eraseButton: PaletteButton!
+    private(set) var levelStorage: LevelStorage = JSONLevelStorage()
+    private(set) var selectedCanvasObject: (any CanvasObject)?
+
+    @IBOutlet weak var bluePegButton: BluePegButton!
+    @IBOutlet weak var orangePegButton: OrangePegButton!
+    @IBOutlet weak var blockButton: BlockButton!
+    @IBOutlet weak var eraseButton: EraseButton!
     @IBOutlet var paletteButtons: [PaletteButton]!
     @IBOutlet weak var canvas: UIImageView!
     @IBOutlet weak var levelNameTextField: UITextField!
-
-    @IBAction func onTapPegButton(_ sender: PaletteButton) {
-        clearAllSelections()
-        sender.isSelected = true
-        selectedPaletteButton = sender
-    }
+    @IBOutlet weak var sizeSlider: UISlider!
+    @IBOutlet weak var widthSlider: UISlider!
+    @IBOutlet weak var heightSlider: UISlider!
+    @IBOutlet weak var rotationSlider: UISlider!
 
     @IBAction func onTapCanvas(_ gestureRecognizer: UITapGestureRecognizer) {
         let taplocation: CGPoint = gestureRecognizer.location(in: canvas)
-
-        switch selectedPaletteButton {
-        case bluePegButton:
-            levelDesigner.addPegToGameboard(pegLocation: taplocation, pegType: .blue)
-        case orangePegButton:
-            levelDesigner.addPegToGameboard(pegLocation: taplocation, pegType: .orange)
-        case blockButton:
-            levelDesigner.addBlockToGameboard(blockLocation: taplocation)
-        case eraseButton:
-            levelDesigner.eraseObjectFromGameboard(tappedLocation: taplocation)
-        default:
-            break
-        }
+        selectedPaletteButton?.modifyGameboard(levelDesigner: levelDesigner, tappedLocation: taplocation)
     }
 
     private func updateCanvas() {
@@ -143,81 +131,15 @@ class LevelDesignController: UIViewController {
         let longPressLocation = gestureRecognizer.location(in: canvas)
         levelDesigner.eraseObjectFromGameboard(tappedLocation: longPressLocation)
     }
-
-    private func clearAllSelections() {
-        paletteButtons.forEach { $0.isSelected = false }
-    }
-
-    private func setDefaults() {
-        bluePegButton.isSelected = true
-        canvas.translatesAutoresizingMaskIntoConstraints = false
-        selectedPaletteButton = bluePegButton
-    }
 }
 
-extension LevelDesignController {
-
-    @IBAction func onTapResetButton(_ sender: Any) {
-        levelDesigner = LevelDesigner()
+extension LevelDesignController: Observer {
+    func update() {
+        updateCanvas()
     }
 
-    @IBAction func onTapSaveButton(_ sender: Any) {
-        guard let levelName = levelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-            return
-        }
-        let newLevel: SavedLevel = SavedLevel(gameBoard: levelDesigner.gameboard, levelName: levelName)
-        levelStorage.saveLevel(level: newLevel) {result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success:
-                break
-            }
-        }
-    }
-
-    @IBAction private func unwindToLevelDesign(sender: UIStoryboardSegue) {
-        guard let levelSelectController = sender.source as? LevelSelectController,
-              let loadedLevel = levelSelectController.loadedLevel
-        else {
-            return
-        }
-        levelDesigner.updateGameboardFromLoadedLevel(savedLevel: loadedLevel)
-        levelNameTextField.text = loadedLevel.levelName
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "showSegueWithGameboard",
-              let gameplayController: GameplayController = segue.destination as? GameplayController else {
-            return
-        }
-        gameplayController.gameboardDelegate = self
-    }
-
-    // Move view with keyboard
-    // Referenced from https://stackoverflow.com/questions/26070242/move-view-with-keyboard-using-swift
-    //
-    private func addKeyboardHandlers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
-                                  as? NSValue)?.cgRectValue else {
-            return
-        }
-        if self.view.frame.origin.y == 0 {
-            self.view.frame.origin.y -= keyboardRect.height
-        }
-    }
-
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
+    func observeModel() {
+        levelDesigner.attach(observer: self)
     }
 }
 

@@ -7,20 +7,25 @@
 
 import CoreGraphics
 
-struct LevelDesigner {
-    private(set) var gameboard: Gameboard = Gameboard()
+class LevelDesigner {
+    var observers: [Observer] = []
+    private(set) var gameboard: Gameboard = Gameboard() {
+        didSet {
+            notify()
+        }
+    }
 
-    mutating func addPegToGameboard(pegLocation: CGPoint, pegType: PegType) {
+    func addPegToGameboard(pegLocation: CGPoint, pegType: PegType) {
         let addedPeg = Peg(location: pegLocation, type: pegType)
         gameboard.addPeg(addedPeg: addedPeg)
     }
 
-    mutating func addBlockToGameboard(blockLocation: CGPoint) {
+    func addBlockToGameboard(blockLocation: CGPoint) {
         let addedBlock = Block(location: blockLocation)
         gameboard.addBlock(addedBlock: addedBlock)
     }
 
-    mutating func moveObjectOnGameboard(oldLocation: CGPoint, newLocation: CGPoint) -> Bool {
+    func moveObjectOnGameboard(oldLocation: CGPoint, newLocation: CGPoint) -> Bool {
         if let movedPeg = gameboard.findPeg(at: oldLocation) {
             return gameboard.movePeg(movedPeg: movedPeg, to: newLocation)
         } else if let movedBlock = gameboard.findBlock(at: oldLocation) {
@@ -29,7 +34,7 @@ struct LevelDesigner {
         return false
     }
 
-    mutating func eraseObjectFromGameboard(tappedLocation: CGPoint) {
+    func eraseObjectFromGameboard(tappedLocation: CGPoint) {
         if let erasedPeg = gameboard.findPeg(at: tappedLocation) {
             gameboard.deletePeg(deletedPeg: erasedPeg)
         } else if let erasedBlock = gameboard.findBlock(at: tappedLocation) {
@@ -39,11 +44,26 @@ struct LevelDesigner {
 }
 
 extension LevelDesigner {
-    mutating func updateCanvasSize(_ canvasSize: CGSize) {
+    func updateCanvasSize(_ canvasSize: CGSize) {
         gameboard.updateBoard(to: canvasSize)
     }
 
-    mutating func updateGameboardFromLoadedLevel(savedLevel: SavedLevel) {
+    func updateGameboardFromLoadedLevel(savedLevel: SavedLevel) {
         gameboard = savedLevel.gameBoard
+    }
+}
+
+extension LevelDesigner: Observable {
+    func attach(observer: Observer) {
+        observers.append(observer)
+    }
+    func detach(observer: Observer) {
+        guard let removedIndex = observers.firstIndex(where: { $0 === observer }) else {
+            return
+        }
+        observers.remove(at: removedIndex)
+    }
+    func notify() {
+        observers.forEach({ $0.update() })
     }
 }

@@ -14,7 +14,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="LevelDesignController" title="Level Design View Controller" id="BYZ-38-t0r" customClass="LevelDesignController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="LevelDesignView" customModule="AsteroidStrike" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -37,7 +37,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FCD-da-yVc" userLabel="Peg Options">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="80"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpN-Of-cAT" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpN-Of-cAT" customClass="BluePegButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="CPW-11-Agf"/>
@@ -46,10 +46,10 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="peg-blue"/>
                                                                 <connections>
-                                                                    <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3d9-8S-bqd"/>
+                                                                    <action selector="onTapPaletteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U9h-Yx-ghj"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J43-cx-TLp" userLabel="Orange Peg Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J43-cx-TLp" userLabel="Orange Peg Button" customClass="OrangePegButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                                 <rect key="frame" x="100" y="0.0" width="80" height="80"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="GeA-0V-1SR"/>
@@ -58,10 +58,10 @@
                                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                                 <state key="normal" image="peg-orange"/>
                                                                 <connections>
-                                                                    <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rP6-ty-RWP"/>
+                                                                    <action selector="onTapPaletteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c1d-Bf-bUh"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhb-UN-4WD" userLabel="Block Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhb-UN-4WD" userLabel="Block Button" customClass="BlockButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                                 <rect key="frame" x="200" y="0.0" width="80" height="80"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="80" id="gFa-Yf-p95"/>
@@ -72,7 +72,7 @@
                                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7BJ-7t-b61"/>
+                                                                    <action selector="onTapPaletteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bES-5k-3mE"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -101,89 +101,80 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ntf-t9-fOg" userLabel="Peg Styles">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="80"/>
                                                         <subviews>
-                                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t9x-bj-bH1" userLabel="Size Controls">
-                                                                <rect key="frame" x="0.0" y="-4" width="308" height="0.0"/>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t9x-bj-bH1" userLabel="Size Controls">
+                                                                <rect key="frame" x="0.0" y="0.0" width="308" height="30"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Size" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4d-9h-jOM">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="0.0"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                                                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xL5-Az-lZT">
-                                                                        <rect key="frame" x="156" y="0.0" width="154" height="1"/>
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="31"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="150" id="4Sb-rL-GeL"/>
+                                                                            <constraint firstAttribute="width" constant="150" id="6EL-Cf-d6n"/>
                                                                         </constraints>
                                                                     </slider>
                                                                 </subviews>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="xL5-Az-lZT" secondAttribute="trailing" id="LqL-zR-OQG"/>
-                                                                </constraints>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKH-co-Rcd" userLabel="Width Controls">
-                                                                <rect key="frame" x="0.0" y="0.0" width="308" height="21.5"/>
+                                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKH-co-Rcd" userLabel="Width Controls">
+                                                                <rect key="frame" x="0.0" y="34" width="308" height="0.0"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvt-PI-0dh">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="21.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="0.0"/>
                                                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="nnq-xN-0h7">
-                                                                        <rect key="frame" x="156" y="0.0" width="154" height="22.5"/>
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="1"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="150" id="kcb-I9-Ii5"/>
+                                                                            <constraint firstAttribute="width" constant="150" id="Xzx-7I-7HY"/>
                                                                         </constraints>
                                                                     </slider>
                                                                 </subviews>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="nnq-xN-0h7" secondAttribute="trailing" id="taO-60-n4t"/>
-                                                                </constraints>
                                                             </stackView>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0Vb-62-E2F" userLabel="Height Controls">
-                                                                <rect key="frame" x="0.0" y="29.5" width="308" height="21.5"/>
+                                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0Vb-62-E2F" userLabel="Height Controls">
+                                                                <rect key="frame" x="0.0" y="34" width="308" height="0.0"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Height" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6YK-1d-70F">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="21.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="0.0"/>
                                                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="vLs-mv-cL9">
-                                                                        <rect key="frame" x="156" y="0.0" width="154" height="22.5"/>
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="1"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="150" id="CGL-kt-pgB"/>
+                                                                            <constraint firstAttribute="width" constant="150" id="2Rr-05-iWl"/>
                                                                         </constraints>
                                                                     </slider>
                                                                 </subviews>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="vLs-mv-cL9" secondAttribute="trailing" id="Mif-OD-KE9"/>
-                                                                </constraints>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MVf-5M-45z" userLabel="Rotation Controls">
-                                                                <rect key="frame" x="0.0" y="59" width="308" height="21"/>
+                                                                <rect key="frame" x="0.0" y="50" width="308" height="30"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZN-qP-0Hm">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="21"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                                                                         <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="360" translatesAutoresizingMaskIntoConstraints="NO" id="Lwy-IB-d0X">
-                                                                        <rect key="frame" x="156" y="0.0" width="154" height="22"/>
+                                                                        <rect key="frame" x="156" y="0.0" width="154" height="31"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="150" id="vp8-Ce-ACT"/>
+                                                                            <constraint firstAttribute="width" constant="150" id="HAL-Xy-H66"/>
                                                                         </constraints>
                                                                     </slider>
                                                                 </subviews>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="Lwy-IB-d0X" secondAttribute="trailing" id="2zm-xI-1Zq"/>
-                                                                </constraints>
                                                             </stackView>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="QKH-co-Rcd" firstAttribute="top" secondItem="t9x-bj-bH1" secondAttribute="bottom" constant="4" id="nh3-3x-2SP"/>
+                                                        </constraints>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="PaletteButton" customModule="AsteroidStrike" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bK6-xx-LXr" userLabel="Erase Button" customClass="EraseButton" customModule="AsteroidStrike" customModuleProvider="target">
                                                         <rect key="frame" x="328" y="0.0" width="80" height="80"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="oHH-70-wMy"/>
@@ -192,14 +183,14 @@
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" image="delete"/>
                                                         <connections>
-                                                            <action selector="onTapPegButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fsa-ad-sF4"/>
+                                                            <action selector="onTapPaletteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iKj-ta-Fzg"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NZx-a3-EEc" userLabel="Storage">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NZx-a3-EEc" userLabel="Action Buttons">
                                         <rect key="frame" x="0.0" y="100" width="984" height="34.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="401-o0-b9r">
@@ -275,8 +266,12 @@
                         <outlet property="bluePegButton" destination="LpN-Of-cAT" id="Iev-5u-EYe"/>
                         <outlet property="canvas" destination="rYb-Dy-ZZg" id="hvu-kp-pq5"/>
                         <outlet property="eraseButton" destination="bK6-xx-LXr" id="MMW-IM-cth"/>
+                        <outlet property="heightSlider" destination="vLs-mv-cL9" id="IG6-Un-pbN"/>
                         <outlet property="levelNameTextField" destination="SdD-TA-tf4" id="SUk-fP-jk8"/>
                         <outlet property="orangePegButton" destination="J43-cx-TLp" id="xxf-Ow-2C9"/>
+                        <outlet property="rotationSlider" destination="Lwy-IB-d0X" id="X2s-SO-lRb"/>
+                        <outlet property="sizeSlider" destination="xL5-Az-lZT" id="CUS-xM-IoB"/>
+                        <outlet property="widthSlider" destination="nnq-xN-0h7" id="cYg-Az-dFI"/>
                         <outletCollection property="paletteButtons" destination="J43-cx-TLp" collectionClass="NSMutableArray" id="qjx-8Y-Jhr"/>
                         <outletCollection property="paletteButtons" destination="LpN-Of-cAT" collectionClass="NSMutableArray" id="cmi-dU-u6z"/>
                         <outletCollection property="paletteButtons" destination="Nhb-UN-4WD" collectionClass="NSMutableArray" id="Dti-t6-gD0"/>
