@@ -21,7 +21,8 @@ struct Gameboard {
     }
 
     mutating func movePeg(movedPeg: Peg, to newLocation: CGPoint) -> Bool {
-        let pegAtNewPosition = Peg(location: newLocation, type: movedPeg.type, radius: movedPeg.radius)
+        let pegAtNewPosition = Peg(location: newLocation, type: movedPeg.type,
+                                   radius: movedPeg.radius, angle: movedPeg.angle)
         return replacePeg(oldPeg: movedPeg, newPeg: pegAtNewPosition)
     }
 
@@ -29,9 +30,16 @@ struct Gameboard {
         pegs.remove(deletedPeg)
     }
 
-    mutating func resizePeg(resizedPeg: Peg, radius: CGFloat) -> Bool {
-        let pegOfNewSize = Peg(location: resizedPeg.location, type: resizedPeg.type, radius: radius)
+    mutating func resizePeg(resizedPeg: Peg, newRadius: CGFloat) -> Bool {
+        let pegOfNewSize = Peg(location: resizedPeg.location, type: resizedPeg.type,
+                               radius: newRadius, angle: resizedPeg.angle)
         return replacePeg(oldPeg: resizedPeg, newPeg: pegOfNewSize)
+    }
+
+    mutating func rotatePeg(rotatedPeg: Peg, to newAngle: CGFloat) -> Bool {
+        let pegOfNewAngle = Peg(location: rotatedPeg.location,
+                                type: rotatedPeg.type, radius: rotatedPeg.radius, angle: newAngle)
+        return replacePeg(oldPeg: rotatedPeg, newPeg: pegOfNewAngle)
     }
 
     func findPeg(at location: CGPoint) -> Peg? {
@@ -91,7 +99,7 @@ extension Gameboard {
     }
 
     mutating func moveBlock(movedBlock: Block, to newLocation: CGPoint) -> Bool {
-        let blockAtNewPosition = Block(location: newLocation, size: movedBlock.size)
+        let blockAtNewPosition = Block(location: newLocation, size: movedBlock.size, angle: movedBlock.angle)
         return replaceBlock(oldBlock: movedBlock, newBlock: blockAtNewPosition)
     }
 
@@ -100,8 +108,13 @@ extension Gameboard {
     }
 
     mutating func resizeBlock(resizedBlock: Block, newSize: CGSize) -> Bool {
-        let blockWithNewSize = Block(location: resizedBlock.location, size: newSize)
+        let blockWithNewSize = Block(location: resizedBlock.location, size: newSize, angle: resizedBlock.angle)
         return replaceBlock(oldBlock: resizedBlock, newBlock: blockWithNewSize)
+    }
+
+    mutating func rotateBlock(rotatedBlock: Block, to newAngle: CGFloat) -> Bool {
+        let blockWithNewAngle = Block(location: rotatedBlock.location, size: rotatedBlock.size, angle: newAngle)
+        return replaceBlock(oldBlock: rotatedBlock, newBlock: blockWithNewAngle)
     }
 
     func findBlock(at location: CGPoint) -> Block? {
@@ -157,8 +170,8 @@ extension Gameboard {
 
     func copy() -> Gameboard {
         var copy = Gameboard(board: board)
-        pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, type: $0.type, radius: $0.radius)) })
-        blocks.forEach({ copy.addBlock(addedBlock: Block(location: $0.location, size: $0.size )) })
+        pegs.forEach({ copy.addPeg(addedPeg: $0.copy()) })
+        blocks.forEach({ copy.addBlock(addedBlock: $0.copy()) })
         return copy
     }
 

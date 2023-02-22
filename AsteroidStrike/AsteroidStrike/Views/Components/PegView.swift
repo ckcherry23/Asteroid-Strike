@@ -22,26 +22,35 @@ class PegView: UIImageView, CanvasObject {
             self.updatePegAppearance()
         }
     }
+    var angle: CGFloat
 
-    fileprivate init(at location: CGPoint, radius: CGFloat) {
+    fileprivate init(at location: CGPoint, radius: CGFloat, angle: CGFloat) {
         let boundingBox = CGRect.boundingBoxForCircle(center: location, radius: radius)
         self.location = location
+        self.angle = angle
         super.init(frame: boundingBox)
         self.customize()
     }
 
     required init?(coder: NSCoder) {
         self.location = CGPoint.zero
+        self.angle = CGFloat.zero
         super.init(coder: coder)
     }
+
+    func setAngle(newAngle: CGFloat) {
+        angle = newAngle
+        self.transform = CGAffineTransform(rotationAngle: newAngle)
+    }
+
+    func updatePegAppearance() {}
 
     private func customize() {
         self.layer.cornerRadius = bounds.size.width / 2
         self.isUserInteractionEnabled = true
         self.contentMode = .scaleAspectFill
+        self.transform = CGAffineTransform(rotationAngle: angle)
     }
-
-    func updatePegAppearance() {}
 }
 
 extension PegView {
@@ -53,12 +62,13 @@ extension PegView {
         rotationSlider.superview?.isHidden = false
 
         sizeSlider.value = Float(size)
+        rotationSlider.value = Float(Convert.radiansToDegrees(angleInRadians: angle))
     }
 }
 
 class BluePegView: PegView {
-    override init(at location: CGPoint, radius: CGFloat) {
-        super.init(at: location, radius: radius)
+    override init(at location: CGPoint, radius: CGFloat, angle: CGFloat) {
+        super.init(at: location, radius: radius, angle: angle)
         updatePegAppearance()
     }
 
@@ -76,8 +86,8 @@ class BluePegView: PegView {
 }
 
 class OrangePegView: PegView {
-    override init(at location: CGPoint, radius: CGFloat) {
-        super.init(at: location, radius: radius)
+    override init(at location: CGPoint, radius: CGFloat, angle: CGFloat) {
+        super.init(at: location, radius: radius, angle: angle)
         updatePegAppearance()
     }
 

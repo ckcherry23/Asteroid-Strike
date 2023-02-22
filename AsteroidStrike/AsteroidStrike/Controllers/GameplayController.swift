@@ -57,12 +57,12 @@ class GameplayController: UIViewController {
     }
 
     private let pegTypeToViewMapping: [PegType: (Peg) -> (PegView) ] = [
-        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius) },
-        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius) }
+        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
     ]
 
     private func createBlockViewFromBlock(block: Block) -> BlockView {
-        BlockView(at: block.location, size: block.size)
+        BlockView(at: block.location, size: block.size, angle: block.angle)
     }
 
     private func addGameboardElements() {

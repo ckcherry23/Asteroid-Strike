@@ -57,8 +57,8 @@ class LevelDesignController: UIViewController {
     }
 
     private let pegTypeToViewMapping: [PegType: (Peg) -> (PegView) ] = [
-        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius) },
-        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius) }
+        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
     ]
 
     private func addNewViews() {
@@ -74,7 +74,7 @@ class LevelDesignController: UIViewController {
 
         for block in levelDesigner.gameboard.blocks
         where !canvas.subviews.compactMap({ ($0 as? BlockView)?.location }).contains(block.location) {
-            let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size)
+            let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size, angle: block.angle)
             setupCanvasObjectGestures(canvasObject: blockViewToAdd)
             canvas.addSubview(blockViewToAdd)
         }

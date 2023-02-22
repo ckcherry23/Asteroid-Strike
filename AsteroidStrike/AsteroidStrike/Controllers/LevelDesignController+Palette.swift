@@ -50,7 +50,15 @@ extension LevelDesignController {
     }
 
     @IBAction func onRotationSliderValueChanged(_ sender: UISlider) {
-
+        guard let canvasObject = selectedCanvasObject else {
+            return
+        }
+        let isRotationValid = levelDesigner.rotateObjectOnGameboard(
+            location: canvasObject.location,
+            newAngle: Convert.degreesToRadians(angleInDegrees: CGFloat(rotationSlider.value)))
+        if isRotationValid {
+            canvasObject.setAngle(newAngle: Convert.degreesToRadians(angleInDegrees: CGFloat(rotationSlider.value)))
+        }
     }
 
     func setDefaults() {

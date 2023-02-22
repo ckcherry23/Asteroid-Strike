@@ -17,7 +17,10 @@ struct Block: GameboardObject {
 
     var hitBox: CGPath {
         let rect = CGRect.centeredRectangle(center: location, size: size)
-        return CGPath(rect: rect, transform: nil)
+        var transform = CGAffineTransform(translationX: location.x, y: location.y)
+            .rotated(by: angle)
+            .translatedBy(x: -location.x, y: -location.y)
+        return CGPath(rect: rect, transform: &transform)
     }
 
     var physicsBody: RectanglePhysicsBody
@@ -30,6 +33,10 @@ struct Block: GameboardObject {
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false
         self.physicsBody.mass = Block.defaultMass
+    }
+
+    func copy() -> Block {
+        Block(location: location, size: size, angle: angle)
     }
 }
 

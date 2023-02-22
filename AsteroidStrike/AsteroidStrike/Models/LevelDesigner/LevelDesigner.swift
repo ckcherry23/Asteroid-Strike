@@ -49,7 +49,7 @@ extension LevelDesigner {
         guard let resizedPeg = gameboard.findPeg(at: pegLocation) else {
             return false
         }
-        return gameboard.resizePeg(resizedPeg: resizedPeg, radius: newSize / 2)
+        return gameboard.resizePeg(resizedPeg: resizedPeg, newRadius: newSize / 2)
     }
 
     func resizeBlockOnGameboard(blockLocation: CGPoint, newSize: CGSize) -> Bool {
@@ -57,6 +57,15 @@ extension LevelDesigner {
             return false
         }
         return gameboard.resizeBlock(resizedBlock: resizedBlock, newSize: newSize)
+    }
+
+    func rotateObjectOnGameboard(location: CGPoint, newAngle: CGFloat) -> Bool {
+        if let rotatedPeg = gameboard.findPeg(at: location) {
+            return gameboard.rotatePeg(rotatedPeg: rotatedPeg, to: newAngle)
+        } else if let rotatedBlock = gameboard.findBlock(at: location) {
+            return gameboard.rotateBlock(rotatedBlock: rotatedBlock, to: newAngle)
+        }
+        return false
     }
 }
 

@@ -47,6 +47,7 @@
 		C7F056E029A6328B00F035CD /* LevelDesignController+ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */; };
 		C7F056E229A6341300F035CD /* LevelDesignController+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */; };
 		C7F056EB29A6554800F035CD /* ObserverPatternHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */; };
+		C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EC29A691C400F035CD /* ConversionHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+ActionButtons.swift"; sourceTree = "<group>"; };
 		C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+Palette.swift"; sourceTree = "<group>"; };
 		C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverPatternHelpers.swift; sourceTree = "<group>"; };
+		C7F056EC29A691C400F035CD /* ConversionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */,
+				C7F056EC29A691C400F035CD /* ConversionHelpers.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */,
 				C76463AB299F74F400AF0413 /* GameplayController.swift in Sources */,
 				C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */,
+				C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */,
 				C76463A8299F74F400AF0413 /* CannonView.swift in Sources */,
 				C76463A5299F74F400AF0413 /* PegView.swift in Sources */,
 				C76463B1299F74F400AF0413 /* SavedLevel.swift in Sources */,

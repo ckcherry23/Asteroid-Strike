@@ -10,11 +10,13 @@ import UIKit
 class BlockView: UIImageView, CanvasObject {
     var location: CGPoint
     var size: CGSize
+    var angle: CGFloat
 
-    init(at location: CGPoint, size: CGSize) {
+    init(at location: CGPoint, size: CGSize, angle: CGFloat) {
         let boundingBox = CGRect.centeredRectangle(center: location, size: size)
         self.location = location
         self.size = size
+        self.angle = angle
         super.init(frame: boundingBox)
         self.customize()
     }
@@ -22,6 +24,7 @@ class BlockView: UIImageView, CanvasObject {
     required init?(coder: NSCoder) {
         self.location = CGPoint.zero
         self.size = CGSize.zero
+        self.angle = CGFloat.zero
         super.init(coder: coder)
     }
 
@@ -30,10 +33,16 @@ class BlockView: UIImageView, CanvasObject {
         frame = CGRect.centeredRectangle(center: location, size: newSize)
     }
 
+    func setAngle(newAngle: CGFloat) {
+        angle = newAngle
+        self.transform = CGAffineTransform(rotationAngle: newAngle)
+    }
+
     private func customize() {
         self.isUserInteractionEnabled = true
         image = UIImage(named: "block")
         self.contentMode = .scaleToFill
+        self.transform = CGAffineTransform(rotationAngle: angle)
     }
 }
 
@@ -45,7 +54,8 @@ extension BlockView {
         sizeSlider.superview?.isHidden = true
         rotationSlider.superview?.isHidden = false
 
-        widthSlider.value = Float(frame.width)
-        heightSlider.value = Float(frame.height)
+        widthSlider.value = Float(size.width)
+        heightSlider.value = Float(size.height)
+        rotationSlider.value = Float(Convert.radiansToDegrees(angleInRadians: angle))
     }
 }

@@ -36,6 +36,10 @@ struct Peg: GameboardObject {
         self.physicsBody.isAffectedByGravity = false
         self.physicsBody.mass = Peg.defaultMass
     }
+
+    func copy() -> Peg {
+        Peg(location: location, type: type, radius: radius, angle: angle)
+    }
 }
 
 enum PegType: Codable {
