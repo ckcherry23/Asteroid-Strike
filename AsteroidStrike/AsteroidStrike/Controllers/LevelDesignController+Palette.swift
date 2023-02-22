@@ -25,6 +25,34 @@ extension LevelDesignController {
         }
     }
 
+    @IBAction func onWidthSliderValueChanged(_ sender: UISlider) {
+        guard let blockView = selectedCanvasObject as? BlockView else {
+            return
+        }
+        let isResizeValid = levelDesigner.resizeBlockOnGameboard(
+            blockLocation: blockView.location,
+            newSize: CGSize(width: CGFloat(widthSlider.value), height: blockView.size.height))
+        if isResizeValid {
+            blockView.setSize(newSize: CGSize(width: CGFloat(widthSlider.value), height: blockView.size.height))
+        }
+    }
+
+    @IBAction func onHeightSliderValueChanged(_ sender: UISlider) {
+        guard let blockView = selectedCanvasObject as? BlockView else {
+            return
+        }
+        let isResizeValid = levelDesigner.resizeBlockOnGameboard(
+            blockLocation: blockView.location,
+            newSize: CGSize(width: blockView.size.width, height: CGFloat(heightSlider.value)))
+        if isResizeValid {
+            blockView.setSize(newSize: CGSize(width: blockView.size.width, height: CGFloat(heightSlider.value)))
+        }
+    }
+
+    @IBAction func onRotationSliderValueChanged(_ sender: UISlider) {
+
+    }
+
     func setDefaults() {
         bluePegButton.isSelected = true
         canvas.translatesAutoresizingMaskIntoConstraints = false

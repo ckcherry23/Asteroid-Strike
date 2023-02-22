@@ -77,7 +77,6 @@ class LevelDesignController: UIViewController {
             let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size)
             setupCanvasObjectGestures(canvasObject: blockViewToAdd)
             canvas.addSubview(blockViewToAdd)
-
         }
     }
 

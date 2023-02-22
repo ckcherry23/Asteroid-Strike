@@ -51,6 +51,13 @@ extension LevelDesigner {
         }
         return gameboard.resizePeg(resizedPeg: resizedPeg, radius: newSize / 2)
     }
+
+    func resizeBlockOnGameboard(blockLocation: CGPoint, newSize: CGSize) -> Bool {
+        guard let resizedBlock = gameboard.findBlock(at: blockLocation) else {
+            return false
+        }
+        return gameboard.resizeBlock(resizedBlock: resizedBlock, newSize: newSize)
+    }
 }
 
 extension LevelDesigner {

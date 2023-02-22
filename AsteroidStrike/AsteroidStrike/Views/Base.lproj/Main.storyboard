@@ -135,6 +135,9 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="150" id="Xzx-7I-7HY"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <action selector="onWidthSliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Opf-I0-xro"/>
+                                                                        </connections>
                                                                     </slider>
                                                                 </subviews>
                                                             </stackView>
@@ -152,6 +155,9 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="150" id="2Rr-05-iWl"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <action selector="onHeightSliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="9bf-qN-nRK"/>
+                                                                        </connections>
                                                                     </slider>
                                                                 </subviews>
                                                             </stackView>
@@ -169,6 +175,9 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="150" id="HAL-Xy-H66"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <action selector="onRotationSliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aEm-2c-jue"/>
+                                                                        </connections>
                                                                     </slider>
                                                                 </subviews>
                                                             </stackView>

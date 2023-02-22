@@ -91,33 +91,41 @@ extension Gameboard {
     }
 
     mutating func moveBlock(movedBlock: Block, to newLocation: CGPoint) -> Bool {
-        let initialBlockCount = blocks.count
-        let blockAtNewPosition = Block(location: newLocation)
-
-        guard contains(block: movedBlock) else {
-            return false
-        }
-
-        deleteBlock(deletedBlock: movedBlock)
-
-        guard blockCanBeAdded(addedBlock: blockAtNewPosition) else {
-            // add back deleted block since new position is invalid
-            addBlock(addedBlock: movedBlock)
-            return false
-        }
-
-        addBlock(addedBlock: blockAtNewPosition)
-        let finalBlockCount = blocks.count
-        assert(initialBlockCount == finalBlockCount)
-        return true
+        let blockAtNewPosition = Block(location: newLocation, size: movedBlock.size)
+        return replaceBlock(oldBlock: movedBlock, newBlock: blockAtNewPosition)
     }
 
     mutating func deleteBlock(deletedBlock: Block) {
         blocks.remove(deletedBlock)
     }
 
+    mutating func resizeBlock(resizedBlock: Block, newSize: CGSize) -> Bool {
+        let blockWithNewSize = Block(location: resizedBlock.location, size: newSize)
+        return replaceBlock(oldBlock: resizedBlock, newBlock: blockWithNewSize)
+    }
+
     func findBlock(at location: CGPoint) -> Block? {
         blocks.first(where: { $0.hitBox.contains(location) }) ?? nil
+    }
+
+    private mutating func replaceBlock(oldBlock: Block, newBlock: Block) -> Bool {
+        let initialBlockCount = blocks.count
+        guard contains(block: oldBlock) else {
+            return false
+        }
+
+        deleteBlock(deletedBlock: oldBlock)
+
+        guard blockCanBeAdded(addedBlock: newBlock) else {
+            // add back deleted block since new position is invalid
+            addBlock(addedBlock: oldBlock)
+            return false
+        }
+
+        addBlock(addedBlock: newBlock)
+        let finalBlockCount = blocks.count
+        assert(initialBlockCount == finalBlockCount)
+        return true
     }
 
     private func blockCanBeAdded(addedBlock: Block) -> Bool {
@@ -150,7 +158,7 @@ extension Gameboard {
     func copy() -> Gameboard {
         var copy = Gameboard(board: board)
         pegs.forEach({ copy.addPeg(addedPeg: Peg(location: $0.location, type: $0.type, radius: $0.radius)) })
-        blocks.forEach({ copy.addBlock(addedBlock: Block(location: $0.location)) })
+        blocks.forEach({ copy.addBlock(addedBlock: Block(location: $0.location, size: $0.size )) })
         return copy
     }
 
