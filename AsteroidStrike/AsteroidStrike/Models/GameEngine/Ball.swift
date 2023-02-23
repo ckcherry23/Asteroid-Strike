@@ -14,7 +14,7 @@ class Ball {
 
     private(set) var radius: CGFloat = Ball.defaultRadius
 
-    private(set) var physicsBody: PhysicsBody
+    private(set) var physicsBody: CirclePhysicsBody
 
     private var timeElapsedSinceBallMovement: TimeInterval = 0.0
     private var lastRecordedTime: Date = Date()
@@ -44,5 +44,13 @@ class Ball {
         lastRecordedTime = Date()
         lastRecordedLocation = location
         return timeElapsedSinceBallMovement > Ball.stuckTimeLimit
+    }
+
+    func hasEntered(bucket: Bucket) -> Bool {
+        frame.intersects(bucket.opening)
+    }
+
+    func resetPosition(to newPosition: CGPoint) {
+        physicsBody.position = CGVector.vector(fromPoint: newPosition)
     }
 }

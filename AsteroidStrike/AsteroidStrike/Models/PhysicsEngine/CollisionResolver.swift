@@ -12,8 +12,12 @@ protocol CollisionResolver {
 class ImpulseResolver: CollisionResolver {
     func resolve(collision: PhysicsCollision) {
         let impulseVector = collision.contactNormal * collision.impulse
-        collision.firstBody.applyImpulse(impulse: -impulseVector)
-        collision.secondBody.applyImpulse(impulse: impulseVector)
+        if collision.firstBody.isCollidableWith(other: collision.secondBody) {
+            collision.firstBody.applyImpulse(impulse: -impulseVector)
+        }
+        if collision.secondBody.isCollidableWith(other: collision.firstBody) {
+            collision.secondBody.applyImpulse(impulse: impulseVector)
+        }
     }
 }
 

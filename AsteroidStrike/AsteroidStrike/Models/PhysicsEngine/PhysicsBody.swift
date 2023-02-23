@@ -33,6 +33,9 @@ class PhysicsBody {
         }
     }
 
+    var collisionBitmask: UInt32 = 0xFFFFFFFF
+    var categoryBitmask: UInt32 = 0xFFFFFFFF
+
     private(set) var angle: CGFloat
 
     private var force: CGVector = CGVector.zero
@@ -117,26 +120,22 @@ extension PhysicsBody {
 }
 
 extension PhysicsBody: Movable {
-    private var isMovable: Bool {
-        isDynamic
-    }
-
     func applyForce(newForce: CGVector) {
-        guard isMovable else {
+        guard isDynamic else {
             return
         }
         force += newForce
     }
 
     func applyImpulse(impulse: CGVector) {
-        guard isMovable else {
+        guard isDynamic else {
             return
         }
         velocity += impulse * (1 / mass)
     }
 
     private func updatePosition(timeInterval: TimeInterval) {
-        guard isMovable else {
+        guard isDynamic else {
             return
         }
         velocity += acceleration * timeInterval
@@ -151,6 +150,10 @@ extension PhysicsBody: Collidable {
         }
         hitCounter += 1
         return PhysicsCollision(firstBody: self, secondBody: other)
+    }
+
+    func isCollidableWith(other: PhysicsBody) -> Bool {
+        (self.collisionBitmask & other.categoryBitmask) != 0
     }
 
     func isIntersecting(other: PhysicsBody) -> Bool {

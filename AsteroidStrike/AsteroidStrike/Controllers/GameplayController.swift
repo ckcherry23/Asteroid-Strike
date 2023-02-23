@@ -15,6 +15,7 @@ class GameplayController: UIViewController {
 
     @IBOutlet weak var gameplayArea: UIImageView!
     @IBOutlet weak var cannonView: CannonView!
+    @IBOutlet weak var bucketView: UIImageView!
     private var ballView: BallView!
     private var pegViews: [PegView] = []
     private var blockViews: [BlockView] = []
@@ -43,12 +44,13 @@ class GameplayController: UIViewController {
     }
 
     private func addGameplayElements() {
-        addCannonToGameplayArea()
+        addPersistentObjectsToGameplayArea()
         addBallToGameplayArea()
     }
 
-    private func addCannonToGameplayArea() {
+    private func addPersistentObjectsToGameplayArea() {
         gameplayArea.addSubview(cannonView)
+        gameplayArea.addSubview(bucketView)
     }
 
     private func addBallToGameplayArea() {
@@ -95,8 +97,17 @@ class GameplayController: UIViewController {
         blockViews.append(blockView)
     }
 
+    private func updateMovingObjects() {
+        updateBall()
+        updateBucket()
+    }
+
     private func updateBall() {
         ballView.center = gameEngine.launchBall.location
+    }
+
+    private func updateBucket() {
+        bucketView.center = gameEngine.bucket.location
     }
 
     private func lightUpHitPegs() {
@@ -188,7 +199,7 @@ class GameplayController: UIViewController {
 
 extension GameplayController: RendererDelegate {
     func render() {
-        updateBall()
+        updateMovingObjects()
         lightUpHitPegs()
         fadeOutRemovedObjects()
         fadeOutLitPegsOnLaunchEnd()

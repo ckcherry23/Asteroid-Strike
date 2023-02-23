@@ -21,6 +21,7 @@ class GameEngine {
     var gameboard: Gameboard
     var launchBall: Ball = Ball()
     var extraBalls: [Ball] = []
+    var bucket: Bucket = Bucket()
 
     var allBalls: [Ball] {
         Array([[launchBall], extraBalls].joined())
@@ -59,8 +60,7 @@ class GameEngine {
     }
 
     @objc func updateGame() {
-        removeBlockingObjects()
-        removeHitPegsOnLaunchEnd()
+        handleGameLogic()
         physicsWorld.updateWorld()
         rendererDelegate?.render()
     }
@@ -81,6 +81,13 @@ class GameEngine {
         launchBall.physicsBody.isDynamic = true
         launchBall.physicsBody.applyImpulse(impulse: launchVelocity * launchBall.physicsBody.mass)
         remainingBallsCount -= 1
+    }
+
+    private func handleGameLogic() {
+        moveBucket()
+        removeBlockingObjects()
+        removeHitPegsOnLaunchEnd()
+        handleSpecialEffects()
     }
 
     private func removeBlockingObjects() {
@@ -121,6 +128,21 @@ class GameEngine {
         && (rendererDelegate?.isRendererAnimationComplete() != false)
     }
 
+    private func handleSpecialEffects() {
+        handleBallEnteredBucket()
+    }
+
+    private func handleBallEnteredBucket() {
+        allBalls.forEach({
+            guard $0.hasEntered(bucket: bucket) else {
+                return
+            }
+            gameMode.onEnterBucket()
+            $0.resetPosition(to: CGPoint(x: centrePoint.x,
+                                         y: gameplayArea.maxY + GameEngine.defaultBallHeightOffset))
+        })
+    }
+
     private func setupGameState() {
         remainingBallsCount = gameMode.totalBallsCount
         timeRemaining = gameMode.timeLimit
@@ -129,8 +151,13 @@ class GameEngine {
     private func setupPhysicsBodies() {
         setupWalls()
         setupBall()
+        setupBucket()
         setupPegs()
         setupBlocks()
+    }
+
+    private func moveBucket() {
+        bucket.oscillateBetweenWalls(gameplayArea: gameplayArea)
     }
 
     private func setupWalls() {
@@ -141,20 +168,27 @@ class GameEngine {
 
     private func setupWall(wall: RectangleEdges.Edge) {
         let wall = Wall(edge: wall)
-        physicsWorld.addPhysicsBody(phyicsBody: wall.physicsBody)
+        physicsWorld.addPhysicsBody(physicsBody: wall.physicsBody)
     }
 
     private func setupBall() {
         self.launchBall = Ball(location: CGPoint(x: centrePoint.x,
                                                  y: gameplayArea.maxY + GameEngine.defaultBallHeightOffset))
-        physicsWorld.addPhysicsBody(phyicsBody: launchBall.physicsBody)
+        physicsWorld.addPhysicsBody(physicsBody: launchBall.physicsBody)
+    }
+
+    private func setupBucket() {
+        let bucketSize = CGSize(width: 120, height: 60)
+        self.bucket = Bucket(center: CGPoint(x: centrePoint.x,
+                                             y: gameplayArea.maxY - CGFloat(bucketSize.height / 2)))
+        bucket.physicsBodies.forEach({ physicsWorld.addPhysicsBody(physicsBody: $0) })
     }
 
     private func setupPegs() {
-        gameboard.pegs.forEach({ physicsWorld.addPhysicsBody(phyicsBody: $0.physicsBody) })
+        gameboard.pegs.forEach({ physicsWorld.addPhysicsBody(physicsBody: $0.physicsBody) })
     }
 
     private func setupBlocks() {
-        gameboard.blocks.forEach({ physicsWorld.addPhysicsBody(phyicsBody: $0.physicsBody) })
+        gameboard.blocks.forEach({ physicsWorld.addPhysicsBody(physicsBody: $0.physicsBody) })
     }
 }

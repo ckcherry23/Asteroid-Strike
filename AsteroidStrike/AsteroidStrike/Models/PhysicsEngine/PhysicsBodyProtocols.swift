@@ -14,4 +14,5 @@ protocol Movable {
 
 protocol Collidable {
     func detectCollision(other: PhysicsBody) -> PhysicsCollision?
+    func isCollidableWith(other: PhysicsBody) -> Bool
 }

@@ -21,8 +21,8 @@ class PhysicsWorld {
 
     let collisionResolvers: [any CollisionResolver] = [ImpulseResolver(), PositionResolver()]
 
-    func addPhysicsBody(phyicsBody: PhysicsBody) {
-        physicsBodies.append(phyicsBody)
+    func addPhysicsBody(physicsBody: PhysicsBody) {
+        physicsBodies.append(physicsBody)
     }
 
     func removePhysicsBody(physicsBody: PhysicsBody) {

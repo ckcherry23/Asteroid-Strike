@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7083AF429A7B83D00054C07 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7083AF329A7B83D00054C07 /* Bucket.swift */; };
 		C7128E5229A79FFF00877706 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7128E5129A79FFF00877706 /* HomeController.swift */; };
 		C76463A1299F74F400AF0413 /* ZIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764637A299F74F200AF0413 /* ZIndices.swift */; };
 		C76463A2299F74F400AF0413 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C764637B299F74F200AF0413 /* LaunchScreen.storyboard */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C7083AF329A7B83D00054C07 /* Bucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
 		C7128E5129A79FFF00877706 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		C764637A299F74F200AF0413 /* ZIndices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZIndices.swift; sourceTree = "<group>"; };
 		C764637C299F74F200AF0413 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				C7F056F029A7468600F035CD /* GameMode.swift */,
 				C764639F299F74F300AF0413 /* Wall.swift */,
 				C76463A0299F74F300AF0413 /* Ball.swift */,
+				C7083AF329A7B83D00054C07 /* Bucket.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				C76463AC299F74F400AF0413 /* CGPath.swift in Sources */,
 				C76463B6299F74F400AF0413 /* PhysicsBodyProtocols.swift in Sources */,
 				C76463BC299F74F400AF0413 /* Wall.swift in Sources */,
+				C7083AF429A7B83D00054C07 /* Bucket.swift in Sources */,
 				C7F056DC29A5145400F035CD /* Block.swift in Sources */,
 				C7F056DA29A50FA100F035CD /* BlockView.swift in Sources */,
 				C7F056E029A6328B00F035CD /* LevelDesignController+ActionButtons.swift in Sources */,

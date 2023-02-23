@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SEN-vs-nxF">
-    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <device id="ipad10_9rounded" orientation="portrait" layout="fullscreen" appearance="dark"/>
     <accessibilityOverrides/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -15,21 +15,21 @@
             <objects>
                 <viewController storyboardIdentifier="LevelDesignController" title="Level Design View Controller" id="BYZ-38-t0r" customClass="LevelDesignController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="LevelDesignView" customModule="AsteroidStrike" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="rYb-Dy-ZZg">
-                                <rect key="frame" x="0.0" y="70" width="768" height="779.5"/>
+                                <rect key="frame" x="0.0" y="74" width="820" height="911.5"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="3sY-oi-6no" appends="YES" id="4qk-Eq-1Gg"/>
                                 </connections>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="OpU-YA-oLj" userLabel="Level Designer Tools">
-                                <rect key="frame" x="20" y="869.5" width="728" height="134.5"/>
+                                <rect key="frame" x="20" y="1005.5" width="780" height="134.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ows-Wq-pFK" userLabel="Palette">
-                                        <rect key="frame" x="0.0" y="0.0" width="728" height="80"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="780" height="80"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTm-mi-G1h">
                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="80"/>
@@ -96,7 +96,7 @@
                                                 <viewLayoutGuide key="frameLayoutGuide" id="Q3W-lf-VmQ"/>
                                             </scrollView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7Ax-Hc-dxt" userLabel="Global Controls">
-                                                <rect key="frame" x="320" y="0.0" width="408" height="80"/>
+                                                <rect key="frame" x="372" y="0.0" width="408" height="80"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ntf-t9-fOg" userLabel="Peg Styles">
                                                         <rect key="frame" x="0.0" y="0.0" width="308" height="80"/>
@@ -203,7 +203,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NZx-a3-EEc" userLabel="Action Buttons">
-                                        <rect key="frame" x="0.0" y="100" width="728" height="34.5"/>
+                                        <rect key="frame" x="0.0" y="100" width="780" height="34.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="401-o0-b9r">
                                                 <rect key="frame" x="0.0" y="0.0" width="72" height="34.5"/>
@@ -227,12 +227,12 @@
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Level Name" textAlignment="justified" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SdD-TA-tf4">
-                                                <rect key="frame" x="181" y="0.0" width="379.5" height="34.5"/>
+                                                <rect key="frame" x="181" y="0.0" width="431.5" height="34.5"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NcW-f4-Iog">
-                                                <rect key="frame" x="580.5" y="0.0" width="62" height="34.5"/>
+                                                <rect key="frame" x="632.5" y="0.0" width="62" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Save">
                                                     <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
@@ -242,7 +242,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lP3-9H-O4G">
-                                                <rect key="frame" x="662.5" y="0.0" width="65.5" height="34.5"/>
+                                                <rect key="frame" x="714.5" y="0.0" width="65.5" height="34.5"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Start">
                                                     <fontDescription key="titleFontDescription" name="Chalkduster" family="Chalkduster" pointSize="16"/>
@@ -305,14 +305,14 @@
             <objects>
                 <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="3op-Jh-mrj" userLabel="Levels Table View">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicStyleCell" id="bgb-8U-jeW" userLabel="Level Table View Cell">
-                                <rect key="frame" x="0.0" y="50" width="768" height="43.5"/>
+                                <rect key="frame" x="0.0" y="50" width="820" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgb-8U-jeW" id="K7n-DV-y8a">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="820" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -341,11 +341,11 @@
             <objects>
                 <viewController id="Hde-6i-thd" customClass="GameplayController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iqr-nH-rPJ">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="iPD-H4-fcE">
-                                <rect key="frame" x="0.0" y="70" width="768" height="954"/>
+                                <rect key="frame" x="0.0" y="74" width="820" height="1086"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="QoY-DB-ZqH" appends="YES" id="ArO-Kr-clA"/>
@@ -353,26 +353,36 @@
                                 </connections>
                             </imageView>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cannon" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-2U-3AE" customClass="CannonView" customModule="AsteroidStrike" customModuleProvider="target">
-                                <rect key="frame" x="309" y="70" width="150" height="150"/>
+                                <rect key="frame" x="335" y="74" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="9f4-N6-LPP"/>
-                                    <constraint firstAttribute="width" constant="150" id="yfD-sk-e2F"/>
+                                    <constraint firstAttribute="height" constant="150" id="Uia-g0-7Ag"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bucket" translatesAutoresizingMaskIntoConstraints="NO" id="1Ca-r7-VgW">
+                                <rect key="frame" x="350" y="1100" width="120" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="cDA-D5-Tgf"/>
+                                    <constraint firstAttribute="height" constant="60" id="hXU-dB-hwD"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VHo-Fd-Ozu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4h8-2U-3AE" firstAttribute="top" secondItem="VHo-Fd-Ozu" secondAttribute="top" id="5FH-ve-Ubd"/>
-                            <constraint firstItem="4h8-2U-3AE" firstAttribute="centerX" secondItem="Iqr-nH-rPJ" secondAttribute="centerX" id="7VY-9L-ZYx"/>
-                            <constraint firstItem="iPD-H4-fcE" firstAttribute="trailing" secondItem="VHo-Fd-Ozu" secondAttribute="trailing" id="LDd-HI-3lh"/>
-                            <constraint firstItem="VHo-Fd-Ozu" firstAttribute="bottom" secondItem="iPD-H4-fcE" secondAttribute="bottom" id="TK8-CI-ikW"/>
-                            <constraint firstItem="iPD-H4-fcE" firstAttribute="top" secondItem="VHo-Fd-Ozu" secondAttribute="top" id="UU5-Bc-mgS"/>
-                            <constraint firstItem="iPD-H4-fcE" firstAttribute="leading" secondItem="VHo-Fd-Ozu" secondAttribute="leading" id="veh-Le-jNQ"/>
+                            <constraint firstItem="iPD-H4-fcE" firstAttribute="top" secondItem="4h8-2U-3AE" secondAttribute="top" id="07y-Vf-BNM"/>
+                            <constraint firstItem="4h8-2U-3AE" firstAttribute="leading" secondItem="VHo-Fd-Ozu" secondAttribute="leading" constant="335" id="5AX-e8-2WM"/>
+                            <constraint firstItem="4h8-2U-3AE" firstAttribute="centerX" secondItem="Iqr-nH-rPJ" secondAttribute="centerX" id="Ck2-xU-eP4"/>
+                            <constraint firstItem="1Ca-r7-VgW" firstAttribute="bottom" secondItem="iPD-H4-fcE" secondAttribute="bottom" id="KyU-ba-SW4"/>
+                            <constraint firstItem="iPD-H4-fcE" firstAttribute="top" secondItem="VHo-Fd-Ozu" secondAttribute="top" id="RV0-Ei-RI7"/>
+                            <constraint firstItem="1Ca-r7-VgW" firstAttribute="centerX" secondItem="Iqr-nH-rPJ" secondAttribute="centerX" id="ib1-eW-m3q"/>
+                            <constraint firstItem="iPD-H4-fcE" firstAttribute="bottom" secondItem="VHo-Fd-Ozu" secondAttribute="bottom" id="jsv-GY-jdA"/>
+                            <constraint firstItem="iPD-H4-fcE" firstAttribute="leading" secondItem="VHo-Fd-Ozu" secondAttribute="leading" id="s8N-Og-zvK"/>
+                            <constraint firstItem="iPD-H4-fcE" firstAttribute="centerX" secondItem="4h8-2U-3AE" secondAttribute="centerX" id="sPa-be-Y5O"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Gameplay" id="3tZ-89-kue"/>
                     <connections>
+                        <outlet property="bucketView" destination="1Ca-r7-VgW" id="bcM-zT-tO6"/>
                         <outlet property="cannonView" destination="4h8-2U-3AE" id="Hhq-fD-MCB"/>
                         <outlet property="gameplayArea" destination="iPD-H4-fcE" id="WkI-Xt-erJ"/>
                         <segue destination="Hal-eX-bHF" kind="unwind" identifier="unwindToHomeFromGameplay" unwindAction="unwindToHomeFromGameplay:" id="aHo-91-LeO"/>
@@ -391,21 +401,21 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1707" y="677"/>
+            <point key="canvasLocation" x="1706.3414634146341" y="676.77966101694915"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="Xv3-7m-Uv8">
             <objects>
                 <viewController title="Home View Controller" id="WZn-Xd-JEA" customClass="HomeController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c0f-bS-6GE">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-vO-QBI">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="820" height="1180"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Qw9-yY-I9j">
-                                <rect key="frame" x="169.5" y="363.5" width="429.5" height="297.5"/>
+                                <rect key="frame" x="195.5" y="441.5" width="429.5" height="297.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asteroid Strike" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2G-i3-BRr">
                                         <rect key="frame" x="0.0" y="0.0" width="429.5" height="63.5"/>
@@ -458,7 +468,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SEN-vs-nxF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qvs-zd-cCe">
-                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
+                        <rect key="frame" x="0.0" y="24" width="820" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -479,6 +489,7 @@
     <resources>
         <image name="background" width="1920" height="1229"/>
         <image name="block" width="320" height="320"/>
+        <image name="bucket" width="404" height="197"/>
         <image name="cannon" width="512" height="512"/>
         <image name="delete" width="256" height="256"/>
         <image name="launch" width="1280" height="1920"/>

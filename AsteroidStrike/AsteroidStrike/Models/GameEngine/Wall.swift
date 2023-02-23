@@ -10,7 +10,7 @@ import CoreGraphics
 struct Wall {
     private static let defaultMass: CGFloat = 10
 
-    private(set) var physicsBody: PhysicsBody
+    private(set) var physicsBody: EdgePhysicsBody
 
     init(edge: RectangleEdges.Edge) {
         self.physicsBody = EdgePhysicsBody(source: edge.source, destination: edge.destination)
