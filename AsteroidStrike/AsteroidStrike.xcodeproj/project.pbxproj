@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7128E5229A79FFF00877706 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7128E5129A79FFF00877706 /* HomeController.swift */; };
 		C76463A1299F74F400AF0413 /* ZIndices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764637A299F74F200AF0413 /* ZIndices.swift */; };
 		C76463A2299F74F400AF0413 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C764637B299F74F200AF0413 /* LaunchScreen.storyboard */; };
 		C76463A3299F74F400AF0413 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C764637D299F74F200AF0413 /* Main.storyboard */; };
@@ -48,6 +49,8 @@
 		C7F056E229A6341300F035CD /* LevelDesignController+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */; };
 		C7F056EB29A6554800F035CD /* ObserverPatternHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */; };
 		C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EC29A691C400F035CD /* ConversionHelpers.swift */; };
+		C7F056F129A7468600F035CD /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056F029A7468600F035CD /* GameMode.swift */; };
+		C7F056F529A7919800F035CD /* GameplayController+Popups.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056F429A7919800F035CD /* GameplayController+Popups.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C7128E5129A79FFF00877706 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		C764637A299F74F200AF0413 /* ZIndices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZIndices.swift; sourceTree = "<group>"; };
 		C764637C299F74F200AF0413 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C764637E299F74F200AF0413 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 		C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+Palette.swift"; sourceTree = "<group>"; };
 		C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverPatternHelpers.swift; sourceTree = "<group>"; };
 		C7F056EC29A691C400F035CD /* ConversionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionHelpers.swift; sourceTree = "<group>"; };
+		C7F056F029A7468600F035CD /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		C7F056F429A7919800F035CD /* GameplayController+Popups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameplayController+Popups.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,8 @@
 				C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */,
 				C7646387299F74F200AF0413 /* LevelSelectController.swift */,
 				C7646388299F74F200AF0413 /* GameplayController.swift */,
+				C7F056F429A7919800F035CD /* GameplayController+Popups.swift */,
+				C7128E5129A79FFF00877706 /* HomeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				C764639E299F74F300AF0413 /* GameEngine.swift */,
+				C7F056F029A7468600F035CD /* GameMode.swift */,
 				C764639F299F74F300AF0413 /* Wall.swift */,
 				C76463A0299F74F300AF0413 /* Ball.swift */,
 			);
@@ -491,13 +500,16 @@
 				C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */,
 				C76463A8299F74F400AF0413 /* CannonView.swift in Sources */,
 				C76463A5299F74F400AF0413 /* PegView.swift in Sources */,
+				C7F056F529A7919800F035CD /* GameplayController+Popups.swift in Sources */,
 				C76463B1299F74F400AF0413 /* SavedLevel.swift in Sources */,
 				C76463A6299F74F400AF0413 /* PaletteButton.swift in Sources */,
 				C76463B0299F74F400AF0413 /* JSONLevelStorage.swift in Sources */,
 				C76463BB299F74F400AF0413 /* GameEngine.swift in Sources */,
 				C76463AE299F74F400AF0413 /* CGPoint.swift in Sources */,
+				C7F056F129A7468600F035CD /* GameMode.swift in Sources */,
 				C76463A7299F74F400AF0413 /* BallView.swift in Sources */,
 				C76463AF299F74F400AF0413 /* CGRect.swift in Sources */,
+				C7128E5229A79FFF00877706 /* HomeController.swift in Sources */,
 				C76463BA299F74F400AF0413 /* PhysicsWorld.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

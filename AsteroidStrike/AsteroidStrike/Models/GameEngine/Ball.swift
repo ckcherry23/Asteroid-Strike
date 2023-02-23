@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Ball {
+class Ball {
     private static let defaultRadius: CGFloat = 25
     private static let stuckTimeLimit: TimeInterval = 3
     private static let minDisplacementForMovement: CGFloat = 1
@@ -33,7 +33,7 @@ struct Ball {
         self.physicsBody = CirclePhysicsBody(radius: radius, center: location)
     }
 
-    mutating func isStuck() -> Bool {
+    func isStuck() -> Bool {
         guard location.distanceFrom(other: lastRecordedLocation) < Ball.minDisplacementForMovement else {
             lastRecordedLocation = location
             timeElapsedSinceBallMovement = 0

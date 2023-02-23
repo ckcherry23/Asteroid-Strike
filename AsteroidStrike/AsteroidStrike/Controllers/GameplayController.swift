@@ -52,7 +52,7 @@ class GameplayController: UIViewController {
     }
 
     private func addBallToGameplayArea() {
-        ballView = BallView(frame: gameEngine.ball.frame)
+        ballView = BallView(frame: gameEngine.launchBall.frame)
         gameplayArea.addSubview(ballView)
     }
 
@@ -96,7 +96,7 @@ class GameplayController: UIViewController {
     }
 
     private func updateBall() {
-        ballView.center = gameEngine.ball.location
+        ballView.center = gameEngine.launchBall.location
     }
 
     private func lightUpHitPegs() {
@@ -111,7 +111,7 @@ class GameplayController: UIViewController {
     }
 
     private func fadeOutRemovedObjects() {
-        guard gameEngine.ball.isStuck() else {
+        guard gameEngine.launchBall.isStuck() else {
             return
         }
         let removedPegs = pegViews.filter({ pegView in
@@ -192,10 +192,18 @@ extension GameplayController: RendererDelegate {
         lightUpHitPegs()
         fadeOutRemovedObjects()
         fadeOutLitPegsOnLaunchEnd()
+        showGameMessages()
     }
 
     func isRendererAnimationComplete() -> Bool {
         isDisappearAnimationComplete
+    }
+
+    private func showGameMessages() {
+        if gameEngine.gameMode.isGameOver() {
+            displayLink.isPaused = true
+            onGameOver(hasWon: gameEngine.gameMode.hasWon)
+        }
     }
 }
 

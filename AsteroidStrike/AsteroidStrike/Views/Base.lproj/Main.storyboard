@@ -305,14 +305,14 @@
             <objects>
                 <tableViewController title="Select Level" id="ivu-ae-LuX" userLabel="Level Select View Controller" customClass="LevelSelectController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="3op-Jh-mrj" userLabel="Levels Table View">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="984"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="basicStyleCell" id="bgb-8U-jeW" userLabel="Level Table View Cell">
-                                <rect key="frame" x="0.0" y="50" width="704" height="43.5"/>
+                                <rect key="frame" x="0.0" y="50" width="768" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgb-8U-jeW" id="K7n-DV-y8a">
-                                    <rect key="frame" x="0.0" y="0.0" width="704" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -375,9 +375,11 @@
                     <connections>
                         <outlet property="cannonView" destination="4h8-2U-3AE" id="Hhq-fD-MCB"/>
                         <outlet property="gameplayArea" destination="iPD-H4-fcE" id="WkI-Xt-erJ"/>
+                        <segue destination="Hal-eX-bHF" kind="unwind" identifier="unwindToHomeFromGameplay" unwindAction="unwindToHomeFromGameplay:" id="aHo-91-LeO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kZN-dZ-2FF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Hal-eX-bHF" userLabel="Exit" sceneMemberID="exit"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="QoY-DB-ZqH">
                     <connections>
                         <action selector="onPanGameplayArea:" destination="Hde-6i-thd" id="fQh-Ip-90M"/>
@@ -394,7 +396,7 @@
         <!--Home View Controller-->
         <scene sceneID="Xv3-7m-Uv8">
             <objects>
-                <viewController title="Home View Controller" id="WZn-Xd-JEA" sceneMemberID="viewController">
+                <viewController title="Home View Controller" id="WZn-Xd-JEA" customClass="HomeController" customModule="AsteroidStrike" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c0f-bS-6GE">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -471,7 +473,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="oi6-CD-dWD"/>
-        <segue reference="r6A-2u-Bvj"/>
+        <segue reference="uFi-ms-JOw"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AccentColor"/>
     <resources>

@@ -11,42 +11,63 @@ import CoreGraphics
 class GameEngine {
     static let defaultBallHeightOffset: CGFloat = 200
     static let defaultLaunchSpeed: CGFloat = 500
+    static let defaultBallCount: Int = 10
 
     let physicsWorld = PhysicsWorld()
     var rendererDelegate: RendererDelegate?
+    private(set) var gameMode: GameMode!
 
     let gameplayArea: CGRect
     var gameboard: Gameboard
-    var ball: Ball = Ball()
+    var launchBall: Ball = Ball()
+    var extraBalls: [Ball] = []
 
-    var centrePoint: CGPoint {
-        CGPoint(x: gameplayArea.midX, y: gameplayArea.midY)
+    var allBalls: [Ball] {
+        Array([[launchBall], extraBalls].joined())
     }
 
+    var remainingBallsCount: Int = GameEngine.defaultBallCount
+    var timeRemaining: TimeInterval = TimeInterval.infinity // TODO: Timer
+    var hitPegsCount: Int = 0
+    var remainingOrangePegsCount: Int {
+        gameboard.pegs.filter({ $0.type == .orange }).count
+    }
+    var score: Int = 0
+
     var hasLaunchEnded: Bool {
-        isBallOutsideGameplayArea
+        areBallsOutsideGameplayArea
+    }
+
+    private var centrePoint: CGPoint {
+        CGPoint(x: gameplayArea.midX, y: gameplayArea.midY)
     }
 
     private var areHitPegsRemoved: Bool {
         gameboard.pegs.allSatisfy({ !$0.isHit })
     }
 
-    private var isBallOutsideGameplayArea: Bool {
-        !gameplayArea.intersects(ball.frame)
+    private var areBallsOutsideGameplayArea: Bool {
+        allBalls.allSatisfy({ !gameplayArea.intersects($0.frame) })
     }
 
     init(gameboard: Gameboard, gameplayArea: CGRect, rendererDelegate: RendererDelegate? = nil) {
         self.gameboard = gameboard
         self.gameplayArea = gameplayArea
         self.rendererDelegate = rendererDelegate
+        self.gameMode = ClassicMode(gameEngine: self)
         setupPhysicsBodies()
     }
 
     @objc func updateGame() {
-        removeBlockingObjectsWhenBallStuck()
+        removeBlockingObjects()
         removeHitPegsOnLaunchEnd()
         physicsWorld.updateWorld()
         rendererDelegate?.render()
+    }
+
+    func setGameMode(gameMode: GameMode) {
+        self.gameMode = gameMode
+        setupGameState()
     }
 
     func launchCannon(from location: CGPoint, atAngle launchAngle: CGFloat) {
@@ -55,13 +76,18 @@ class GameEngine {
         }
         let launchSpeed: CGFloat = GameEngine.defaultLaunchSpeed
         let launchVelocity = CGVector(dx: -sin(launchAngle), dy: cos(launchAngle)) * launchSpeed
-        ball.physicsBody.velocity = CGVector.zero
-        ball.physicsBody.position = CGVector(dx: location.x, dy: location.y)
-        ball.physicsBody.isDynamic = true
-        ball.physicsBody.applyImpulse(impulse: launchVelocity * ball.physicsBody.mass)
+        launchBall.physicsBody.velocity = CGVector.zero
+        launchBall.physicsBody.position = CGVector(dx: location.x, dy: location.y)
+        launchBall.physicsBody.isDynamic = true
+        launchBall.physicsBody.applyImpulse(impulse: launchVelocity * launchBall.physicsBody.mass)
+        remainingBallsCount -= 1
     }
 
-    private func removeBlockingObjectsWhenBallStuck() {
+    private func removeBlockingObjects() {
+        allBalls.forEach({ removeBlockingObjectsWhenBallStuck(ball: $0) })
+    }
+
+    private func removeBlockingObjectsWhenBallStuck(ball: Ball) {
         guard ball.isStuck() else {
             return
         }
@@ -69,6 +95,7 @@ class GameEngine {
             if let pegToBeDeleted = gameboard.pegs.first(where: { peg in peg.physicsBody === physicsBody }) {
                 gameboard.deletePeg(deletedPeg: pegToBeDeleted)
                 physicsWorld.removePhysicsBody(physicsBody: physicsBody)
+                hitPegsCount += 1
             } else if let blockToBeDeleted = gameboard.blocks.first(where: { block in
                 block.physicsBody === physicsBody }) {
                 gameboard.deleteBlock(deletedBlock: blockToBeDeleted)
@@ -84,12 +111,19 @@ class GameEngine {
         gameboard.pegs.filter({ $0.isHit }).forEach({
             physicsWorld.removePhysicsBody(physicsBody: $0.physicsBody)
             gameboard.deletePeg(deletedPeg: $0)
+            hitPegsCount += 1
         })
     }
 
     private func isCannonLaunchable() -> Bool {
-        return isBallOutsideGameplayArea && areHitPegsRemoved
-        && ((rendererDelegate?.isRendererAnimationComplete()) != false)
+        return areBallsOutsideGameplayArea && areHitPegsRemoved
+        && !gameMode.isGameOver()
+        && (rendererDelegate?.isRendererAnimationComplete() != false)
+    }
+
+    private func setupGameState() {
+        remainingBallsCount = gameMode.totalBallsCount
+        timeRemaining = gameMode.timeLimit
     }
 
     private func setupPhysicsBodies() {
@@ -111,8 +145,9 @@ class GameEngine {
     }
 
     private func setupBall() {
-        self.ball = Ball(location: CGPoint(x: centrePoint.x, y: gameplayArea.maxY + GameEngine.defaultBallHeightOffset))
-        physicsWorld.addPhysicsBody(phyicsBody: ball.physicsBody)
+        self.launchBall = Ball(location: CGPoint(x: centrePoint.x,
+                                                 y: gameplayArea.maxY + GameEngine.defaultBallHeightOffset))
+        physicsWorld.addPhysicsBody(phyicsBody: launchBall.physicsBody)
     }
 
     private func setupPegs() {
