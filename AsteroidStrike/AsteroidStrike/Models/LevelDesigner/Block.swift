@@ -29,7 +29,8 @@ struct Block: GameboardObject {
         self.location = location
         self.size = size
         self.angle = angle
-        self.physicsBody = RectanglePhysicsBody(rect: CGRect.centeredRectangle(center: location, size: size))
+        self.physicsBody = RectanglePhysicsBody(rect: CGRect.centeredRectangle(center: location, size: size),
+                                                angle: angle)
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false
         self.physicsBody.mass = Block.defaultMass

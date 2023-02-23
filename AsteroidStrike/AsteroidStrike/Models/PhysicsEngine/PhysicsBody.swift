@@ -33,6 +33,8 @@ class PhysicsBody {
         }
     }
 
+    private(set) var angle: CGFloat
+
     private var force: CGVector = CGVector.zero
 
     private var acceleration: CGVector {
@@ -59,13 +61,15 @@ class PhysicsBody {
 
     var hitCounter: Int = 0
 
-    fileprivate init(radius: CGFloat, center: CGPoint) {
+    fileprivate init(radius: CGFloat, center: CGPoint, angle: CGFloat = 0.0) {
+        self.angle = angle
         hitBox = CGPath(ellipseIn: CGRect.boundingBoxForCircle(center: center, radius: radius),
                         transform: nil)
         addGravityEffects()
     }
 
-    fileprivate init(source: CGPoint, destination: CGPoint) {
+    fileprivate init(source: CGPoint, destination: CGPoint, angle: CGFloat = 0.0) {
+        self.angle = angle
         let path: CGMutablePath = CGMutablePath()
         path.move(to: source)
         path.addLine(to: destination)
@@ -74,8 +78,13 @@ class PhysicsBody {
         addGravityEffects()
     }
 
-    fileprivate init(rect: CGRect) {
-        hitBox = CGPath(rect: rect, transform: nil)
+    fileprivate init(rect: CGRect, angle: CGFloat) {
+        self.angle = angle
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        var transform = CGAffineTransform(translationX: center.x, y: center.y)
+            .rotated(by: angle)
+            .translatedBy(x: -center.x, y: -center.y)
+        hitBox = CGPath(rect: rect, transform: &transform)
         addGravityEffects()
     }
 
@@ -150,25 +159,25 @@ extension PhysicsBody: Collidable {
 }
 
 class CirclePhysicsBody: PhysicsBody {
-    override init(radius: CGFloat, center: CGPoint) {
-        super.init(radius: radius, center: center)
+    override init(radius: CGFloat, center: CGPoint, angle: CGFloat = 0.0) {
+        super.init(radius: radius, center: center, angle: angle)
     }
 }
 
 class EdgePhysicsBody: PhysicsBody {
     var source: CGPoint
     var destination: CGPoint
-    override init(source: CGPoint, destination: CGPoint) {
+    override init(source: CGPoint, destination: CGPoint, angle: CGFloat = 0.0) {
         self.source = source
         self.destination = destination
-        super.init(source: source, destination: destination)
+        super.init(source: source, destination: destination, angle: angle)
     }
 }
 
 class RectanglePhysicsBody: PhysicsBody {
     var rect: CGRect
-    override init(rect: CGRect) {
+    override init(rect: CGRect, angle: CGFloat = 0.0) {
         self.rect = rect
-        super.init(rect: rect)
+        super.init(rect: rect, angle: angle)
     }
 }

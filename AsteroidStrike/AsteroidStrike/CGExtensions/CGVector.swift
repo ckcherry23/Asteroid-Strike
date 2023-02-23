@@ -69,10 +69,10 @@ extension CGVector {
 
 extension CGVector {
     static func getClosestEdgeVector(rectangleBody: RectanglePhysicsBody, circleBody: CirclePhysicsBody) -> CGVector? {
-        var closestEdge = rectangleBody.rect.getEdges().left
+        var closestEdge = rectangleBody.rect.getEdges(angle: rectangleBody.angle).left
         var closestEdgeDistance = CGFloat.infinity
 
-        for edge in rectangleBody.rect.getEdges().edges {
+        for edge in rectangleBody.rect.getEdges(angle: rectangleBody.angle).edges {
             let squaredDistance = findSquaredDistanceFromCircle(edge: edge, circleBody: circleBody)
             if squaredDistance < closestEdgeDistance {
                 closestEdgeDistance = squaredDistance

@@ -19,19 +19,18 @@ extension CGRect {
         return CGRect(x: boundingBoxOrigin.x, y: boundingBoxOrigin.y, width: diameter, height: diameter)
     }
 
-    func getCorners() -> RectangleCorners {
-        let topLeft = CGPoint(x: minX, y: minY)
-        let bottomLeft = CGPoint(x: minX, y: maxY)
-        let bottomRight = CGPoint(x: maxX, y: maxY)
-        let topRight = CGPoint(x: maxX, y: minY)
-
-        // TODO: Rotation - `CGPointApplyAffineTransform()`
+    func getCorners(angle: CGFloat = 0.0) -> RectangleCorners {
+        let rotationTransform = CGAffineTransform(rotationAngle: angle)
+        let topLeft = CGPoint(x: minX, y: minY).applying(rotationTransform)
+        let bottomLeft = CGPoint(x: minX, y: maxY).applying(rotationTransform)
+        let bottomRight = CGPoint(x: maxX, y: maxY).applying(rotationTransform)
+        let topRight = CGPoint(x: maxX, y: minY).applying(rotationTransform)
 
         return RectangleCorners(topLeft: topLeft, bottomLeft: bottomLeft, bottomRight: bottomRight, topRight: topRight)
     }
 
-    func getEdges() -> RectangleEdges {
-        let corners: RectangleCorners = getCorners()
+    func getEdges(angle: CGFloat = 0.0) -> RectangleEdges {
+        let corners: RectangleCorners = getCorners(angle: angle)
         let left = (source: corners.topLeft, destination: corners.bottomLeft)
         let bottom = (source: corners.bottomLeft, destination: corners.bottomRight)
         let right = (source: corners.bottomRight, destination: corners.topRight)
