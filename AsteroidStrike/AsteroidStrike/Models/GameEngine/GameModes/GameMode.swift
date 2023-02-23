@@ -22,31 +22,6 @@ extension GameMode {
     }
 }
 
-class ClassicMode: GameMode {
-    var totalBallsCount: Int
-    var timeLimit: TimeInterval = TimeInterval.infinity
-    unowned var gameEngine: GameEngine
-
-    init(gameEngine: GameEngine, totalBallsCount: Int = 10) {
-        self.gameEngine = gameEngine
-        self.totalBallsCount = totalBallsCount
-    }
-
-    var hasWon: Bool {
-        gameEngine.remainingOrangePegsCount == 0
-    }
-
-    var hasLost: Bool {
-        gameEngine.remainingBallsCount <= 0
-        && gameEngine.remainingOrangePegsCount > 0
-        && gameEngine.hasLaunchEnded
-    }
-
-    func onEnterBucket() {
-        gameEngine.remainingBallsCount += 1
-    }
-}
-
 class BeatTheScoreMode: GameMode {
     var totalBallsCount: Int = Int.max
     var timeLimit: TimeInterval

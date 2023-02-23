@@ -36,11 +36,11 @@ class Bucket {
 
         self.leftEdge = EdgePhysicsBody(source: corners.topLeft, destination: corners.bottomLeft)
         leftEdge.isAffectedByGravity = false
-        leftEdge.collisionBitmask = 0
+        leftEdge.collisionBitmask = PhysicsBodyCategory.none
 
         self.rightEdge = EdgePhysicsBody(source: corners.topRight, destination: corners.bottomRight)
         rightEdge.isAffectedByGravity = false
-        rightEdge.collisionBitmask = 0
+        rightEdge.collisionBitmask = PhysicsBodyCategory.none
 
         move()
     }

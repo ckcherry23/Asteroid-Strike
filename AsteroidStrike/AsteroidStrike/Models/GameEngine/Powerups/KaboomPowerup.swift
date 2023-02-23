@@ -1,32 +1,9 @@
 //
-//  PowerupMode.swift
+//  KaboomPowerup.swift
 //  AsteroidStrike
 //
 //  Created by Charisma Kausar on 24/2/23.
 //
-
-import CoreGraphics
-
-enum PowerupMode {
-    case kaboom
-    case spookyBall
-
-    static let powerupMapping: [PowerupMode: (GameEngine) -> (Powerup)] = [
-        .kaboom: { (gameEngine) in KaboomPowerup(gameEngine: gameEngine) },
-        .spookyBall: { (gameEngine) in SpookyBallPowerup(gameEngine: gameEngine) }
-    ]
-}
-
-protocol Powerup {
-    var isPowerupActivated: Bool { get }
-    func handlePowerup()
-}
-
-extension Powerup {
-    func getGreenHitPegs(gameEngine: GameEngine) -> [Peg] {
-        gameEngine.gameboard.pegs.filter({ $0.type == .green && $0.isHit })
-    }
-}
 
 class KaboomPowerup: Powerup {
     unowned var gameEngine: GameEngine
@@ -37,6 +14,10 @@ class KaboomPowerup: Powerup {
     init(gameEngine: GameEngine) {
         self.gameEngine = gameEngine
         gameEngine.physicsWorld.collisionDelegate = ExplosionDelegate()
+    }
+
+    deinit {
+        gameEngine.physicsWorld.collisionDelegate = nil
     }
 
     private func getKaboomPegs() -> [Peg] {
@@ -55,21 +36,5 @@ class KaboomPowerup: Powerup {
                 $0.hitCounter += 1
                 $0.categoryBitmask = PhysicsBodyCategory.all
             }) })
-    }
-}
-
-class SpookyBallPowerup: Powerup {
-    var isPowerupActivated: Bool {
-        getGreenHitPegs(gameEngine: gameEngine).count > 0
-    }
-
-    func handlePowerup() {
-
-    }
-
-    unowned var gameEngine: GameEngine
-
-    init(gameEngine: GameEngine) {
-        self.gameEngine = gameEngine
     }
 }

@@ -86,10 +86,3 @@ struct JSONLevelStorage: LevelStorage {
         return directoryURL
     }
 }
-
-protocol LevelStorage {
-    func getAllLevelNames(completion: @escaping (Result<[String], Error>) -> Void)
-    func saveLevel(level: SavedLevel, completion: @escaping (Result<String, Error>) -> Void)
-    func loadLevel(levelName: String, completion: @escaping (Result<SavedLevel, Error>) -> Void)
-    func deleteLevel(levelName: String, completion: @escaping (Result<Bool, Error>) -> Void)
-}

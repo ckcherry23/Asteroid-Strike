@@ -31,10 +31,6 @@ class GameplayController: UIViewController {
         addGameplayElements()
         addGameboardElements()
         setupDisplayRefreshLoop()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         showGameModeModal()
     }
 

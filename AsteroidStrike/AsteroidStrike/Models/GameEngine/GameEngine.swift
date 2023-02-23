@@ -78,6 +78,7 @@ class GameEngine {
         guard let powerupInit = PowerupMode.powerupMapping[powerup] else {
             return
         }
+        self.powerup = nil // to call deinit
         self.powerup = powerupInit(self)
     }
 
