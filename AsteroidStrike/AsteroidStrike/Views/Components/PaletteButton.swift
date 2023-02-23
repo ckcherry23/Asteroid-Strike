@@ -39,6 +39,12 @@ class OrangePegButton: PaletteButton {
     }
 }
 
+class GreenPegButton: PaletteButton {
+    override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
+        { (tappedLocation) in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .green) }
+    }
+}
+
 class BlockButton: PaletteButton {
     override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
         { (tappedLocation) in levelDesigner.addBlockToGameboard(blockLocation: tappedLocation) }

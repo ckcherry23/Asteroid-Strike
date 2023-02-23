@@ -32,6 +32,7 @@ class LevelDesignController: UIViewController {
 
     @IBOutlet weak var bluePegButton: BluePegButton!
     @IBOutlet weak var orangePegButton: OrangePegButton!
+    @IBOutlet weak var greenPegButton: GreenPegButton!
     @IBOutlet weak var blockButton: BlockButton!
     @IBOutlet weak var eraseButton: EraseButton!
     @IBOutlet var paletteButtons: [PaletteButton]!
@@ -56,15 +57,10 @@ class LevelDesignController: UIViewController {
         addNewViews()
     }
 
-    private let pegTypeToViewMapping: [PegType: (Peg) -> (PegView) ] = [
-        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
-        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
-    ]
-
     private func addNewViews() {
         for peg in levelDesigner.gameboard.pegs
         where !canvas.subviews.compactMap({ ($0 as? PegView)?.location }).contains(peg.location) {
-            guard let createPegViewFromPeg = pegTypeToViewMapping[peg.type] else {
+            guard let createPegViewFromPeg = PegType.pegViewMapping[peg.type] else {
                 continue
             }
             let pegViewToAdd: PegView = createPegViewFromPeg(peg)

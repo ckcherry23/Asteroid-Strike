@@ -35,6 +35,10 @@ struct Peg: GameboardObject {
         self.physicsBody.isDynamic = false
         self.physicsBody.isAffectedByGravity = false
         self.physicsBody.mass = Peg.defaultMass
+
+        if type == .green {
+            physicsBody.categoryBitmask = PhysicsBodyCategory.activePowerup
+        }
     }
 
     func copy() -> Peg {
@@ -45,6 +49,13 @@ struct Peg: GameboardObject {
 enum PegType: Codable {
     case blue
     case orange
+    case green
+
+    static let pegViewMapping: [PegType: (Peg) -> (PegView) ] = [
+        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .green: { (peg) in GreenPegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
+    ]
 }
 
 extension Peg: Hashable {

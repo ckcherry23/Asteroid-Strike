@@ -21,6 +21,8 @@ class PhysicsWorld {
 
     let collisionResolvers: [any CollisionResolver] = [ImpulseResolver(), PositionResolver()]
 
+    var collisionDelegate: PhysicsCollisionDelegate?
+
     func addPhysicsBody(physicsBody: PhysicsBody) {
         physicsBodies.append(physicsBody)
     }
@@ -35,6 +37,10 @@ class PhysicsWorld {
 
     func getBodiesInContact(with physicsBody: PhysicsBody) -> [PhysicsBody] {
         physicsBodies.filter({ physicsBody.isIntersecting(other: $0) })
+    }
+
+    func getBodiesNear(body: PhysicsBody, radius: CGFloat) -> [PhysicsBody] {
+        physicsBodies.filter({ $0.position.distanceFrom(other: body.position) <= radius })
     }
 }
 
@@ -54,6 +60,7 @@ extension PhysicsWorld {
                     continue
                 }
                 bodiesCollision.resolveCollision(resolvers: collisionResolvers)
+                collisionDelegate?.onCollision(physicsCollision: bodiesCollision)
             }
         }
     }

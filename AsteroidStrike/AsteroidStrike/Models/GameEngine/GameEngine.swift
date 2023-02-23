@@ -15,7 +15,6 @@ class GameEngine {
 
     let physicsWorld = PhysicsWorld()
     var rendererDelegate: RendererDelegate?
-    private(set) var gameMode: GameMode!
 
     let gameplayArea: CGRect
     var gameboard: Gameboard
@@ -33,6 +32,10 @@ class GameEngine {
     var remainingOrangePegsCount: Int {
         gameboard.pegs.filter({ $0.type == .orange }).count
     }
+
+    private(set) var gameMode: GameMode!
+    private(set) var powerup: Powerup!
+
     var score: Int = 0
 
     var hasLaunchEnded: Bool {
@@ -56,6 +59,7 @@ class GameEngine {
         self.gameplayArea = gameplayArea
         self.rendererDelegate = rendererDelegate
         self.gameMode = ClassicMode(gameEngine: self)
+        self.powerup = KaboomPowerup(gameEngine: self)
         setupPhysicsBodies()
     }
 
@@ -68,6 +72,13 @@ class GameEngine {
     func setGameMode(gameMode: GameMode) {
         self.gameMode = gameMode
         setupGameState()
+    }
+
+    func setPowerup(powerup: PowerupMode) {
+        guard let powerupInit = PowerupMode.powerupMapping[powerup] else {
+            return
+        }
+        self.powerup = powerupInit(self)
     }
 
     func launchCannon(from location: CGPoint, atAngle launchAngle: CGFloat) {
@@ -87,7 +98,8 @@ class GameEngine {
         moveBucket()
         removeBlockingObjects()
         removeHitPegsOnLaunchEnd()
-        handleSpecialEffects()
+        handleBallEnteredBucket()
+        handlePowerups()
     }
 
     private func removeBlockingObjects() {
@@ -128,10 +140,6 @@ class GameEngine {
         && (rendererDelegate?.isRendererAnimationComplete() != false)
     }
 
-    private func handleSpecialEffects() {
-        handleBallEnteredBucket()
-    }
-
     private func handleBallEnteredBucket() {
         allBalls.forEach({
             guard $0.hasEntered(bucket: bucket) else {
@@ -141,6 +149,10 @@ class GameEngine {
             $0.resetPosition(to: CGPoint(x: centrePoint.x,
                                          y: gameplayArea.maxY + GameEngine.defaultBallHeightOffset))
         })
+    }
+
+    private func handlePowerups() {
+        powerup.handlePowerup()
     }
 
     private func setupGameState() {

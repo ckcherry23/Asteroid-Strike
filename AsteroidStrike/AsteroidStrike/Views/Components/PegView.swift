@@ -103,3 +103,22 @@ class OrangePegView: PegView {
         }
     }
 }
+
+class GreenPegView: PegView {
+    override init(at location: CGPoint, radius: CGFloat, angle: CGFloat) {
+        super.init(at: location, radius: radius, angle: angle)
+        updatePegAppearance()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func updatePegAppearance() {
+        if isHit {
+            image = UIImage(named: "peg-green-glow")
+        } else {
+            image = UIImage(named: "peg-green")
+        }
+    }
+}

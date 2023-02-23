@@ -33,6 +33,11 @@ class GameplayController: UIViewController {
         setupDisplayRefreshLoop()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showGameModeModal()
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         tearDownDisplayRefreshLoop()
@@ -58,11 +63,6 @@ class GameplayController: UIViewController {
         gameplayArea.addSubview(ballView)
     }
 
-    private let pegTypeToViewMapping: [PegType: (Peg) -> (PegView) ] = [
-        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
-        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
-    ]
-
     private func createBlockViewFromBlock(block: Block) -> BlockView {
         BlockView(at: block.location, size: block.size, angle: block.angle)
     }
@@ -74,7 +74,7 @@ class GameplayController: UIViewController {
 
     private func addPegs() {
         for peg in gameEngine.gameboard.pegs {
-            guard let createPegViewFromPeg = pegTypeToViewMapping[peg.type] else {
+            guard let createPegViewFromPeg = PegType.pegViewMapping[peg.type] else {
                 continue
             }
             addPegToView(pegView: createPegViewFromPeg(peg))
@@ -158,6 +158,10 @@ class GameplayController: UIViewController {
 
     private func getPegViewForPeg(_ peg: Peg) -> PegView? {
         pegViews.first(where: { $0.location == peg.location })
+    }
+
+    func setPowerupMode(powerup: PowerupMode) {
+        gameEngine.setPowerup(powerup: powerup)
     }
 
     private func setupDisplayRefreshLoop() {
