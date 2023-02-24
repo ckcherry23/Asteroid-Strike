@@ -42,7 +42,7 @@ class BeatTheScoreMode: GameMode {
     }
 
     func onEnterBucket() {
-        gameEngine.timeRemaining += 10
+        gameEngine.updateTimeLeft(10)
     }
 }
 
@@ -65,7 +65,7 @@ class SiamMode: GameMode {
     }
 
     func onEnterBucket() {
-        gameEngine.remainingBallsCount -= 1
+        gameEngine.updateBallCount(-1)
     }
 }
 

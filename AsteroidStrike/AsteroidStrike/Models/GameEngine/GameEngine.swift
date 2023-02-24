@@ -16,30 +16,31 @@ class GameEngine {
     let physicsWorld = PhysicsWorld()
     var rendererDelegate: RendererDelegate?
 
-    let gameplayArea: CGRect
-    var gameboard: Gameboard
-    var launchBall: Ball = Ball()
-    var extraBalls: [Ball] = []
-    var bucket: Bucket = Bucket()
+    private let gameplayArea: CGRect
+    private(set) var gameboard: Gameboard
+    private(set) var launchBall: Ball = Ball()
+    private(set) var extraBalls: [Ball] = []
+    private(set) var bucket: Bucket = Bucket()
 
     var allBalls: [Ball] {
         Array([[launchBall], extraBalls].joined())
     }
 
-    var remainingBallsCount: Int = GameEngine.defaultBallCount
-    var timeRemaining: TimeInterval = TimeInterval.infinity // TODO: Timer
-    var hitPegsCount: Int = 0
+    private(set) var remainingBallsCount: Int = GameEngine.defaultBallCount
+    private(set) var timeRemaining: TimeInterval = TimeInterval.infinity // TODO: Timer
+    private(set) var hitPegsCount: Int = 0
     var remainingOrangePegsCount: Int {
         gameboard.pegs.filter({ $0.type == .orange }).count
     }
 
     private(set) var gameMode: GameMode!
     private(set) var powerup: Powerup!
+    var isSpookyBallActivated: Bool = false
 
-    var score: Int = 0
+    private(set) var score: Int = 0
 
     var hasLaunchEnded: Bool {
-        areBallsOutsideGameplayArea
+        areBallsOutsideGameplayArea && !isSpookyBallActivated
     }
 
     private var centrePoint: CGPoint {
@@ -51,7 +52,7 @@ class GameEngine {
     }
 
     private var areBallsOutsideGameplayArea: Bool {
-        allBalls.allSatisfy({ !gameplayArea.intersects($0.frame) })
+        allBalls.allSatisfy({ isObjectOutsideGameplayArea(objectFrame: $0.frame) })
     }
 
     init(gameboard: Gameboard, gameplayArea: CGRect, rendererDelegate: RendererDelegate? = nil) {
@@ -67,6 +68,14 @@ class GameEngine {
         handleGameLogic()
         physicsWorld.updateWorld()
         rendererDelegate?.render()
+    }
+
+    func updateBallCount(_ incrementValue: Int) {
+        remainingBallsCount += incrementValue
+    }
+
+    func updateTimeLeft(_ incrementValue: TimeInterval) {
+        timeRemaining += incrementValue
     }
 
     func setGameMode(gameMode: GameMode) {
@@ -95,9 +104,32 @@ class GameEngine {
         remainingBallsCount -= 1
     }
 
+    func teleportSpookyBall() {
+        allBalls.forEach({
+            if isObjectOutsideGameplayArea(objectFrame: $0.frame) {
+                $0.resetPosition(to: CGPoint(x: $0.location.x, y: gameplayArea.minY))
+                isSpookyBallActivated = false
+                powerup.deactivateUsedPowerups(powerups: powerup.getPowerupsToDeactivate())
+            }
+        })
+    }
+
+    func destroyNearbyPegs(radius: CGFloat) {
+        let powerupsToDeactivate = powerup.getPowerupsToDeactivate()
+        powerupsToDeactivate.forEach({ powerup in
+            physicsWorld.getBodiesNear(body: powerup.physicsBody, radius: radius)
+            .forEach({
+                $0.hitCounter += 1
+                $0.categoryBitmask = PhysicsBodyCategory.all
+            })
+        })
+        powerup.deactivateUsedPowerups(powerups: powerupsToDeactivate)
+    }
+
     private func handleGameLogic() {
         moveBucket()
         removeBlockingObjects()
+        handleBallOutsideGameplayArea()
         removeHitPegsOnLaunchEnd()
         handleBallEnteredBucket()
         handlePowerups()
@@ -105,6 +137,13 @@ class GameEngine {
 
     private func removeBlockingObjects() {
         allBalls.forEach({ removeBlockingObjectsWhenBallStuck(ball: $0) })
+    }
+
+    private func handleBallOutsideGameplayArea() {
+        if isSpookyBallActivated {
+            teleportSpookyBall()
+        }
+        removeHitPegsOnLaunchEnd()
     }
 
     private func removeBlockingObjectsWhenBallStuck(ball: Ball) {
@@ -136,8 +175,7 @@ class GameEngine {
     }
 
     private func isCannonLaunchable() -> Bool {
-        return areBallsOutsideGameplayArea && areHitPegsRemoved
-        && !gameMode.isGameOver()
+        return !gameMode.isGameOver() && hasLaunchEnded && areHitPegsRemoved
         && (rendererDelegate?.isRendererAnimationComplete() != false)
     }
 
@@ -154,6 +192,10 @@ class GameEngine {
 
     private func handlePowerups() {
         powerup.handlePowerup()
+    }
+
+    private func isObjectOutsideGameplayArea(objectFrame: CGRect) -> Bool {
+        !gameplayArea.intersects(objectFrame)
     }
 
     private func setupGameState() {

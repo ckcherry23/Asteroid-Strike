@@ -28,6 +28,6 @@ class ClassicMode: GameMode {
     }
 
     func onEnterBucket() {
-        gameEngine.remainingBallsCount += 1
+        gameEngine.updateBallCount(1)
     }
 }

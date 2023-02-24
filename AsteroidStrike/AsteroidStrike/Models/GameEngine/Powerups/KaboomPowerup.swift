@@ -5,10 +5,14 @@
 //  Created by Charisma Kausar on 24/2/23.
 //
 
+import CoreGraphics
+
 class KaboomPowerup: Powerup {
     unowned var gameEngine: GameEngine
+    private var blastRadius: CGFloat = 200
+
     var isPowerupActivated: Bool {
-        getGreenHitPegs(gameEngine: gameEngine).count > 0
+        getActivatedPowerups(gameEngine: gameEngine).count > 0
     }
 
     init(gameEngine: GameEngine) {
@@ -20,21 +24,14 @@ class KaboomPowerup: Powerup {
         gameEngine.physicsWorld.collisionDelegate = nil
     }
 
-    private func getKaboomPegs() -> [Peg] {
-        getGreenHitPegs(gameEngine: gameEngine)
-    }
-
     func handlePowerup() {
         guard isPowerupActivated else {
             return
         }
-        let kaboomPegs = getKaboomPegs()
-        kaboomPegs.forEach({ kaboomPeg in
-            kaboomPeg.physicsBody.categoryBitmask = PhysicsBodyCategory.all
-            gameEngine.physicsWorld.getBodiesNear(body: kaboomPeg.physicsBody, radius: 200)
-            .forEach({
-                $0.hitCounter += 1
-                $0.categoryBitmask = PhysicsBodyCategory.all
-            }) })
+        gameEngine.destroyNearbyPegs(radius: blastRadius)
+    }
+
+    func getPowerupsToDeactivate() -> [Peg] {
+        getActivatedPowerups(gameEngine: gameEngine)
     }
 }

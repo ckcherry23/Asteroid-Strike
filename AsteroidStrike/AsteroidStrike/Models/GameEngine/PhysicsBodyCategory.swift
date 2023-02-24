@@ -10,4 +10,5 @@ struct PhysicsBodyCategory {
     static let all: UInt32 = UInt32.max
     static let ball: UInt32 = UInt32.max
     static let activePowerup: UInt32 = 0b10
+    static let deactivatedPowerup: UInt32 = UInt32.max
 }
