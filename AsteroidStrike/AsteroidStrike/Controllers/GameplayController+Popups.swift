@@ -23,6 +23,9 @@ extension GameplayController {
         alert.addAction(UIAlertAction(title: "Beat the Score", style: .default, handler: { _ in
             self.gameEngine.setGameMode(gameMode: .beatTheScore)
         }))
+        alert.addAction(UIAlertAction(title: "Siam Left, Siam Right", style: .default, handler: { _ in
+            self.gameEngine.setGameMode(gameMode: .siam)
+        }))
 
         self.present(alert, animated: true, completion: nil)
     }

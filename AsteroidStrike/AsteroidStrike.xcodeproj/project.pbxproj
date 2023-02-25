@@ -49,6 +49,7 @@
 		C77E65A929A81BB300F2D8BD /* PhysicsBodyCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65A829A81BB300F2D8BD /* PhysicsBodyCategory.swift */; };
 		C77E65AB29A9B9A200F2D8BD /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65AA29A9B9A100F2D8BD /* GameStats.swift */; };
 		C77E65AD29A9D5B000F2D8BD /* BeatTheScoreMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65AC29A9D5B000F2D8BD /* BeatTheScoreMode.swift */; };
+		C77E65AF29AA056A00F2D8BD /* SiamMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65AE29AA056A00F2D8BD /* SiamMode.swift */; };
 		C796C334299D3AE800ADC141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C333299D3AE800ADC141 /* AppDelegate.swift */; };
 		C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C335299D3AE800ADC141 /* SceneDelegate.swift */; };
 		C796C33D299D3AEA00ADC141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C796C33C299D3AEA00ADC141 /* Assets.xcassets */; };
@@ -125,6 +126,7 @@
 		C77E65A829A81BB300F2D8BD /* PhysicsBodyCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyCategory.swift; sourceTree = "<group>"; };
 		C77E65AA29A9B9A100F2D8BD /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
 		C77E65AC29A9D5B000F2D8BD /* BeatTheScoreMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTheScoreMode.swift; sourceTree = "<group>"; };
+		C77E65AE29AA056A00F2D8BD /* SiamMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiamMode.swift; sourceTree = "<group>"; };
 		C796C330299D3AE800ADC141 /* AsteroidStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsteroidStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C796C333299D3AE800ADC141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C796C335299D3AE800ADC141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				C7F056F029A7468600F035CD /* GameMode.swift */,
 				C77E65A429A81A7F00F2D8BD /* ClassicMode.swift */,
 				C77E65AC29A9D5B000F2D8BD /* BeatTheScoreMode.swift */,
+				C77E65AE29AA056A00F2D8BD /* SiamMode.swift */,
 			);
 			path = GameModes;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				C77E65AD29A9D5B000F2D8BD /* BeatTheScoreMode.swift in Sources */,
 				C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */,
 				C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */,
+				C77E65AF29AA056A00F2D8BD /* SiamMode.swift in Sources */,
 				C76463A8299F74F400AF0413 /* CannonView.swift in Sources */,
 				C76463A5299F74F400AF0413 /* PegView.swift in Sources */,
 				C7F056F529A7919800F035CD /* GameplayController+Popups.swift in Sources */,

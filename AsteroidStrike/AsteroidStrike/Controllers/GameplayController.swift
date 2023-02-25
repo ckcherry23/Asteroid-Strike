@@ -19,6 +19,7 @@ class GameplayController: UIViewController {
 
     @IBOutlet weak var remainingBallsCountDisplay: UILabel!
     @IBOutlet weak var timerDisplay: UILabel!
+    @IBOutlet weak var remainingOrangePegsCountDisplay: UILabel!
     @IBOutlet weak var scoreDisplay: UILabel!
 
     private var ballView: BallView!
@@ -183,10 +184,14 @@ class GameplayController: UIViewController {
         }
 
         if gameEngine.gameMode.hasTargetScore {
+            scoreDisplay.superview?.isHidden = false
+            remainingOrangePegsCountDisplay.superview?.isHidden = true
             scoreDisplay.text = String(gameEngine.gameStats.score) + "/" +
             String(gameEngine.gameMode.targetScore)
         } else {
-            scoreDisplay.text = String(gameEngine.gameStats.score)
+            scoreDisplay.superview?.isHidden = true
+            remainingOrangePegsCountDisplay.superview?.isHidden = false
+            remainingOrangePegsCountDisplay.text = String(gameEngine.remainingOrangePegsCount)
         }
 
         remainingBallsCountDisplay.text = String(gameEngine.gameStats.remainingBallsCount)
