@@ -8,9 +8,11 @@
 import CoreGraphics
 
 struct Gameboard {
+    static let defaultRect: CGRect = CGRect(origin: CGPoint.zero, size: CGSize(width: 800, height: 600))
+
     private(set) var pegs: Set<Peg> = Set<Peg>()
     private(set) var blocks: Set<Block> = Set<Block>()
-    private(set) var board: CGPath?
+    private(set) var board: CGPath = CGPath(rect: Gameboard.defaultRect, transform: nil)
 
     mutating func addPeg(addedPeg: Peg) {
         guard pegCanBeAdded(addedPeg: addedPeg) else {
@@ -46,7 +48,7 @@ struct Gameboard {
         pegs.first(where: { $0.hitBox.contains(location) }) ?? nil
     }
 
-    private mutating func replacePeg(oldPeg: Peg, newPeg: Peg) -> Bool {
+    mutating func replacePeg(oldPeg: Peg, newPeg: Peg) -> Bool {
         let initialPegCount = pegs.count
 
         guard contains(peg: oldPeg) else {
@@ -77,9 +79,6 @@ struct Gameboard {
     }
 
     private func isPegInsideCanvas(peg: Peg) -> Bool {
-        guard let board = board else {
-            return false
-        }
         return peg.isWithin(path: board)
     }
 
@@ -151,9 +150,6 @@ extension Gameboard {
     }
 
     private func isBlockInsideCanvas(block: Block) -> Bool {
-        guard let board = board else {
-            return false
-        }
         return block.isWithin(path: board)
     }
 

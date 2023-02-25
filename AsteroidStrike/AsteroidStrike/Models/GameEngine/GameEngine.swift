@@ -15,8 +15,8 @@ class GameEngine {
 
     let physicsWorld = PhysicsWorld()
     var rendererDelegate: RendererDelegate?
+    let gameplayArea: CGRect
 
-    private let gameplayArea: CGRect
     private(set) var gameboard: Gameboard
     private(set) var launchBall: Ball = Ball()
     private(set) var extraBalls: [Ball] = []
@@ -55,7 +55,7 @@ class GameEngine {
         CGPoint(x: gameplayArea.midX, y: gameplayArea.midY)
     }
 
-    private var areHitPegsRemoved: Bool {
+    var areHitPegsRemoved: Bool {
         gameboard.pegs.allSatisfy({ !$0.isHit })
     }
 
@@ -69,6 +69,7 @@ class GameEngine {
         self.rendererDelegate = rendererDelegate
         self.gameMode = ClassicMode(gameEngine: self)
         self.powerup = KaboomPowerup(gameEngine: self)
+        spiceUpPegs()
         setupPhysicsBodies()
     }
 
@@ -107,40 +108,6 @@ class GameEngine {
         }
         self.powerup = nil // to call deinit
         self.powerup = powerupInit(self)
-    }
-
-    func launchCannon(from location: CGPoint, atAngle launchAngle: CGFloat) {
-        guard isCannonLaunchable() else {
-            return
-        }
-        let launchSpeed: CGFloat = GameEngine.defaultLaunchSpeed
-        let launchVelocity = CGVector(dx: -sin(launchAngle), dy: cos(launchAngle)) * launchSpeed
-        launchBall.physicsBody.velocity = CGVector.zero
-        launchBall.physicsBody.position = CGVector(dx: location.x, dy: location.y)
-        launchBall.physicsBody.isDynamic = true
-        launchBall.physicsBody.applyImpulse(impulse: launchVelocity * launchBall.physicsBody.mass)
-        gameStats.remainingBallsCount -= 1
-    }
-
-    func teleportSpookyBall() {
-        allBalls.forEach({
-            if isObjectOutsideGameplayArea(objectFrame: $0.frame) {
-                $0.resetPosition(to: CGPoint(x: $0.location.x, y: gameplayArea.minY))
-                isSpookyBallActivated = false
-                powerup.deactivateUsedPowerups(powerups: powerup.getPowerupsToDeactivate())
-            }
-        })
-    }
-
-    func destroyNearbyPegs(radius: CGFloat) {
-        let powerupsToDeactivate = powerup.getPowerupsToDeactivate()
-        powerupsToDeactivate.forEach({ powerup in
-            physicsWorld.getBodiesNear(body: powerup.physicsBody, radius: radius)
-            .forEach({
-                $0.hitCounter += 1
-            })
-        })
-        powerup.deactivateUsedPowerups(powerups: powerupsToDeactivate)
     }
 
     private func handleGameLogic() {
@@ -191,11 +158,6 @@ class GameEngine {
         })
     }
 
-    private func isCannonLaunchable() -> Bool {
-        return !gameMode.isGameOver() && hasLaunchEnded && areHitPegsRemoved
-        && (rendererDelegate?.isRendererAnimationComplete() != false)
-    }
-
     private func handleBallEnteredBucket() {
         allBalls.forEach({
             guard $0.hasEntered(bucket: bucket) else {
@@ -211,7 +173,7 @@ class GameEngine {
         powerup.handlePowerup()
     }
 
-    private func isObjectOutsideGameplayArea(objectFrame: CGRect) -> Bool {
+    func isObjectOutsideGameplayArea(objectFrame: CGRect) -> Bool {
         !gameplayArea.intersects(objectFrame)
     }
 
@@ -231,6 +193,25 @@ class GameEngine {
             removeHitPegs(when: gameStats.timeRemaining <= 0)
             timer.invalidate()
         }
+    }
+
+    private func spiceUpPegs() {
+        if gameboard.pegs.count >= 10 {
+            replacePegWithSpicyPeg(type: .zombie, pegToReplace: gameboard.pegs.first)
+        }
+
+        if gameboard.pegs.count >= 20 {
+            replacePegWithSpicyPeg(type: .inverter, pegToReplace: gameboard.pegs.suffix(1).first)
+        }
+    }
+
+    private func replacePegWithSpicyPeg(type: PegType, pegToReplace: Peg?) {
+        guard let pegToReplace = pegToReplace else {
+            return
+        }
+        let newSpicyPeg = Peg(location: pegToReplace.location, type: type,
+                              radius: pegToReplace.radius, angle: pegToReplace.angle)
+        _ = gameboard.replacePeg(oldPeg: pegToReplace, newPeg: newSpicyPeg)
     }
 
     private func setupPhysicsBodies() {

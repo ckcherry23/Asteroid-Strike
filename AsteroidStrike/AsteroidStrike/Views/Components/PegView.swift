@@ -122,3 +122,33 @@ class GreenPegView: PegView {
         }
     }
 }
+
+class ZombiePegView: PegView {
+    override init(at location: CGPoint, radius: CGFloat, angle: CGFloat) {
+        super.init(at: location, radius: radius, angle: angle)
+        updatePegAppearance()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func updatePegAppearance() {
+        image = UIImage(named: "peg-zombie")
+    }
+}
+
+class InverterPegView: PegView {
+    override init(at location: CGPoint, radius: CGFloat, angle: CGFloat) {
+        super.init(at: location, radius: radius, angle: angle)
+        updatePegAppearance()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func updatePegAppearance() {
+        image = UIImage(named: "peg-inverter")
+    }
+}
