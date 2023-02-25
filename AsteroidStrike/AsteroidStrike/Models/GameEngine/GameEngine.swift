@@ -80,10 +80,16 @@ class GameEngine {
 
     func updateBallCount(_ incrementValue: Int) {
         gameStats.remainingBallsCount += incrementValue
+        if gameStats.remainingBallsCount < 0 {
+            gameStats.remainingBallsCount = 0
+        }
     }
 
     func updateTimeLeft(_ incrementValue: TimeInterval) {
         gameStats.timeRemaining += incrementValue
+        if gameStats.timeRemaining < 0 {
+            gameStats.timeRemaining = 0
+        }
     }
 
     func setGameMode(gameMode: GameModeType) {
@@ -132,7 +138,6 @@ class GameEngine {
             physicsWorld.getBodiesNear(body: powerup.physicsBody, radius: radius)
             .forEach({
                 $0.hitCounter += 1
-                $0.categoryBitmask = PhysicsBodyCategory.all
             })
         })
         powerup.deactivateUsedPowerups(powerups: powerupsToDeactivate)

@@ -184,14 +184,13 @@ class GameplayController: UIViewController {
         }
 
         if gameEngine.gameMode.hasTargetScore {
-            scoreDisplay.superview?.isHidden = false
             remainingOrangePegsCountDisplay.superview?.isHidden = true
             scoreDisplay.text = String(gameEngine.gameStats.score) + "/" +
             String(gameEngine.gameMode.targetScore)
         } else {
-            scoreDisplay.superview?.isHidden = true
             remainingOrangePegsCountDisplay.superview?.isHidden = false
             remainingOrangePegsCountDisplay.text = String(gameEngine.remainingOrangePegsCount)
+            scoreDisplay.text = String(gameEngine.gameStats.score)
         }
 
         remainingBallsCountDisplay.text = String(gameEngine.gameStats.remainingBallsCount)

@@ -59,7 +59,7 @@ enum PegType: Codable {
 
     static let pegScoreMapping: [PegType: Int ] = [
         .blue: 1,
-        .orange: 3,
+        .orange: 2,
         .green: 5
     ]
 }
