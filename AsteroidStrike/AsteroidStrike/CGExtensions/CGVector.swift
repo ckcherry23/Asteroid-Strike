@@ -66,6 +66,10 @@ extension CGVector {
         return CGVector(dx: -dy, dy: dx)
     }
 
+    func otherNormal() -> CGVector {
+        return CGVector(dx: dy, dy: -dx)
+    }
+
     func distanceFrom(other: CGVector) -> CGFloat {
         sqrt(pow((dx - other.dx), 2) + pow((dy - other.dy), 2))
     }

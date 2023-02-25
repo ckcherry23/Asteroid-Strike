@@ -62,7 +62,6 @@ struct Gameboard {
             addPeg(addedPeg: oldPeg)
             return false
         }
-
         addPeg(addedPeg: newPeg)
         let finalPegCount = pegs.count
         assert(initialPegCount == finalPegCount)

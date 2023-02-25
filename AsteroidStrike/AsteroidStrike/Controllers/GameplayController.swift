@@ -22,7 +22,7 @@ class GameplayController: UIViewController {
     @IBOutlet weak var remainingOrangePegsCountDisplay: UILabel!
     @IBOutlet weak var scoreDisplay: UILabel!
 
-    private var ballView: BallView!
+    private var ballViews: [BallView] = []
     private var pegViews: [PegView] = []
     private var blockViews: [BlockView] = []
     private var glowingPegViews: [PegView] = []
@@ -67,7 +67,8 @@ class GameplayController: UIViewController {
     }
 
     private func addBallToGameplayArea() {
-        ballView = BallView(frame: gameEngine.launchBall.frame)
+        let ballView = BallView(frame: gameEngine.launchBall.frame)
+        ballViews.append(ballView)
         gameplayArea.addSubview(ballView)
     }
 
@@ -106,12 +107,19 @@ class GameplayController: UIViewController {
     }
 
     private func updateMovingObjects() {
-        updateBall()
+        updateBalls()
         updateBucket()
     }
 
-    private func updateBall() {
-        ballView.center = gameEngine.launchBall.location
+    private func updateBalls() {
+        for (index, ball) in gameEngine.allBalls.enumerated() {
+            if index >= ballViews.count {
+                let ballView = BallView(frame: ball.frame)
+                ballViews.append(ballView)
+                gameplayArea.addSubview(ballView)
+            }
+            ballViews[index].center = ball.location
+        }
     }
 
     private func updateBucket() {
@@ -130,9 +138,6 @@ class GameplayController: UIViewController {
     }
 
     private func fadeOutRemovedObjects() {
-        guard gameEngine.launchBall.isStuck() else {
-            return
-        }
         let removedPegs = pegViews.filter({ pegView in
             !gameEngine.gameboard.pegs.compactMap({ $0.location }).contains(pegView.location)
         })

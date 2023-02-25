@@ -19,7 +19,7 @@ class PhysicsWorld {
     var frameRate: Float = PhysicsWorld.defaultFrameRate
     var origin: CGPoint = CGPoint.zero
 
-    let collisionResolvers: [any CollisionResolver] = [ImpulseResolver(), PositionResolver()]
+    let collisionResolvers: [any CollisionResolver] = [ImpulseResolver()]
 
     var collisionDelegate: PhysicsCollisionDelegate?
 

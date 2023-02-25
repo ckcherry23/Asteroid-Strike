@@ -149,6 +149,7 @@ extension PhysicsBody: Collidable {
             return nil
         }
         hitCounter += 1
+        other.hitCounter += 1
         return PhysicsCollision(firstBody: self, secondBody: other)
     }
 

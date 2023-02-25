@@ -134,7 +134,11 @@ class ZombiePegView: PegView {
     }
 
     override func updatePegAppearance() {
-        image = UIImage(named: "peg-zombie")
+        if isHit {
+            image = nil
+        } else {
+            image = UIImage(named: "peg-zombie")
+        }
     }
 }
 
@@ -149,6 +153,10 @@ class InverterPegView: PegView {
     }
 
     override func updatePegAppearance() {
-        image = UIImage(named: "peg-inverter")
+        if isHit {
+            image = nil
+        } else {
+            image = UIImage(named: "peg-inverter")
+        }
     }
 }

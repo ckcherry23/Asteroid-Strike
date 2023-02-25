@@ -57,7 +57,7 @@ class PhysicsCollision {
 
     convenience init?(firstBody: EdgePhysicsBody, secondBody: CirclePhysicsBody) {
         let edge = CGVector.vector(fromPoint: firstBody.destination) - CGVector.vector(fromPoint: firstBody.source)
-        let normal: CGVector = edge.normal().normalized()
+        let normal: CGVector = edge.otherNormal().normalized()
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 
@@ -69,7 +69,7 @@ class PhysicsCollision {
 
     convenience init?(firstBody: CirclePhysicsBody, secondBody: RectanglePhysicsBody) {
         let closestEdgeVector = CGVector.getClosestEdgeVector(rectangleBody: secondBody, circleBody: firstBody)
-        let normal: CGVector = closestEdgeVector?.normal().normalized() ?? -(firstBody.velocity.normalized())
+        let normal: CGVector = closestEdgeVector?.otherNormal().normalized() ?? -(firstBody.velocity.normalized())
         self.init(firstBody: firstBody, secondBody: secondBody, contactNormal: normal)
     }
 

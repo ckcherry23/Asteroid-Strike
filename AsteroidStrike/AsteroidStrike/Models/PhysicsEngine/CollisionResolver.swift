@@ -20,9 +20,3 @@ class ImpulseResolver: CollisionResolver {
         }
     }
 }
-
-class PositionResolver: CollisionResolver {
-    func resolve(collision: PhysicsCollision) {
-
-    }
-}

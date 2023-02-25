@@ -116,6 +116,7 @@ class GameEngine {
         handleBallOutsideGameplayArea()
         handleBallEnteredBucket()
         handlePowerups()
+        handleSpicyPegs()
     }
 
     private func removeBlockingObjects() {
@@ -150,12 +151,14 @@ class GameEngine {
         guard removeCondition else {
             return
         }
-        gameboard.pegs.filter({ $0.isHit }).forEach({
-            physicsWorld.removePhysicsBody(physicsBody: $0.physicsBody)
-            gameboard.deletePeg(deletedPeg: $0)
-            removedHitPegsCount += 1
-            gameStats.score += PegType.pegScoreMapping[$0.type] ?? 0
-        })
+        gameboard.pegs.filter({ $0.isHit }).forEach({ removePeg(peg: $0) })
+    }
+
+    func removePeg(peg: Peg) {
+        physicsWorld.removePhysicsBody(physicsBody: peg.physicsBody)
+        gameboard.deletePeg(deletedPeg: peg)
+        removedHitPegsCount += 1
+        gameStats.score += PegType.pegScoreMapping[peg.type] ?? 0
     }
 
     private func handleBallEnteredBucket() {
@@ -199,7 +202,6 @@ class GameEngine {
         if gameboard.pegs.count >= 10 {
             replacePegWithSpicyPeg(type: .zombie, pegToReplace: gameboard.pegs.first)
         }
-
         if gameboard.pegs.count >= 20 {
             replacePegWithSpicyPeg(type: .inverter, pegToReplace: gameboard.pegs.suffix(1).first)
         }
@@ -241,6 +243,12 @@ class GameEngine {
         self.launchBall = Ball(location: CGPoint(x: centrePoint.x,
                                                  y: gameplayArea.maxY + GameEngine.defaultBallHeightOffset))
         physicsWorld.addPhysicsBody(physicsBody: launchBall.physicsBody)
+    }
+
+    func setupExtraBall(location: CGPoint) {
+        let extraBall = Ball(location: location)
+        self.extraBalls.append(extraBall)
+        physicsWorld.addPhysicsBody(physicsBody: extraBall.physicsBody)
     }
 
     private func setupBucket() {

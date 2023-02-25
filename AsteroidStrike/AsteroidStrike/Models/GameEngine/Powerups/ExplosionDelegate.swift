@@ -9,6 +9,10 @@ import CoreGraphics
 
 class ExplosionDelegate: PhysicsCollisionDelegate {
     func onCollision(physicsCollision: PhysicsCollision) {
+        applyExplosionImpulse(physicsCollision: physicsCollision)
+    }
+
+    private func applyExplosionImpulse(physicsCollision: PhysicsCollision) {
         let explosionImpulse = CGVector(dx: -400, dy: -400)
         if physicsCollision.firstBody.categoryBitmask == PhysicsBodyCategory.activePowerup {
             physicsCollision.secondBody.applyImpulse(impulse: explosionImpulse)
