@@ -26,18 +26,21 @@ class GameEngine {
         Array([[launchBall], extraBalls].joined())
     }
 
-    private(set) var remainingBallsCount: Int = GameEngine.defaultBallCount
-    private(set) var timeRemaining: TimeInterval = TimeInterval.infinity // TODO: Timer
+    private(set) var gameStats: GameStats = GameStats(
+        remainingBallsCount: GameEngine.defaultBallCount, timeRemaining: TimeInterval.infinity, score: 0)
     private(set) var hitPegsCount: Int = 0
     var remainingOrangePegsCount: Int {
         gameboard.pegs.filter({ $0.type == .orange }).count
     }
+    private var timer: Timer?
 
     private(set) var gameMode: GameMode!
     private(set) var powerup: Powerup!
     var isSpookyBallActivated: Bool = false
 
-    private(set) var score: Int = 0
+    var areAllScoresCalculated: Bool {
+        gameboard.pegs.allSatisfy({ !$0.isHit })
+    }
 
     var hasLaunchEnded: Bool {
         areBallsOutsideGameplayArea && !isSpookyBallActivated
@@ -71,15 +74,19 @@ class GameEngine {
     }
 
     func updateBallCount(_ incrementValue: Int) {
-        remainingBallsCount += incrementValue
+        gameStats.remainingBallsCount += incrementValue
     }
 
     func updateTimeLeft(_ incrementValue: TimeInterval) {
-        timeRemaining += incrementValue
+        gameStats.timeRemaining += incrementValue
     }
 
-    func setGameMode(gameMode: GameMode) {
-        self.gameMode = gameMode
+    func setGameMode(gameMode: GameModeType) {
+        guard let gameModeInit = GameModeType.gameModeMapping[gameMode] else {
+            return
+        }
+        self.gameMode = nil // to call deinit
+        self.gameMode = gameModeInit(self)
         setupGameState()
     }
 
@@ -101,7 +108,7 @@ class GameEngine {
         launchBall.physicsBody.position = CGVector(dx: location.x, dy: location.y)
         launchBall.physicsBody.isDynamic = true
         launchBall.physicsBody.applyImpulse(impulse: launchVelocity * launchBall.physicsBody.mass)
-        remainingBallsCount -= 1
+        gameStats.remainingBallsCount -= 1
     }
 
     func teleportSpookyBall() {
@@ -130,7 +137,6 @@ class GameEngine {
         moveBucket()
         removeBlockingObjects()
         handleBallOutsideGameplayArea()
-        removeHitPegsOnLaunchEnd()
         handleBallEnteredBucket()
         handlePowerups()
     }
@@ -143,7 +149,7 @@ class GameEngine {
         if isSpookyBallActivated {
             teleportSpookyBall()
         }
-        removeHitPegsOnLaunchEnd()
+        removeHitPegs(when: hasLaunchEnded)
     }
 
     private func removeBlockingObjectsWhenBallStuck(ball: Ball) {
@@ -163,14 +169,15 @@ class GameEngine {
         })
     }
 
-    private func removeHitPegsOnLaunchEnd() {
-        guard hasLaunchEnded else {
+    private func removeHitPegs(when removeCondition: Bool) {
+        guard removeCondition else {
             return
         }
         gameboard.pegs.filter({ $0.isHit }).forEach({
             physicsWorld.removePhysicsBody(physicsBody: $0.physicsBody)
             gameboard.deletePeg(deletedPeg: $0)
             hitPegsCount += 1
+            gameStats.score += PegType.pegScoreMapping[$0.type] ?? 0
         })
     }
 
@@ -199,8 +206,21 @@ class GameEngine {
     }
 
     private func setupGameState() {
-        remainingBallsCount = gameMode.totalBallsCount
-        timeRemaining = gameMode.timeLimit
+        if gameMode.isTimerNeeded {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleTimerExecution),
+                                         userInfo: nil, repeats: true)
+        }
+        gameStats.remainingBallsCount = gameMode.totalBallsCount
+        gameStats.timeRemaining = gameMode.timeLimit
+    }
+
+    @objc private func handleTimerExecution(_ timer: Timer) {
+        if gameStats.timeRemaining > 0 {
+            gameStats.timeRemaining -= 1
+        } else {
+            removeHitPegs(when: gameStats.timeRemaining <= 0)
+            timer.invalidate()
+        }
     }
 
     private func setupPhysicsBodies() {

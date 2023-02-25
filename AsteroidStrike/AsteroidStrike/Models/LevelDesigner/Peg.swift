@@ -56,6 +56,12 @@ enum PegType: Codable {
         .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
         .green: { (peg) in GreenPegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
     ]
+
+    static let pegScoreMapping: [PegType: Int ] = [
+        .blue: 1,
+        .orange: 3,
+        .green: 5
+    ]
 }
 
 extension Peg: Hashable {

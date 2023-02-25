@@ -47,6 +47,8 @@
 		C77E65A529A81A7F00F2D8BD /* ClassicMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65A429A81A7F00F2D8BD /* ClassicMode.swift */; };
 		C77E65A729A81AE800F2D8BD /* LevelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65A629A81AE800F2D8BD /* LevelStorage.swift */; };
 		C77E65A929A81BB300F2D8BD /* PhysicsBodyCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65A829A81BB300F2D8BD /* PhysicsBodyCategory.swift */; };
+		C77E65AB29A9B9A200F2D8BD /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65AA29A9B9A100F2D8BD /* GameStats.swift */; };
+		C77E65AD29A9D5B000F2D8BD /* BeatTheScoreMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65AC29A9D5B000F2D8BD /* BeatTheScoreMode.swift */; };
 		C796C334299D3AE800ADC141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C333299D3AE800ADC141 /* AppDelegate.swift */; };
 		C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C335299D3AE800ADC141 /* SceneDelegate.swift */; };
 		C796C33D299D3AEA00ADC141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C796C33C299D3AEA00ADC141 /* Assets.xcassets */; };
@@ -121,6 +123,8 @@
 		C77E65A429A81A7F00F2D8BD /* ClassicMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicMode.swift; sourceTree = "<group>"; };
 		C77E65A629A81AE800F2D8BD /* LevelStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelStorage.swift; sourceTree = "<group>"; };
 		C77E65A829A81BB300F2D8BD /* PhysicsBodyCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsBodyCategory.swift; sourceTree = "<group>"; };
+		C77E65AA29A9B9A100F2D8BD /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
+		C77E65AC29A9D5B000F2D8BD /* BeatTheScoreMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTheScoreMode.swift; sourceTree = "<group>"; };
 		C796C330299D3AE800ADC141 /* AsteroidStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsteroidStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C796C333299D3AE800ADC141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C796C335299D3AE800ADC141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				C764639E299F74F300AF0413 /* GameEngine.swift */,
+				C77E65AA29A9B9A100F2D8BD /* GameStats.swift */,
 				C77E65A829A81BB300F2D8BD /* PhysicsBodyCategory.swift */,
 				C77E65A229A81A3500F2D8BD /* GameplayElements */,
 				C77E65A329A81A5800F2D8BD /* GameModes */,
@@ -309,6 +314,7 @@
 			children = (
 				C7F056F029A7468600F035CD /* GameMode.swift */,
 				C77E65A429A81A7F00F2D8BD /* ClassicMode.swift */,
+				C77E65AC29A9D5B000F2D8BD /* BeatTheScoreMode.swift */,
 			);
 			path = GameModes;
 			sourceTree = "<group>";
@@ -556,6 +562,7 @@
 				C7F056E029A6328B00F035CD /* LevelDesignController+ActionButtons.swift in Sources */,
 				C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */,
 				C76463AB299F74F400AF0413 /* GameplayController.swift in Sources */,
+				C77E65AD29A9D5B000F2D8BD /* BeatTheScoreMode.swift in Sources */,
 				C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */,
 				C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */,
 				C76463A8299F74F400AF0413 /* CannonView.swift in Sources */,
@@ -569,6 +576,7 @@
 				C76463AE299F74F400AF0413 /* CGPoint.swift in Sources */,
 				C7F056F129A7468600F035CD /* GameMode.swift in Sources */,
 				C76463A7299F74F400AF0413 /* BallView.swift in Sources */,
+				C77E65AB29A9B9A200F2D8BD /* GameStats.swift in Sources */,
 				C77E659829A807F300F2D8BD /* PhysicsCollisionDelegate.swift in Sources */,
 				C76463AF299F74F400AF0413 /* CGRect.swift in Sources */,
 				C77E659F29A819D200F2D8BD /* KaboomPowerup.swift in Sources */,

@@ -343,7 +343,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="iPD-H4-fcE">
-                                <rect key="frame" x="0.0" y="74" width="744" height="923"/>
+                                <rect key="frame" x="0.0" y="74" width="744" height="912"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="QoY-DB-ZqH" appends="YES" id="ArO-Kr-clA"/>
@@ -357,26 +357,26 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bucket" translatesAutoresizingMaskIntoConstraints="NO" id="1Ca-r7-VgW">
-                                <rect key="frame" x="312" y="937" width="120" height="60"/>
+                                <rect key="frame" x="312" y="926" width="120" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="cDA-D5-Tgf"/>
                                     <constraint firstAttribute="height" constant="60" id="hXU-dB-hwD"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="4Q1-aj-PoI" userLabel="Game UI">
-                                <rect key="frame" x="20" y="1017" width="704" height="76"/>
+                            <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="4Q1-aj-PoI" userLabel="Game UI">
+                                <rect key="frame" x="20" y="1006" width="704" height="87"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="v7I-zd-Kba" userLabel="Balls Count">
-                                        <rect key="frame" x="0.0" y="0.0" width="199" height="76"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="v7I-zd-Kba" userLabel="Balls Count">
+                                        <rect key="frame" x="0.0" y="0.0" width="208" height="76"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Balls Left" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc3-nq-hzi">
-                                                <rect key="frame" x="0.0" y="0.0" width="109.5" height="76"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Balls Left" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc3-nq-hzi">
+                                                <rect key="frame" x="0.0" y="0.0" width="117.5" height="76"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0U-9f-rvR">
-                                                <rect key="frame" x="121" y="0.0" width="78" height="76"/>
+                                                <rect key="frame" x="117.5" y="0.0" width="90.5" height="76"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="60"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -384,17 +384,17 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.54199999570846558" green="0.25999999046325684" blue="0.57099997997283936" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="KAk-HD-yec" userLabel="Timer">
-                                        <rect key="frame" x="239" y="0.0" width="247.5" height="76"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="KAk-HD-yec" userLabel="Timer">
+                                        <rect key="frame" x="248" y="0.0" width="208" height="76"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="  Time Left" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W02-ad-hHe">
-                                                <rect key="frame" x="0.0" y="0.0" width="108.5" height="76"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="  Timer" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W02-ad-hHe">
+                                                <rect key="frame" x="0.0" y="0.0" width="76.5" height="76"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1:22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbx-xi-Ub4">
-                                                <rect key="frame" x="123.5" y="0.0" width="124" height="76"/>
+                                                <rect key="frame" x="76.5" y="0.0" width="131.5" height="76"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="60"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -402,17 +402,17 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.54199999570000001" green="0.2599999905" blue="0.57099997999999996" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="4WQ-M2-m4Y" userLabel="Score">
-                                        <rect key="frame" x="526.5" y="0.0" width="177.5" height="76"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="4WQ-M2-m4Y" userLabel="Score">
+                                        <rect key="frame" x="496" y="0.0" width="208" height="76"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="  Score" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AH-8H-O4n" userLabel="Score">
-                                                <rect key="frame" x="0.0" y="0.0" width="67.5" height="76"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="86.5" height="76"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="46" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHP-Vo-B84" userLabel="98">
-                                                <rect key="frame" x="82.5" y="0.0" width="95" height="76"/>
+                                                <rect key="frame" x="86.5" y="0.0" width="121.5" height="76"/>
                                                 <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="60"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -445,6 +445,9 @@
                         <outlet property="bucketView" destination="1Ca-r7-VgW" id="bcM-zT-tO6"/>
                         <outlet property="cannonView" destination="4h8-2U-3AE" id="Hhq-fD-MCB"/>
                         <outlet property="gameplayArea" destination="iPD-H4-fcE" id="WkI-Xt-erJ"/>
+                        <outlet property="remainingBallsCountDisplay" destination="Q0U-9f-rvR" id="y2V-TD-hFc"/>
+                        <outlet property="scoreDisplay" destination="SHP-Vo-B84" id="Gz3-S6-nZu"/>
+                        <outlet property="timerDisplay" destination="sbx-xi-Ub4" id="YNO-iC-ufW"/>
                         <segue destination="Hal-eX-bHF" kind="unwind" identifier="unwindToHomeFromGameplay" unwindAction="unwindToHomeFromGameplay:" id="aHo-91-LeO"/>
                     </connections>
                 </viewController>
@@ -547,7 +550,7 @@
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="AccentColor"/>
     <resources>
-        <image name="background" width="1920" height="1229"/>
+        <image name="background" width="1858" height="912"/>
         <image name="block" width="320" height="320"/>
         <image name="bucket" width="404" height="197"/>
         <image name="cannon" width="512" height="512"/>

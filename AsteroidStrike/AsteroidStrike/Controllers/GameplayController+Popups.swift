@@ -15,10 +15,13 @@ extension GameplayController {
 
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Classic Ka-Boom", style: .default, handler: { _ in
-            self.setPowerupMode(powerup: .kaboom)
+            self.gameEngine.setPowerup(powerup: .kaboom)
         }))
         alert.addAction(UIAlertAction(title: "Classic Spooky Ball", style: .default, handler: { _ in
-            self.setPowerupMode(powerup: .spookyBall)
+            self.gameEngine.setPowerup(powerup: .spookyBall)
+        }))
+        alert.addAction(UIAlertAction(title: "Beat the Score", style: .default, handler: { _ in
+            self.gameEngine.setGameMode(gameMode: .beatTheScore)
         }))
 
         self.present(alert, animated: true, completion: nil)

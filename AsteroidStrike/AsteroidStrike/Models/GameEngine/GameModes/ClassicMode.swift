@@ -8,8 +8,11 @@
 import Foundation
 
 class ClassicMode: GameMode {
+    var isTimerNeeded: Bool = false
+    var hasTargetScore: Bool = false
     var totalBallsCount: Int
     var timeLimit: TimeInterval = TimeInterval.infinity
+    var targetScore: Int = 0
     unowned var gameEngine: GameEngine
 
     init(gameEngine: GameEngine, totalBallsCount: Int = 10) {
@@ -22,7 +25,7 @@ class ClassicMode: GameMode {
     }
 
     var hasLost: Bool {
-        gameEngine.remainingBallsCount <= 0
+        gameEngine.gameStats.remainingBallsCount <= 0
         && gameEngine.remainingOrangePegsCount > 0
         && gameEngine.hasLaunchEnded
     }

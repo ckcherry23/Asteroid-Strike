@@ -16,6 +16,11 @@ class GameplayController: UIViewController {
     @IBOutlet weak var gameplayArea: UIImageView!
     @IBOutlet weak var cannonView: CannonView!
     @IBOutlet weak var bucketView: UIImageView!
+
+    @IBOutlet weak var remainingBallsCountDisplay: UILabel!
+    @IBOutlet weak var timerDisplay: UILabel!
+    @IBOutlet weak var scoreDisplay: UILabel!
+
     private var ballView: BallView!
     private var pegViews: [PegView] = []
     private var blockViews: [BlockView] = []
@@ -23,15 +28,21 @@ class GameplayController: UIViewController {
     private var displayLink: CADisplayLink!
     private var isDisappearAnimationComplete = true
 
-    private var gameEngine: GameEngine!
+    private(set) var gameEngine: GameEngine!
     var gameboardDelegate: GameboardDelegate?
 
+    private var isFirstLoad = true
+
     override func viewDidLayoutSubviews() {
+        guard isFirstLoad else {
+            return
+        }
         setupGameEngine()
         addGameplayElements()
         addGameboardElements()
         setupDisplayRefreshLoop()
         showGameModeModal()
+        isFirstLoad = false
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -136,7 +147,8 @@ class GameplayController: UIViewController {
         guard gameEngine.hasLaunchEnded else {
             return
         }
-        fadeOutViews(views: glowingPegViews, delay: GameplayController.pegViewAnimationDelay)
+        let animationDelay = gameEngine.gameMode.isTimerNeeded ? 0 : GameplayController.pegViewAnimationDelay
+        fadeOutViews(views: glowingPegViews, delay: animationDelay)
     }
 
     private func fadeOutViews(views: [UIView], delay: TimeInterval = 0.0) {
@@ -158,6 +170,27 @@ class GameplayController: UIViewController {
 
     func setPowerupMode(powerup: PowerupMode) {
         gameEngine.setPowerup(powerup: powerup)
+    }
+
+    private func updateGameStats() {
+        if gameEngine.gameMode.isTimerNeeded {
+            timerDisplay.superview?.isHidden = false
+            remainingBallsCountDisplay.superview?.isHidden = true
+            timerDisplay.text = String(gameEngine.gameStats.timeRemaining)
+        } else {
+            timerDisplay.superview?.isHidden = true
+            remainingBallsCountDisplay.superview?.isHidden = false
+        }
+
+        if gameEngine.gameMode.hasTargetScore {
+            scoreDisplay.text = String(gameEngine.gameStats.score) + "/" +
+            String(gameEngine.gameMode.targetScore)
+        } else {
+            scoreDisplay.text = String(gameEngine.gameStats.score)
+        }
+
+        remainingBallsCountDisplay.text = String(gameEngine.gameStats.remainingBallsCount)
+
     }
 
     private func setupDisplayRefreshLoop() {
@@ -204,6 +237,7 @@ extension GameplayController: RendererDelegate {
         fadeOutRemovedObjects()
         fadeOutLitPegsOnLaunchEnd()
         showGameMessages()
+        updateGameStats()
     }
 
     func isRendererAnimationComplete() -> Bool {

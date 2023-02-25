@@ -8,8 +8,11 @@
 import Foundation
 
 protocol GameMode {
+    var isTimerNeeded: Bool { get }
+    var hasTargetScore: Bool { get }
     var totalBallsCount: Int { get }
     var timeLimit: TimeInterval { get }
+    var targetScore: Int { get }
     var hasWon: Bool { get }
     var hasLost: Bool { get }
     func isGameOver() -> Bool
@@ -22,33 +25,12 @@ extension GameMode {
     }
 }
 
-class BeatTheScoreMode: GameMode {
-    var totalBallsCount: Int = Int.max
-    var timeLimit: TimeInterval
-    var scoreToBeat: Int
-    unowned var gameEngine: GameEngine
-
-    init(gameEngine: GameEngine, gameboard: Gameboard) {
-        self.gameEngine = gameEngine
-        (timeLimit, scoreToBeat) = ScoreHelper.calculateBeatTheScoreGameConditions(for: gameboard)
-    }
-
-    var hasWon: Bool {
-        gameEngine.score > scoreToBeat
-    }
-
-    var hasLost: Bool {
-        gameEngine.timeRemaining == 0 && gameEngine.score < scoreToBeat
-    }
-
-    func onEnterBucket() {
-        gameEngine.updateTimeLeft(10)
-    }
-}
-
 class SiamMode: GameMode {
+    var isTimerNeeded: Bool = false
+    var hasTargetScore: Bool = false
     var totalBallsCount: Int
     var timeLimit: TimeInterval = TimeInterval.infinity
+    var targetScore: Int = 0
     unowned var gameEngine: GameEngine
 
     init(gameEngine: GameEngine, totalBallsCount: Int = 3) {
@@ -57,7 +39,7 @@ class SiamMode: GameMode {
     }
 
     var hasWon: Bool {
-        gameEngine.remainingBallsCount == 0 && gameEngine.hitPegsCount == 0
+        gameEngine.gameStats.remainingBallsCount == 0 && gameEngine.hitPegsCount == 0
     }
 
     var hasLost: Bool {
@@ -69,8 +51,14 @@ class SiamMode: GameMode {
     }
 }
 
-class ScoreHelper {
-    static func calculateBeatTheScoreGameConditions(for gameboard: Gameboard) -> (TimeInterval, Int) {
-        return (120, 1200)
-    }
+enum GameModeType {
+    case classic
+    case beatTheScore
+    case siam
+
+    static let gameModeMapping: [GameModeType: (GameEngine) -> (GameMode)] = [
+        .classic: { (gameEngine) in ClassicMode(gameEngine: gameEngine) },
+        .beatTheScore: { (gameEngine) in BeatTheScoreMode(gameEngine: gameEngine) },
+        .siam: { (gameEngine) in SiamMode(gameEngine: gameEngine) }
+    ]
 }
