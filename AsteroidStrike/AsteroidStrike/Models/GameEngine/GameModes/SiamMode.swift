@@ -21,11 +21,13 @@ class SiamMode: GameMode {
     }
 
     var hasWon: Bool {
-        gameEngine.gameStats.remainingBallsCount == 0 && gameEngine.hitPegsCount == 0
+        gameEngine.gameStats.remainingBallsCount <= 0
+        && gameEngine.removedHitPegsCount <= 0
+        && gameEngine.hasLaunchEnded
     }
 
     var hasLost: Bool {
-        gameEngine.hitPegsCount > 0
+        gameEngine.removedHitPegsCount > 0 || gameEngine.currentlyHitPegsCount > 0
     }
 
     func onEnterBucket() {

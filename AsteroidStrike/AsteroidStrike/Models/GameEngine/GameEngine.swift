@@ -28,10 +28,15 @@ class GameEngine {
 
     private(set) var gameStats: GameStats = GameStats(
         remainingBallsCount: GameEngine.defaultBallCount, timeRemaining: TimeInterval.infinity, score: 0)
-    private(set) var hitPegsCount: Int = 0
+    private(set) var removedHitPegsCount: Int = 0
+
+    var currentlyHitPegsCount: Int {
+        gameboard.pegs.filter({ $0.isHit }).count
+    }
     var remainingOrangePegsCount: Int {
         gameboard.pegs.filter({ $0.type == .orange }).count
     }
+
     private var timer: Timer?
 
     private(set) var gameMode: GameMode!
@@ -160,7 +165,7 @@ class GameEngine {
             if let pegToBeDeleted = gameboard.pegs.first(where: { peg in peg.physicsBody === physicsBody }) {
                 gameboard.deletePeg(deletedPeg: pegToBeDeleted)
                 physicsWorld.removePhysicsBody(physicsBody: physicsBody)
-                hitPegsCount += 1
+                removedHitPegsCount += 1
             } else if let blockToBeDeleted = gameboard.blocks.first(where: { block in
                 block.physicsBody === physicsBody }) {
                 gameboard.deleteBlock(deletedBlock: blockToBeDeleted)
@@ -176,7 +181,7 @@ class GameEngine {
         gameboard.pegs.filter({ $0.isHit }).forEach({
             physicsWorld.removePhysicsBody(physicsBody: $0.physicsBody)
             gameboard.deletePeg(deletedPeg: $0)
-            hitPegsCount += 1
+            removedHitPegsCount += 1
             gameStats.score += PegType.pegScoreMapping[$0.type] ?? 0
         })
     }
