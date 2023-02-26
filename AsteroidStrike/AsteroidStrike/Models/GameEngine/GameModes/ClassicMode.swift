@@ -21,13 +21,14 @@ class ClassicMode: GameMode {
     }
 
     var hasWon: Bool {
-        gameEngine.remainingOrangePegsCount == 0
+        gameEngine.remainingOrangePegsCount <= 0
     }
 
     var hasLost: Bool {
         gameEngine.gameStats.remainingBallsCount <= 0
         && gameEngine.remainingOrangePegsCount > 0
         && gameEngine.hasLaunchEnded
+        && gameEngine.areAllScoresCalculated
     }
 
     func onEnterBucket() {

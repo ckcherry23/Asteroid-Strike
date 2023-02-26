@@ -18,4 +18,8 @@ extension CGPoint {
     public func distanceFrom(other: CGPoint) -> CGFloat {
         sqrt(pow((x - other.x), 2) + pow((y - other.y), 2))
     }
+
+    public func rotatedUpsideDown(frame: CGRect) -> CGPoint {
+        CGPoint(x: frame.maxX - x, y: frame.maxY - y)
+    }
 }

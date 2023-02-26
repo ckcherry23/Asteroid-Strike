@@ -26,8 +26,15 @@ class GameplayController: UIViewController {
     private var pegViews: [PegView] = []
     private var blockViews: [BlockView] = []
     private var glowingPegViews: [PegView] = []
+
+    var canvasObjects: [any CanvasObject] {
+        let canvasObjectsArray: [[any CanvasObject]] = [pegViews, blockViews]
+        return Array(canvasObjectsArray.joined())
+    }
+
     private var displayLink: CADisplayLink!
     private var isDisappearAnimationComplete = true
+    private var isGameboardUpsideDown = false
 
     private(set) var gameEngine: GameEngine!
     var gameboardDelegate: GameboardDelegate?
@@ -118,7 +125,11 @@ class GameplayController: UIViewController {
                 ballViews.append(ballView)
                 gameplayArea.addSubview(ballView)
             }
-            ballViews[index].center = ball.location
+            if !isGameboardUpsideDown {
+                ballViews[index].center = ball.location
+            } else {
+                ballViews[index].center = ball.location.rotatedUpsideDown(frame: gameplayArea.frame)
+            }
         }
     }
 
@@ -245,12 +256,19 @@ extension GameplayController: RendererDelegate {
         lightUpHitPegs()
         fadeOutRemovedObjects()
         fadeOutLitPegsOnLaunchEnd()
-        showGameMessages()
         updateGameStats()
+        showGameMessages()
     }
 
     func isRendererAnimationComplete() -> Bool {
         isDisappearAnimationComplete
+    }
+
+    func toggleGameboardOrientation() {
+        isGameboardUpsideDown = !isGameboardUpsideDown
+        canvasObjects.forEach({
+            $0.center = $0.center.rotatedUpsideDown(frame: gameplayArea.frame)
+        })
     }
 
     private func showGameMessages() {
@@ -259,9 +277,4 @@ extension GameplayController: RendererDelegate {
             onGameOver(hasWon: gameEngine.gameMode.hasWon)
         }
     }
-}
-
-protocol RendererDelegate: AnyObject {
-    func render()
-    func isRendererAnimationComplete() -> Bool
 }
