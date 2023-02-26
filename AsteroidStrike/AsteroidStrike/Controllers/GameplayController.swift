@@ -149,13 +149,15 @@ class GameplayController: UIViewController {
     }
 
     private func fadeOutRemovedObjects() {
+        guard gameEngine.allBalls.contains(where: { $0.isStuck() }) || gameEngine.isSpicyPegHit else {
+            return
+        }
         let removedPegs = pegViews.filter({ pegView in
             !gameEngine.gameboard.pegs.compactMap({ $0.location }).contains(pegView.location)
         })
         let removedBlocks = blockViews.filter({ blockView in
             !gameEngine.gameboard.blocks.compactMap({ $0.location }).contains(blockView.location)
         })
-
         fadeOutViews(views: removedPegs)
         fadeOutViews(views: removedBlocks)
     }
@@ -171,15 +173,26 @@ class GameplayController: UIViewController {
     private func fadeOutViews(views: [UIView], delay: TimeInterval = 0.0) {
         for (index, view) in views.enumerated() {
             let animationDelay = delay * Double(index)
-            if animationDelay > 0 {
-                isDisappearAnimationComplete = false
-            }
+            isDisappearAnimationComplete = false
             UIView.animate(withDuration: GameplayController.pegViewAnimationDuration, delay: animationDelay,
                            animations: { view.alpha = 0.0 }, completion: { _ in
                 if index == views.count - 1 {
                     self.isDisappearAnimationComplete = true
+                    self.deleteView(view: view)
                 }
             })
+        }
+    }
+
+    private func deleteView(view: UIView) {
+        view.removeFromSuperview()
+        if let pegView = view as? PegView,
+           let pegViewIndex = pegViews.firstIndex(of: pegView) {
+            pegViews.remove(at: pegViewIndex)
+        }
+        if let blockView = view as? BlockView,
+           let blockViewIndex = blockViews.firstIndex(of: blockView) {
+            blockViews.remove(at: blockViewIndex)
         }
     }
 

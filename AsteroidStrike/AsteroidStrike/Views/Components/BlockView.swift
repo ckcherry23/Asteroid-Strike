@@ -40,7 +40,7 @@ class BlockView: UIImageView, CanvasObject {
 
     private func customize() {
         self.isUserInteractionEnabled = true
-        image = UIImage(named: "block")
+        image = #imageLiteral(resourceName: "block")
         self.contentMode = .scaleToFill
         self.transform = CGAffineTransform(rotationAngle: angle)
     }

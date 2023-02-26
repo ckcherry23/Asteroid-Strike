@@ -42,6 +42,7 @@ class GameEngine {
     private(set) var gameMode: GameMode!
     private(set) var powerup: Powerup!
     var isSpookyBallActivated = false
+    var isSpicyPegHit = false
 
     var areAllScoresCalculated: Bool {
         gameboard.pegs.allSatisfy({ !$0.isHit })
@@ -127,6 +128,7 @@ class GameEngine {
         if isSpookyBallActivated {
             teleportSpookyBall()
         }
+        isSpicyPegHit = false
         removeHitPegs(when: hasLaunchEnded)
     }
 

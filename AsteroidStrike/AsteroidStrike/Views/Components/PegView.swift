@@ -78,9 +78,9 @@ class BluePegView: PegView {
 
     override func updatePegAppearance() {
         if isHit {
-            image = UIImage(named: "peg-blue-glow")
+            image = #imageLiteral(resourceName: "peg-blue-glow")
         } else {
-            image = UIImage(named: "peg-blue")
+            image = #imageLiteral(resourceName: "peg-blue")
         }
     }
 }
@@ -97,9 +97,9 @@ class OrangePegView: PegView {
 
     override func updatePegAppearance() {
         if isHit {
-            image = UIImage(named: "peg-orange-glow")
+            image = #imageLiteral(resourceName: "peg-orange-glow")
         } else {
-            image = UIImage(named: "peg-orange")
+            image = #imageLiteral(resourceName: "peg-orange")
         }
     }
 }
@@ -116,9 +116,9 @@ class GreenPegView: PegView {
 
     override func updatePegAppearance() {
         if isHit {
-            image = UIImage(named: "peg-green-glow")
+            image = #imageLiteral(resourceName: "peg-green-glow")
         } else {
-            image = UIImage(named: "peg-green")
+            image = #imageLiteral(resourceName: "peg-green")
         }
     }
 }
@@ -137,7 +137,7 @@ class ZombiePegView: PegView {
         if isHit {
             image = nil
         } else {
-            image = UIImage(named: "peg-zombie")
+            image = #imageLiteral(resourceName: "ball")
         }
     }
 }
@@ -156,7 +156,7 @@ class InverterPegView: PegView {
         if isHit {
             image = nil
         } else {
-            image = UIImage(named: "peg-inverter")
+            image = #imageLiteral(resourceName: "peg-inverter")
         }
     }
 }

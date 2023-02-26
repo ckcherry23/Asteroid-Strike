@@ -14,6 +14,7 @@ extension GameEngine {
     private func handleZombiePegs() {
         let zombiePegs: [Peg] = gameboard.pegs.filter({ $0.type == .zombie && $0.isHit })
         zombiePegs.forEach({
+            isSpicyPegHit = true
             removePeg(peg: $0)
             setupExtraBall(location: $0.location)
         })
@@ -22,6 +23,7 @@ extension GameEngine {
     private func handleInverterPegs() {
         let inverterPegs: [Peg] = gameboard.pegs.filter({ $0.type == .inverter && $0.isHit })
         inverterPegs.forEach({
+            isSpicyPegHit = true
             removePeg(peg: $0)
             rendererDelegate?.toggleGameboardOrientation()
         })
