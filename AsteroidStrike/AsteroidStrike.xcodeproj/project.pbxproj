@@ -55,6 +55,7 @@
 		C77E65B529AAB07600F2D8BD /* GameEngine+SpicyPegs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65B429AAB07600F2D8BD /* GameEngine+SpicyPegs.swift */; };
 		C77E65B729AAB28700F2D8BD /* RendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65B629AAB28700F2D8BD /* RendererDelegate.swift */; };
 		C77E65BB29AB5B1800F2D8BD /* LevelSelectController+Popups.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65BA29AB5B1800F2D8BD /* LevelSelectController+Popups.swift */; };
+		C77E65BD29AB6BFE00F2D8BD /* PreloadedLevels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77E65BC29AB6BFE00F2D8BD /* PreloadedLevels.swift */; };
 		C796C334299D3AE800ADC141 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C333299D3AE800ADC141 /* AppDelegate.swift */; };
 		C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C335299D3AE800ADC141 /* SceneDelegate.swift */; };
 		C796C33D299D3AEA00ADC141 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C796C33C299D3AEA00ADC141 /* Assets.xcassets */; };
@@ -136,6 +137,7 @@
 		C77E65B429AAB07600F2D8BD /* GameEngine+SpicyPegs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameEngine+SpicyPegs.swift"; sourceTree = "<group>"; };
 		C77E65B629AAB28700F2D8BD /* RendererDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererDelegate.swift; sourceTree = "<group>"; };
 		C77E65BA29AB5B1800F2D8BD /* LevelSelectController+Popups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelSelectController+Popups.swift"; sourceTree = "<group>"; };
+		C77E65BC29AB6BFE00F2D8BD /* PreloadedLevels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedLevels.swift; sourceTree = "<group>"; };
 		C796C330299D3AE800ADC141 /* AsteroidStrike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsteroidStrike.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C796C333299D3AE800ADC141 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C796C335299D3AE800ADC141 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				C77E65A629A81AE800F2D8BD /* LevelStorage.swift */,
 				C7646390299F74F300AF0413 /* JSONLevelStorage.swift */,
 				C7646391299F74F300AF0413 /* SavedLevel.swift */,
+				C77E65BC29AB6BFE00F2D8BD /* PreloadedLevels.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */,
 				C7F056ED29A691C400F035CD /* Convert.swift in Sources */,
 				C77E65AF29AA056A00F2D8BD /* SiamMode.swift in Sources */,
+				C77E65BD29AB6BFE00F2D8BD /* PreloadedLevels.swift in Sources */,
 				C76463A8299F74F400AF0413 /* CannonView.swift in Sources */,
 				C76463A5299F74F400AF0413 /* PegView.swift in Sources */,
 				C7F056F529A7919800F035CD /* GameplayController+Popups.swift in Sources */,

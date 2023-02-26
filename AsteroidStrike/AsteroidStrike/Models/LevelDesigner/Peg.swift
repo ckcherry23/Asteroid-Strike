@@ -44,6 +44,12 @@ struct Peg: GameboardObject {
     func copy() -> Peg {
         Peg(location: location, type: type, radius: radius, angle: angle)
     }
+
+    func scale(by factor: Double) -> Peg {
+        let newLocation = CGPoint(x: self.location.x * factor, y: self.location.y * factor)
+        let newRadius = self.radius * factor
+        return Peg(location: newLocation, type: type, radius: newRadius, angle: angle)
+    }
 }
 
 enum PegType: Codable {

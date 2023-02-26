@@ -39,6 +39,12 @@ struct Block: GameboardObject {
     func copy() -> Block {
         Block(location: location, size: size, angle: angle)
     }
+
+    func scale(by factor: Double) -> Block {
+        let newLocation = CGPoint(x: self.location.x * factor, y: self.location.y * factor)
+        let newSize = CGSize(width: size.width * factor, height: size.height * factor)
+        return Block(location: newLocation, size: newSize, angle: angle)
+    }
 }
 
 extension Block: Hashable {

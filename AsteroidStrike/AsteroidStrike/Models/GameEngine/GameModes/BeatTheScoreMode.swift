@@ -39,7 +39,11 @@ class BeatTheScoreMode: GameMode {
             let maxScore = gameboard.pegs.reduce(0, { partialResult, peg in
                 partialResult + (PegType.pegScoreMapping[peg.type] ?? 0) })
             let scoreToBeat = maxScore * 2 / 3
-            let timeRequired = TimeInterval(gameboard.pegs.count)
+
+            let minTime = TimeInterval(10)
+            let pegCountScaled = Double(gameboard.pegs.count) * 5
+            let powerupDeficit = Double((gameboard.pegs.filter({ $0.type == .green }).count + 1))
+            let timeRequired = max(TimeInterval(pegCountScaled / powerupDeficit), minTime).rounded()
             return (timeRequired, scoreToBeat)
         }
     }

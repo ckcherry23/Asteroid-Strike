@@ -56,6 +56,9 @@ extension PhysicsWorld {
                 guard firstBody !== secondBody else {
                     break
                 }
+                guard firstBody.isDynamic || secondBody.isDynamic else {
+                    continue
+                }
                 guard let bodiesCollision = firstBody.detectCollision(other: secondBody) else {
                     continue
                 }

@@ -20,7 +20,7 @@ extension LevelDesignController {
 
     func showInvalidLevelNameModal() {
         let title = "Level Name Invalid"
-        let message = "Please try a different level name that is not empty."
+        let message = "Please try a different level name that is not empty or reserved."
 
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Go Back", style: .cancel, handler: { _ in }))

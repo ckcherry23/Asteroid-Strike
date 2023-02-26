@@ -41,22 +41,36 @@ class LevelSelectController: UITableViewController {
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let sectionToLevelNamesMapping: [Int: (Int) -> String] = [
+            0: { row in self.preloadedLevelNames[row] },
+            1: { row in self.savedLevelNames[row] }
+        ]
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicStyleCell", for: indexPath)
-        cell.textLabel!.text = savedLevelNames[indexPath.row]
+        guard let levelNames = sectionToLevelNamesMapping[indexPath.section] else {
+            return cell
+        }
+        cell.textLabel!.text = levelNames(indexPath.row)
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedLevelName = savedLevelNames[indexPath.row]
-        levelStorage.loadLevel(levelName: selectedLevelName, completion: { result in
-            switch result {
-            case .failure:
-                self.showInvalidLevelModal()
-                return
-            case .success(let level):
-                self.loadedLevel = level
-            }
-        })
+        if indexPath.section == 0 {
+            self.loadedLevel = PreloadedLevels(size: UIScreen.main.bounds.size)
+                .preloadedLevels[indexPath.row]
+        } else if indexPath.section == 1 {
+            let selectedLevelName = savedLevelNames[indexPath.row]
+            levelStorage.loadLevel(levelName: selectedLevelName, completion: { result in
+                switch result {
+                case .failure:
+                    self.showInvalidLevelModal()
+                    return
+                case .success(let level):
+                    self.loadedLevel = level
+                }
+            })
+        }
+
         guard loadedLevel?.gameBoard.isValidLevel() != false else {
             showInvalidLevelModal()
             return
@@ -75,7 +89,7 @@ class LevelSelectController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        if editingStyle == .delete && indexPath.section != 0 {
             levelStorage.deleteLevel(levelName: savedLevelNames[indexPath.row], completion: { result in
                 switch result {
                 case .failure(let error):
@@ -105,14 +119,7 @@ class LevelSelectController: UITableViewController {
     }
 
     private func getPreloadedLevelNames() {
-        levelStorage.getAllLevelNames { result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let levelNames):
-                self.preloadedLevelNames = levelNames
-            }
-        }
+        preloadedLevelNames = PreloadedLevels.preloadedLevelNames
     }
 }
 

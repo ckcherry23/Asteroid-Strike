@@ -166,17 +166,23 @@ class LevelDesignController: UIViewController {
             showInvalidLevelDesignModal()
             return
         }
+        guard !PreloadedLevels.preloadedLevelNames.contains(levelName) else {
+            showInvalidLevelNameModal()
+            return
+        }
         if levelName != loadedLevelName {
+            var savedLevelnames: [String] = []
             levelStorage.getAllLevelNames { result in
                 switch result {
                 case .failure:
                     break
                 case .success(let levelNames):
-                    if levelNames.contains(levelName) {
-                        self.showLevelNameExistsModal()
-                        return
-                    }
+                    savedLevelnames = levelNames
                 }
+            }
+            if savedLevelnames.contains(levelName) {
+                self.showLevelNameExistsModal()
+                return
             }
         }
         let newLevel = SavedLevel(gameBoard: levelDesigner.gameboard, levelName: levelName)
