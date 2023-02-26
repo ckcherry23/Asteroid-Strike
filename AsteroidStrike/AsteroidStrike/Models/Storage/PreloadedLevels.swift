@@ -47,7 +47,7 @@ struct PreloadedLevels {
     private var powerupsLevel: SavedLevel {
         SavedLevel(gameBoard: Gameboard(
             pegs: Set<Peg>([
-                Peg(location: CGPoint(x: 510, y: 190), type: .blue),
+                Peg(location: CGPoint(x: 610, y: 190), type: .blue),
                 Peg(location: CGPoint(x: 540, y: 330), type: .green),
                 Peg(location: CGPoint(x: 460, y: 400), type: .orange),
                 Peg(location: CGPoint(x: 200, y: 700), type: .blue),

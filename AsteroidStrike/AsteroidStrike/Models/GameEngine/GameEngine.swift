@@ -202,10 +202,12 @@ class GameEngine {
 
     private func spiceUpPegs() {
         if gameboard.pegs.count >= 10 {
-            replacePegWithSpicyPeg(type: .zombie, pegToReplace: gameboard.pegs.first)
+            let pegToReplace = gameboard.pegs.first(where: { $0.type != .orange })
+            replacePegWithSpicyPeg(type: .zombie, pegToReplace: pegToReplace)
         }
         if gameboard.pegs.count >= 20 {
-            replacePegWithSpicyPeg(type: .inverter, pegToReplace: gameboard.pegs.suffix(1).first)
+            let pegToReplace = gameboard.pegs.filter({ $0.type != .orange }).suffix(1).first
+            replacePegWithSpicyPeg(type: .inverter, pegToReplace: pegToReplace)
         }
     }
 
