@@ -26,6 +26,7 @@ class LevelDesignController: UIViewController {
 
     private(set) var levelStorage: LevelStorage = JSONLevelStorage()
     private(set) var selectedCanvasObject: (any CanvasObject)?
+    private(set) var loadedLevelName: String?
 
     @IBOutlet private var bluePegButton: BluePegButton!
     @IBOutlet private var orangePegButton: OrangePegButton!
@@ -143,17 +144,44 @@ class LevelDesignController: UIViewController {
         levelDesigner.eraseObjectFromGameboard(tappedLocation: longPressLocation)
     }
 
-    @IBAction private func onTapSaveButton(_ sender: Any) {
-        guard let levelName = levelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+    @IBAction private func onTapResetButton(_ sender: UIButton) {
+        levelDesigner = LevelDesigner()
+    }
+
+    @IBAction private func onTapSaveButton(_ sender: UIButton) {
+        guard let levelName = levelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        else {
+            showInvalidLevelNameModal()
             return
+        }
+        guard !levelName.isEmpty else {
+            showInvalidLevelNameModal()
+            return
+        }
+        guard levelDesigner.gameboard.pegs.contains(where: { $0.type == .orange }) else {
+            showInvalidLevelDesignModal()
+            return
+        }
+        if levelName != loadedLevelName {
+            levelStorage.getAllLevelNames { result in
+                switch result {
+                case .failure:
+                    break
+                case .success(let levelNames):
+                    if levelNames.contains(levelName) {
+                        self.showLevelNameExistsModal()
+                        return
+                    }
+                }
+            }
         }
         let newLevel = SavedLevel(gameBoard: levelDesigner.gameboard, levelName: levelName)
         levelStorage.saveLevel(level: newLevel) {result in
             switch result {
             case .failure(let error):
-                print(error)
-            case .success:
-                break
+                self.showSaveLevelFailureModal(error: error.localizedDescription)
+            case .success(let levelName):
+                self.showSaveLevelSuccessModal(levelName: levelName)
             }
         }
     }
@@ -162,10 +190,12 @@ class LevelDesignController: UIViewController {
         guard let levelSelectController = sender.source as? LevelSelectController,
               let loadedLevel = levelSelectController.loadedLevel
         else {
+            showLoadLevelErrorModal()
             return
         }
         levelDesigner.updateGameboardFromLoadedLevel(savedLevel: loadedLevel)
         levelNameTextField.text = loadedLevel.levelName
+        loadedLevelName = loadedLevel.levelName
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

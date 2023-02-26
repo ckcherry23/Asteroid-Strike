@@ -62,8 +62,7 @@
 		C796C357299D3AEB00ADC141 /* AsteroidStrikeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C356299D3AEB00ADC141 /* AsteroidStrikeUITestsLaunchTests.swift */; };
 		C7F056DA29A50FA100F035CD /* BlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056D929A50FA100F035CD /* BlockView.swift */; };
 		C7F056DC29A5145400F035CD /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DB29A5145400F035CD /* Block.swift */; };
-		C7F056E029A6328B00F035CD /* LevelDesignController+ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */; };
-		C7F056E229A6341300F035CD /* LevelDesignController+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */; };
+		C7F056E029A6328B00F035CD /* LevelDesignController+Popups.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DF29A6328B00F035CD /* LevelDesignController+Popups.swift */; };
 		C7F056EB29A6554800F035CD /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EA29A6554800F035CD /* Observer.swift */; };
 		C7F056ED29A691C400F035CD /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EC29A691C400F035CD /* Convert.swift */; };
 		C7F056F129A7468600F035CD /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056F029A7468600F035CD /* GameMode.swift */; };
@@ -147,8 +146,7 @@
 		C796C356299D3AEB00ADC141 /* AsteroidStrikeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidStrikeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C7F056D929A50FA100F035CD /* BlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockView.swift; sourceTree = "<group>"; };
 		C7F056DB29A5145400F035CD /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+ActionButtons.swift"; sourceTree = "<group>"; };
-		C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+Palette.swift"; sourceTree = "<group>"; };
+		C7F056DF29A6328B00F035CD /* LevelDesignController+Popups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+Popups.swift"; sourceTree = "<group>"; };
 		C7F056EA29A6554800F035CD /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		C7F056EC29A691C400F035CD /* Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
 		C7F056F029A7468600F035CD /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
@@ -216,8 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				C7646386299F74F200AF0413 /* LevelDesignController.swift */,
-				C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */,
-				C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */,
+				C7F056DF29A6328B00F035CD /* LevelDesignController+Popups.swift */,
 				C7646387299F74F200AF0413 /* LevelSelectController.swift */,
 				C7646388299F74F200AF0413 /* GameplayController.swift */,
 				C7F056F429A7919800F035CD /* GameplayController+Popups.swift */,
@@ -559,7 +556,6 @@
 				C796C334299D3AE800ADC141 /* AppDelegate.swift in Sources */,
 				C76463A4299F74F400AF0413 /* CanvasObject.swift in Sources */,
 				C76463B7299F74F400AF0413 /* CollisionResolver.swift in Sources */,
-				C7F056E229A6341300F035CD /* LevelDesignController+Palette.swift in Sources */,
 				C76463A1299F74F400AF0413 /* ZIndices.swift in Sources */,
 				C76463BD299F74F400AF0413 /* Ball.swift in Sources */,
 				C76463AA299F74F400AF0413 /* LevelSelectController.swift in Sources */,
@@ -576,7 +572,7 @@
 				C77E659629A7FC7E00F2D8BD /* PowerupMode.swift in Sources */,
 				C7F056DC29A5145400F035CD /* Block.swift in Sources */,
 				C7F056DA29A50FA100F035CD /* BlockView.swift in Sources */,
-				C7F056E029A6328B00F035CD /* LevelDesignController+ActionButtons.swift in Sources */,
+				C7F056E029A6328B00F035CD /* LevelDesignController+Popups.swift in Sources */,
 				C796C336299D3AE800ADC141 /* SceneDelegate.swift in Sources */,
 				C76463AB299F74F400AF0413 /* GameplayController.swift in Sources */,
 				C77E65AD29A9D5B000F2D8BD /* BeatTheScoreMode.swift in Sources */,
