@@ -15,35 +15,32 @@ class LevelDesignController: UIViewController {
         observeModel()
     }
 
-    override func viewDidLayoutSubviews() {
-        levelDesigner.updateCanvasSize(canvas.bounds.size)
-    }
-
     var selectedPaletteButton: PaletteButton?
 
-    var levelDesigner: LevelDesigner = LevelDesigner() {
+    var levelDesigner = LevelDesigner() {
         didSet {
             observeModel()
+            updateCanvas()
         }
     }
 
     private(set) var levelStorage: LevelStorage = JSONLevelStorage()
     private(set) var selectedCanvasObject: (any CanvasObject)?
 
-    @IBOutlet weak var bluePegButton: BluePegButton!
-    @IBOutlet weak var orangePegButton: OrangePegButton!
-    @IBOutlet weak var greenPegButton: GreenPegButton!
-    @IBOutlet weak var blockButton: BlockButton!
-    @IBOutlet weak var eraseButton: EraseButton!
-    @IBOutlet var paletteButtons: [PaletteButton]!
-    @IBOutlet weak var canvas: UIImageView!
-    @IBOutlet weak var levelNameTextField: UITextField!
-    @IBOutlet weak var sizeSlider: UISlider!
-    @IBOutlet weak var widthSlider: UISlider!
-    @IBOutlet weak var heightSlider: UISlider!
-    @IBOutlet weak var rotationSlider: UISlider!
+    @IBOutlet private var bluePegButton: BluePegButton!
+    @IBOutlet private var orangePegButton: OrangePegButton!
+    @IBOutlet private var greenPegButton: GreenPegButton!
+    @IBOutlet private var blockButton: BlockButton!
+    @IBOutlet private var eraseButton: EraseButton!
+    @IBOutlet private var paletteButtons: [PaletteButton]!
+    @IBOutlet private var canvas: UIImageView!
+    @IBOutlet private var levelNameTextField: UITextField!
+    @IBOutlet private var sizeSlider: UISlider!
+    @IBOutlet private var widthSlider: UISlider!
+    @IBOutlet private var heightSlider: UISlider!
+    @IBOutlet private var rotationSlider: UISlider!
 
-    @IBAction func onTapCanvas(_ gestureRecognizer: UITapGestureRecognizer) {
+    @IBAction private func onTapCanvas(_ gestureRecognizer: UITapGestureRecognizer) {
         let taplocation: CGPoint = gestureRecognizer.location(in: canvas)
         guard let modifyGameboard =
                 selectedPaletteButton?.getModifyGameboardClosure(levelDesigner: levelDesigner) else {
@@ -70,7 +67,7 @@ class LevelDesignController: UIViewController {
 
         for block in levelDesigner.gameboard.blocks
         where !canvas.subviews.compactMap({ ($0 as? BlockView)?.location }).contains(block.location) {
-            let blockViewToAdd: BlockView = BlockView(at: block.location, size: block.size, angle: block.angle)
+            let blockViewToAdd = BlockView(at: block.location, size: block.size, angle: block.angle)
             setupCanvasObjectGestures(canvasObject: blockViewToAdd)
             canvas.addSubview(blockViewToAdd)
         }
@@ -103,12 +100,12 @@ class LevelDesignController: UIViewController {
     }
 
     private func allowCanvasObjectLongPress(canvasObject: any CanvasObject) {
-        let canvasObjectLongPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
-                                                                         action: #selector(onLongPressCanvasObject(_:)))
+        let canvasObjectLongPressGestureRecognizer = UILongPressGestureRecognizer(
+            target: self, action: #selector(onLongPressCanvasObject(_:)))
         canvasObject.addGestureRecognizer(canvasObjectLongPressGestureRecognizer)
     }
 
-    @IBAction func onTapCanvasObject(_ gestureRecognizer: UITapGestureRecognizer) {
+    @IBAction private func onTapCanvasObject(_ gestureRecognizer: UITapGestureRecognizer) {
         guard let tappedCanvasObject = gestureRecognizer.view as? (any CanvasObject) else {
             return
         }
@@ -120,7 +117,7 @@ class LevelDesignController: UIViewController {
         selectedCanvasObject = tappedCanvasObject
     }
 
-    @IBAction func onDragCanvasObject(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @IBAction private func onDragCanvasObject(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let draggedCanvasObject = gestureRecognizer.view as? (any CanvasObject) else {
             return
         }
@@ -141,9 +138,105 @@ class LevelDesignController: UIViewController {
         }
     }
 
-    @IBAction func onLongPressCanvasObject(_ gestureRecognizer: UILongPressGestureRecognizer) {
+    @IBAction private func onLongPressCanvasObject(_ gestureRecognizer: UILongPressGestureRecognizer) {
         let longPressLocation = gestureRecognizer.location(in: canvas)
         levelDesigner.eraseObjectFromGameboard(tappedLocation: longPressLocation)
+    }
+
+    @IBAction private func onTapSaveButton(_ sender: Any) {
+        guard let levelName = levelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+            return
+        }
+        let newLevel = SavedLevel(gameBoard: levelDesigner.gameboard, levelName: levelName)
+        levelStorage.saveLevel(level: newLevel) {result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success:
+                break
+            }
+        }
+    }
+
+    @IBAction private func unwindToLevelDesign(sender: UIStoryboardSegue) {
+        guard let levelSelectController = sender.source as? LevelSelectController,
+              let loadedLevel = levelSelectController.loadedLevel
+        else {
+            return
+        }
+        levelDesigner.updateGameboardFromLoadedLevel(savedLevel: loadedLevel)
+        levelNameTextField.text = loadedLevel.levelName
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showSegueWithGameboard",
+              let gameplayController: GameplayController = segue.destination as? GameplayController else {
+            return
+        }
+        gameplayController.gameboardDelegate = self
+    }
+
+    @IBAction private func onTapPaletteButton(_ sender: PaletteButton) {
+        clearAllSelections()
+        sender.isSelected = true
+        selectedPaletteButton = sender
+    }
+
+    @IBAction private func onSizeSliderValueChanged(_ sender: UISlider) {
+        guard let pegView = selectedCanvasObject as? PegView else {
+            return
+        }
+        let isResizeValid = levelDesigner.resizePegOnGameboard(pegLocation: pegView.location,
+                                                               newSize: CGFloat(sizeSlider.value))
+        if isResizeValid {
+            pegView.size = CGFloat(sizeSlider.value)
+        }
+    }
+
+    @IBAction private func onWidthSliderValueChanged(_ sender: UISlider) {
+        guard let blockView = selectedCanvasObject as? BlockView else {
+            return
+        }
+        let isResizeValid = levelDesigner.resizeBlockOnGameboard(
+            blockLocation: blockView.location,
+            newSize: CGSize(width: CGFloat(widthSlider.value), height: blockView.size.height))
+        if isResizeValid {
+            blockView.setSize(newSize: CGSize(width: CGFloat(widthSlider.value), height: blockView.size.height))
+        }
+    }
+
+    @IBAction private func onHeightSliderValueChanged(_ sender: UISlider) {
+        guard let blockView = selectedCanvasObject as? BlockView else {
+            return
+        }
+        let isResizeValid = levelDesigner.resizeBlockOnGameboard(
+            blockLocation: blockView.location,
+            newSize: CGSize(width: blockView.size.width, height: CGFloat(heightSlider.value)))
+        if isResizeValid {
+            blockView.setSize(newSize: CGSize(width: blockView.size.width, height: CGFloat(heightSlider.value)))
+        }
+    }
+
+    @IBAction private func onRotationSliderValueChanged(_ sender: UISlider) {
+        guard let canvasObject = selectedCanvasObject else {
+            return
+        }
+        let isRotationValid = levelDesigner.rotateObjectOnGameboard(
+            location: canvasObject.location,
+            newAngle: Convert.degreesToRadians(angleInDegrees: CGFloat(rotationSlider.value)))
+        if isRotationValid {
+            canvasObject.setAngle(newAngle: Convert.degreesToRadians(angleInDegrees: CGFloat(rotationSlider.value)))
+        }
+    }
+
+    func setDefaults() {
+        bluePegButton.isSelected = true
+        canvas.translatesAutoresizingMaskIntoConstraints = false
+        selectedPaletteButton = bluePegButton
+    }
+
+    private func clearAllSelections() {
+        paletteButtons.forEach { $0.isSelected = false }
     }
 }
 

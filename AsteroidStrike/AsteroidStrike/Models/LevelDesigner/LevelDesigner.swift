@@ -9,7 +9,7 @@ import CoreGraphics
 
 class LevelDesigner {
     var observers: [Observer] = []
-    private(set) var gameboard: Gameboard = Gameboard() {
+    private(set) var gameboard = Gameboard() {
         didSet {
             notify()
         }

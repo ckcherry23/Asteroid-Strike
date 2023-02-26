@@ -14,6 +14,7 @@ final class AsteroidStrikeUITestsLaunchTests: XCTestCase {
     }
 
     override func setUpWithError() throws {
+        super.setUpWithError()
         continueAfterFailure = false
     }
 

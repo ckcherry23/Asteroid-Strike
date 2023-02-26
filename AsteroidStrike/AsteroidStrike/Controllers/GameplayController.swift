@@ -13,14 +13,14 @@ class GameplayController: UIViewController {
     private static let pegViewAnimationDuration = 0.5
     private static let pegViewAnimationDelay = 0.3
 
-    @IBOutlet weak var gameplayArea: UIImageView!
-    @IBOutlet weak var cannonView: CannonView!
-    @IBOutlet weak var bucketView: UIImageView!
+    @IBOutlet private var gameplayArea: UIImageView!
+    @IBOutlet private var cannonView: CannonView!
+    @IBOutlet private var bucketView: UIImageView!
 
-    @IBOutlet weak var remainingBallsCountDisplay: UILabel!
-    @IBOutlet weak var timerDisplay: UILabel!
-    @IBOutlet weak var remainingOrangePegsCountDisplay: UILabel!
-    @IBOutlet weak var scoreDisplay: UILabel!
+    @IBOutlet private var remainingBallsCountDisplay: UILabel!
+    @IBOutlet private var timerDisplay: UILabel!
+    @IBOutlet private var remainingOrangePegsCountDisplay: UILabel!
+    @IBOutlet private var scoreDisplay: UILabel!
 
     private var ballViews: [BallView] = []
     private var pegViews: [PegView] = []
@@ -227,13 +227,13 @@ class GameplayController: UIViewController {
         displayLink.remove(from: .current, forMode: .default)
     }
 
-    @IBAction func onPanGameplayArea(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @IBAction private func onPanGameplayArea(_ gestureRecognizer: UIPanGestureRecognizer) {
         let panLocation: CGPoint = gestureRecognizer.location(in: gameplayArea)
         let angleOfRotation: CGFloat = getAngleOfRotation(from: panLocation)
         cannonView.rotate(by: angleOfRotation)
     }
 
-    @IBAction func onTapGameplayArea(_ gestureRecognizer: UITapGestureRecognizer) {
+    @IBAction private func onTapGameplayArea(_ gestureRecognizer: UITapGestureRecognizer) {
         let launchAngle: CGFloat = atan2(cannonView.transform.b, cannonView.transform.a)
         gameEngine.launchCannon(from: cannonView.center, atAngle: launchAngle)
     }
@@ -267,7 +267,7 @@ extension GameplayController: RendererDelegate {
     }
 
     func toggleGameboardOrientation() {
-        isGameboardUpsideDown = !isGameboardUpsideDown
+        isGameboardUpsideDown.toggle()
         canvasObjects.forEach({
             $0.center = $0.center.rotatedUpsideDown(frame: gameplayArea.frame)
         })

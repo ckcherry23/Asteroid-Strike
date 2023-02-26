@@ -12,7 +12,7 @@ struct SavedLevel: Codable {
     private(set) var gameBoard: Gameboard
     private(set) var levelName: String
 
-    init(id: UUID = UUID(), gameBoard: Gameboard, levelName: String) {
+    init(gameBoard: Gameboard, levelName: String, id: UUID = UUID()) {
         self.id = id
         self.gameBoard = gameBoard
         self.levelName = levelName

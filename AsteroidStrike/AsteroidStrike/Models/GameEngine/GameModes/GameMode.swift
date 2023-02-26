@@ -31,8 +31,8 @@ enum GameModeType {
     case siam
 
     static let gameModeMapping: [GameModeType: (GameEngine) -> (GameMode)] = [
-        .classic: { (gameEngine) in ClassicMode(gameEngine: gameEngine) },
-        .beatTheScore: { (gameEngine) in BeatTheScoreMode(gameEngine: gameEngine) },
-        .siam: { (gameEngine) in SiamMode(gameEngine: gameEngine) }
+        .classic: { gameEngine in ClassicMode(gameEngine: gameEngine) },
+        .beatTheScore: { gameEngine in BeatTheScoreMode(gameEngine: gameEngine) },
+        .siam: { gameEngine in SiamMode(gameEngine: gameEngine) }
     ]
 }

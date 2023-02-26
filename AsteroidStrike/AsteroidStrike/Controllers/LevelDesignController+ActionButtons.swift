@@ -8,41 +8,8 @@
 import UIKit
 
 extension LevelDesignController {
-    @IBAction func onTapResetButton(_ sender: Any) {
+    @IBAction private func onTapResetButton(_ sender: Any) {
         levelDesigner = LevelDesigner()
-    }
-
-    @IBAction func onTapSaveButton(_ sender: Any) {
-        guard let levelName = levelNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-            return
-        }
-        let newLevel: SavedLevel = SavedLevel(gameBoard: levelDesigner.gameboard, levelName: levelName)
-        levelStorage.saveLevel(level: newLevel) {result in
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success:
-                break
-            }
-        }
-    }
-
-    @IBAction private func unwindToLevelDesign(sender: UIStoryboardSegue) {
-        guard let levelSelectController = sender.source as? LevelSelectController,
-              let loadedLevel = levelSelectController.loadedLevel
-        else {
-            return
-        }
-        levelDesigner.updateGameboardFromLoadedLevel(savedLevel: loadedLevel)
-        levelNameTextField.text = loadedLevel.levelName
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "showSegueWithGameboard",
-              let gameplayController: GameplayController = segue.destination as? GameplayController else {
-            return
-        }
-        gameplayController.gameboardDelegate = self
     }
 
     // Move view with keyboard

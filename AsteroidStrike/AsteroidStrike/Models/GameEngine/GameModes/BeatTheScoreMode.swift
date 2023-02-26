@@ -8,9 +8,9 @@
 import Foundation
 
 class BeatTheScoreMode: GameMode {
-    var isTimerNeeded: Bool = true
-    var hasTargetScore: Bool = true
-    var totalBallsCount: Int = Int.max
+    var isTimerNeeded = true
+    var hasTargetScore = true
+    var totalBallsCount = Int.max
     var timeLimit: TimeInterval
     var targetScore: Int
     unowned var gameEngine: GameEngine

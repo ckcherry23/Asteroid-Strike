@@ -8,10 +8,10 @@
 import Foundation
 
 class SiamMode: GameMode {
-    var isTimerNeeded: Bool = false
-    var hasTargetScore: Bool = false
+    var isTimerNeeded = false
+    var hasTargetScore = false
     var totalBallsCount: Int
-    var timeLimit: TimeInterval = TimeInterval.infinity
+    var timeLimit = TimeInterval.infinity
     var targetScore: Int = 0
     unowned var gameEngine: GameEngine
 

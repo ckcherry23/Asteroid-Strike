@@ -8,11 +8,11 @@
 import CoreGraphics
 
 struct Gameboard {
-    static let defaultRect: CGRect = CGRect(origin: CGPoint.zero, size: CGSize(width: 800, height: 600))
+    static let defaultRect = CGRect(origin: CGPoint.zero, size: CGSize(width: 800, height: 600))
 
     private(set) var pegs: Set<Peg> = Set<Peg>()
     private(set) var blocks: Set<Block> = Set<Block>()
-    private(set) var board: CGPath = CGPath(rect: Gameboard.defaultRect, transform: nil)
+    private(set) var board = CGPath(rect: Gameboard.defaultRect, transform: nil)
 
     mutating func addPeg(addedPeg: Peg) {
         guard pegCanBeAdded(addedPeg: addedPeg) else {
@@ -45,7 +45,7 @@ struct Gameboard {
     }
 
     func findPeg(at location: CGPoint) -> Peg? {
-        pegs.first(where: { $0.hitBox.contains(location) }) ?? nil
+        pegs.first(where: { $0.hitBox.contains(location) })
     }
 
     mutating func replacePeg(oldPeg: Peg, newPeg: Peg) -> Bool {
@@ -78,11 +78,11 @@ struct Gameboard {
     }
 
     private func isPegInsideCanvas(peg: Peg) -> Bool {
-        return peg.isWithin(path: board)
+        peg.isWithin(path: board)
     }
 
     private func contains(peg: Peg) -> Bool {
-        return pegs.contains(peg)
+        pegs.contains(peg)
     }
 }
 
@@ -116,7 +116,7 @@ extension Gameboard {
     }
 
     func findBlock(at location: CGPoint) -> Block? {
-        blocks.first(where: { $0.hitBox.contains(location) }) ?? nil
+        blocks.first(where: { $0.hitBox.contains(location) })
     }
 
     private mutating func replaceBlock(oldBlock: Block, newBlock: Block) -> Bool {
@@ -149,11 +149,11 @@ extension Gameboard {
     }
 
     private func isBlockInsideCanvas(block: Block) -> Bool {
-        return block.isWithin(path: board)
+        block.isWithin(path: board)
     }
 
     private func contains(block: Block) -> Bool {
-        return blocks.contains(block)
+        blocks.contains(block)
     }
 }
 

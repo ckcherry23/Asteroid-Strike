@@ -51,23 +51,23 @@ extension CGVector {
 // Vector Properties
 extension CGVector {
     func squaredLength() -> CGFloat {
-        return dx * dx + dy * dy
+        dx * dx + dy * dy
     }
 
     func length() -> CGFloat {
-        return sqrt(squaredLength())
+        sqrt(squaredLength())
     }
 
     func normalized() -> CGVector {
-        return self / self.length()
+        self / self.length()
     }
 
     func normal() -> CGVector {
-        return CGVector(dx: -dy, dy: dx)
+        CGVector(dx: -dy, dy: dx)
     }
 
     func otherNormal() -> CGVector {
-        return CGVector(dx: dy, dy: -dx)
+        CGVector(dx: dy, dy: -dx)
     }
 
     func distanceFrom(other: CGVector) -> CGFloat {

@@ -18,7 +18,7 @@ class BallView: UIImageView {
     }
 
     private func customize() {
-        self.image = UIImage(named: "ball")
+        self.image = #imageLiteral(resourceName: "ball")
         self.contentMode = .scaleAspectFill
         self.layer.cornerRadius = bounds.size.width / 2
         self.layer.zPosition = ZIndices.ballView

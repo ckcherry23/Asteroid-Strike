@@ -12,9 +12,9 @@ class PhysicsBody {
     private static var defaultMass: CGFloat = 1
     private static var defaultRestitution: CGFloat = 0.9
 
-    var isDynamic: Bool = true
+    var isDynamic = true
 
-    var isAffectedByGravity: Bool = true {
+    var isAffectedByGravity = true {
         didSet(oldValue) {
             if isAffectedByGravity != oldValue {
                 updateGravityEffects()
@@ -38,7 +38,7 @@ class PhysicsBody {
 
     private(set) var angle: CGFloat
 
-    private var force: CGVector = CGVector.zero
+    private var force = CGVector.zero
 
     private var acceleration: CGVector {
         force / mass
@@ -48,7 +48,7 @@ class PhysicsBody {
         PhysicsWorld.gravity * mass
     }
 
-    var velocity: CGVector = CGVector.zero
+    var velocity = CGVector.zero
 
     var isResting: Bool {
         velocity == CGVector.zero
@@ -73,7 +73,7 @@ class PhysicsBody {
 
     fileprivate init(source: CGPoint, destination: CGPoint, angle: CGFloat = 0.0) {
         self.angle = angle
-        let path: CGMutablePath = CGMutablePath()
+        let path = CGMutablePath()
         path.move(to: source)
         path.addLine(to: destination)
         path.closeSubpath()

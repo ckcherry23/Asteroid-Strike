@@ -17,7 +17,7 @@ class PegView: UIImageView, CanvasObject {
             self.frame = CGRect.centeredRectangle(center: location, size: CGSize(width: newSize, height: newSize))
         }
     }
-    var isHit: Bool = false {
+    var isHit = false {
         didSet {
             self.updatePegAppearance()
         }

@@ -15,7 +15,7 @@ struct JSONLevelStorage: LevelStorage {
     private let fileExtension = "json"
     private let fileManager = FileManager.default
 
-    public func getAllLevelNames(completion: @escaping (Result<[String], Error>) -> Void) {
+    func getAllLevelNames(completion: @escaping (Result<[String], Error>) -> Void) {
         do {
             let fileNames = try getAllFileNamesInDirectory(directoryName: savedLevelsDirectory)
             completion(.success(fileNames))
@@ -24,7 +24,7 @@ struct JSONLevelStorage: LevelStorage {
         }
     }
 
-    public func saveLevel(level: SavedLevel, completion: @escaping (Result<String, Error>) -> Void) {
+    func saveLevel(level: SavedLevel, completion: @escaping (Result<String, Error>) -> Void) {
         do {
             let encodedData = try JSONEncoder().encode(level)
             let savedLevelFileURL = try getSavedLevelFileURL(levelName: level.levelName)
@@ -32,7 +32,7 @@ struct JSONLevelStorage: LevelStorage {
             if !fileManager.fileExists(atPath: savedLevelFileURL.path()) {
                 fileManager.createFile(atPath: savedLevelFileURL.path(), contents: encodedData)
             } else {
-                deleteLevel(levelName: level.levelName, completion: {_ in })
+                deleteLevel(levelName: level.levelName, completion: { _ in })
                 fileManager.createFile(atPath: savedLevelFileURL.path(), contents: encodedData)
             }
 
@@ -42,7 +42,7 @@ struct JSONLevelStorage: LevelStorage {
         }
     }
 
-    public func loadLevel(levelName: String, completion: @escaping (Result<SavedLevel, Error>) -> Void) {
+    func loadLevel(levelName: String, completion: @escaping (Result<SavedLevel, Error>) -> Void) {
         do {
             let savedLevelFileURL = try getSavedLevelFileURL(levelName: percentEncoded(levelName))
             let savedLevelFile = try FileHandle(forReadingFrom: savedLevelFileURL)
@@ -53,7 +53,7 @@ struct JSONLevelStorage: LevelStorage {
         }
     }
 
-    public func deleteLevel(levelName: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+    func deleteLevel(levelName: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         do {
             try fileManager.removeItem(at: getSavedLevelFileURL(levelName: percentEncoded(levelName)))
             completion(.success(true))
@@ -63,18 +63,18 @@ struct JSONLevelStorage: LevelStorage {
     }
 
     private func percentEncoded(_ levelName: String) -> String {
-        return levelName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? levelName
+        levelName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? levelName
     }
 
     private func getSavedLevelFileURL(levelName: String) throws -> URL {
-        return try createAndGetSavedLevelsDirectoryURL()
+        try createAndGetSavedLevelsDirectoryURL()
             .appending(path: levelName)
             .appendingPathExtension(fileExtension)
     }
 
     private func getAllFileNamesInDirectory(directoryName: String) throws -> [String] {
-        return try fileManager.contentsOfDirectory(at: createAndGetSavedLevelsDirectoryURL(),
-                                                   includingPropertiesForKeys: nil)
+        try fileManager.contentsOfDirectory(at: createAndGetSavedLevelsDirectoryURL(),
+                                            includingPropertiesForKeys: nil)
         .compactMap({ $0.deletingPathExtension().lastPathComponent.removingPercentEncoding })
     }
 

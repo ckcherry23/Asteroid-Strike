@@ -18,15 +18,15 @@ class GameEngine {
     let gameplayArea: CGRect
 
     private(set) var gameboard: Gameboard
-    private(set) var launchBall: Ball = Ball()
+    private(set) var launchBall = Ball()
     private(set) var extraBalls: [Ball] = []
-    private(set) var bucket: Bucket = Bucket()
+    private(set) var bucket = Bucket()
 
     var allBalls: [Ball] {
         Array([[launchBall], extraBalls].joined())
     }
 
-    private(set) var gameStats: GameStats = GameStats(
+    private(set) var gameStats = GameStats(
         remainingBallsCount: GameEngine.defaultBallCount, timeRemaining: TimeInterval.infinity, score: 0)
     private(set) var removedHitPegsCount: Int = 0
 
@@ -41,7 +41,7 @@ class GameEngine {
 
     private(set) var gameMode: GameMode!
     private(set) var powerup: Powerup!
-    var isSpookyBallActivated: Bool = false
+    var isSpookyBallActivated = false
 
     var areAllScoresCalculated: Bool {
         gameboard.pegs.allSatisfy({ !$0.isHit })

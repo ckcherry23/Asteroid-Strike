@@ -23,7 +23,7 @@ extension GameEngine {
     }
 
     private func isCannonLaunchable() -> Bool {
-        return !gameMode.isGameOver() && hasLaunchEnded && areHitPegsRemoved
+        !gameMode.isGameOver() && hasLaunchEnded && areHitPegsRemoved
         && (rendererDelegate?.isRendererAnimationComplete() != false)
     }
 }

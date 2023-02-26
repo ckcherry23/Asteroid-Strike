@@ -10,7 +10,7 @@ enum PowerupMode {
     case spookyBall
 
     static let powerupMapping: [PowerupMode: (GameEngine) -> (Powerup)] = [
-        .kaboom: { (gameEngine) in KaboomPowerup(gameEngine: gameEngine) },
-        .spookyBall: { (gameEngine) in SpookyBallPowerup(gameEngine: gameEngine) }
+        .kaboom: { gameEngine in KaboomPowerup(gameEngine: gameEngine) },
+        .spookyBall: { gameEngine in SpookyBallPowerup(gameEngine: gameEngine) }
     ]
 }

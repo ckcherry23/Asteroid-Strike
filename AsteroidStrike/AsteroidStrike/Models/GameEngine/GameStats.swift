@@ -9,6 +9,6 @@ import Foundation
 
 struct GameStats {
     var remainingBallsCount: Int = GameEngine.defaultBallCount
-    var timeRemaining: TimeInterval = TimeInterval.infinity
+    var timeRemaining = TimeInterval.infinity
     var score: Int = 0
 }

@@ -8,5 +8,5 @@
 import UIKit
 
 class HomeController: UIViewController {
-    @IBAction func unwindToHomeFromGameplay( _ seg: UIStoryboardSegue) {}
+    @IBAction private func unwindToHomeFromGameplay( _ seg: UIStoryboardSegue) {}
 }

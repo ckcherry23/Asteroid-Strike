@@ -21,16 +21,16 @@ class LevelSelectController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-       return numberOfSections
+    numberOfSections
     }
 
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return savedLevelNames.count
+        savedLevelNames.count
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        sectionTitles[section]
     }
 
     override func tableView(_ tableView: UITableView,

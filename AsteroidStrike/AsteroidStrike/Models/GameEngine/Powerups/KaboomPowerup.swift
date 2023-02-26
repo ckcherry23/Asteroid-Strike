@@ -12,7 +12,7 @@ class KaboomPowerup: Powerup {
     private var blastRadius: CGFloat = 200
 
     var isPowerupActivated: Bool {
-        getActivatedPowerups(gameEngine: gameEngine).count > 0
+        !getActivatedPowerups(gameEngine: gameEngine).isEmpty
     }
 
     init(gameEngine: GameEngine) {

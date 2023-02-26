@@ -27,7 +27,7 @@ class Bucket {
     var opening: CGRect {
         let openingSize = CGSize(width: 120, height: 10)
         return CGRect(origin: CGPoint(x: leftEdge.position.dx, y: leftEdge.source.y),
-               size: openingSize)
+                      size: openingSize)
     }
 
     init(center: CGPoint = CGPoint()) {
@@ -52,7 +52,7 @@ class Bucket {
     }
 
     private func move() {
-        physicsBodies.forEach({ $0.applyImpulse(impulse: Bucket.defaultSpeed)})
+        physicsBodies.forEach({ $0.applyImpulse(impulse: Bucket.defaultSpeed) })
     }
 
     private func isAtLeftBoundary(of rect: CGRect) -> Bool {

@@ -17,8 +17,8 @@ class Ball {
     private(set) var physicsBody: CirclePhysicsBody
 
     private var timeElapsedSinceBallMovement: TimeInterval = 0.0
-    private var lastRecordedTime: Date = Date()
-    private var lastRecordedLocation: CGPoint = CGPoint.zero
+    private var lastRecordedTime = Date()
+    private var lastRecordedLocation = CGPoint.zero
 
     var frame: CGRect {
         physicsBody.boundingBox

@@ -30,7 +30,7 @@
 		C76463B3299F74F400AF0413 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646394299F74F300AF0413 /* Peg.swift */; };
 		C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646395299F74F300AF0413 /* GameboardObject.swift */; };
 		C76463B5299F74F400AF0413 /* Gameboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646396299F74F300AF0413 /* Gameboard.swift */; };
-		C76463B6299F74F400AF0413 /* PhysicsBodyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646398299F74F300AF0413 /* PhysicsBodyProtocols.swift */; };
+		C76463B6299F74F400AF0413 /* Movable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646398299F74F300AF0413 /* Movable.swift */; };
 		C76463B7299F74F400AF0413 /* CollisionResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7646399299F74F300AF0413 /* CollisionResolver.swift */; };
 		C76463B8299F74F400AF0413 /* PhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764639A299F74F300AF0413 /* PhysicsBody.swift */; };
 		C76463B9299F74F400AF0413 /* PhysicsCollision.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764639B299F74F300AF0413 /* PhysicsCollision.swift */; };
@@ -64,8 +64,8 @@
 		C7F056DC29A5145400F035CD /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DB29A5145400F035CD /* Block.swift */; };
 		C7F056E029A6328B00F035CD /* LevelDesignController+ActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */; };
 		C7F056E229A6341300F035CD /* LevelDesignController+Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */; };
-		C7F056EB29A6554800F035CD /* ObserverPatternHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */; };
-		C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EC29A691C400F035CD /* ConversionHelpers.swift */; };
+		C7F056EB29A6554800F035CD /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EA29A6554800F035CD /* Observer.swift */; };
+		C7F056ED29A691C400F035CD /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056EC29A691C400F035CD /* Convert.swift */; };
 		C7F056F129A7468600F035CD /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056F029A7468600F035CD /* GameMode.swift */; };
 		C7F056F529A7919800F035CD /* GameplayController+Popups.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F056F429A7919800F035CD /* GameplayController+Popups.swift */; };
 /* End PBXBuildFile section */
@@ -111,7 +111,7 @@
 		C7646394299F74F300AF0413 /* Peg.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
 		C7646395299F74F300AF0413 /* GameboardObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameboardObject.swift; sourceTree = "<group>"; };
 		C7646396299F74F300AF0413 /* Gameboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gameboard.swift; sourceTree = "<group>"; };
-		C7646398299F74F300AF0413 /* PhysicsBodyProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBodyProtocols.swift; sourceTree = "<group>"; };
+		C7646398299F74F300AF0413 /* Movable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movable.swift; sourceTree = "<group>"; };
 		C7646399299F74F300AF0413 /* CollisionResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollisionResolver.swift; sourceTree = "<group>"; };
 		C764639A299F74F300AF0413 /* PhysicsBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsBody.swift; sourceTree = "<group>"; };
 		C764639B299F74F300AF0413 /* PhysicsCollision.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicsCollision.swift; sourceTree = "<group>"; };
@@ -149,8 +149,8 @@
 		C7F056DB29A5145400F035CD /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		C7F056DF29A6328B00F035CD /* LevelDesignController+ActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+ActionButtons.swift"; sourceTree = "<group>"; };
 		C7F056E129A6341300F035CD /* LevelDesignController+Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelDesignController+Palette.swift"; sourceTree = "<group>"; };
-		C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverPatternHelpers.swift; sourceTree = "<group>"; };
-		C7F056EC29A691C400F035CD /* ConversionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionHelpers.swift; sourceTree = "<group>"; };
+		C7F056EA29A6554800F035CD /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		C7F056EC29A691C400F035CD /* Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
 		C7F056F029A7468600F035CD /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		C7F056F429A7919800F035CD /* GameplayController+Popups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameplayController+Popups.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -276,7 +276,7 @@
 			children = (
 				C764639C299F74F300AF0413 /* PhysicsWorld.swift */,
 				C764639A299F74F300AF0413 /* PhysicsBody.swift */,
-				C7646398299F74F300AF0413 /* PhysicsBodyProtocols.swift */,
+				C7646398299F74F300AF0413 /* Movable.swift */,
 				C764639B299F74F300AF0413 /* PhysicsCollision.swift */,
 				C7646399299F74F300AF0413 /* CollisionResolver.swift */,
 				C77E659729A807F300F2D8BD /* PhysicsCollisionDelegate.swift */,
@@ -389,8 +389,8 @@
 		C7F056E929A6552F00F035CD /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C7F056EA29A6554800F035CD /* ObserverPatternHelpers.swift */,
-				C7F056EC29A691C400F035CD /* ConversionHelpers.swift */,
+				C7F056EA29A6554800F035CD /* Observer.swift */,
+				C7F056EC29A691C400F035CD /* Convert.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -563,9 +563,9 @@
 				C76463A1299F74F400AF0413 /* ZIndices.swift in Sources */,
 				C76463BD299F74F400AF0413 /* Ball.swift in Sources */,
 				C76463AA299F74F400AF0413 /* LevelSelectController.swift in Sources */,
-				C7F056EB29A6554800F035CD /* ObserverPatternHelpers.swift in Sources */,
+				C7F056EB29A6554800F035CD /* Observer.swift in Sources */,
 				C76463AC299F74F400AF0413 /* CGPath.swift in Sources */,
-				C76463B6299F74F400AF0413 /* PhysicsBodyProtocols.swift in Sources */,
+				C76463B6299F74F400AF0413 /* Movable.swift in Sources */,
 				C77E65B729AAB28700F2D8BD /* RendererDelegate.swift in Sources */,
 				C76463BC299F74F400AF0413 /* Wall.swift in Sources */,
 				C77E65A929A81BB300F2D8BD /* PhysicsBodyCategory.swift in Sources */,
@@ -581,7 +581,7 @@
 				C76463AB299F74F400AF0413 /* GameplayController.swift in Sources */,
 				C77E65AD29A9D5B000F2D8BD /* BeatTheScoreMode.swift in Sources */,
 				C76463B4299F74F400AF0413 /* GameboardObject.swift in Sources */,
-				C7F056ED29A691C400F035CD /* ConversionHelpers.swift in Sources */,
+				C7F056ED29A691C400F035CD /* Convert.swift in Sources */,
 				C77E65AF29AA056A00F2D8BD /* SiamMode.swift in Sources */,
 				C76463A8299F74F400AF0413 /* CannonView.swift in Sources */,
 				C76463A5299F74F400AF0413 /* PegView.swift in Sources */,

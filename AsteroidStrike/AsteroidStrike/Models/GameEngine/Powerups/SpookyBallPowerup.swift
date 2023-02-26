@@ -14,7 +14,7 @@ class SpookyBallPowerup: Powerup {
     }
 
     var isPowerupActivated: Bool {
-        getActivatedPowerups(gameEngine: gameEngine).count > 0
+        !getActivatedPowerups(gameEngine: gameEngine).isEmpty
     }
 
     func handlePowerup() {

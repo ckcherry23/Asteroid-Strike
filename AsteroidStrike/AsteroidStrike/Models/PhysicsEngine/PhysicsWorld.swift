@@ -10,14 +10,14 @@ import Foundation
 
 class PhysicsWorld {
     private static var defaultFrameRate: Float = 60
-    private static var defaultGravity: CGVector = CGVector(dx: 0, dy: 200)
+    private static var defaultGravity = CGVector(dx: 0, dy: 200)
 
     private var physicsBodies: [PhysicsBody] = []
 
     static var gravity: CGVector = defaultGravity
 
     var frameRate: Float = PhysicsWorld.defaultFrameRate
-    var origin: CGPoint = CGPoint.zero
+    var origin = CGPoint.zero
 
     let collisionResolvers: [any CollisionResolver] = [ImpulseResolver()]
 

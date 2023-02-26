@@ -54,11 +54,11 @@ enum PegType: Codable {
     case inverter
 
     static let pegViewMapping: [PegType: (Peg) -> (PegView) ] = [
-        .blue: { (peg) in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
-        .orange: { (peg) in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
-        .green: { (peg) in GreenPegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
-        .zombie: { (peg) in ZombiePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
-        .inverter: { (peg) in InverterPegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
+        .blue: { peg in BluePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .orange: { peg in OrangePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .green: { peg in GreenPegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .zombie: { peg in ZombiePegView(at: peg.location, radius: peg.radius, angle: peg.angle) },
+        .inverter: { peg in InverterPegView(at: peg.location, radius: peg.radius, angle: peg.angle) }
     ]
 
     static let pegScoreMapping: [PegType: Int ] = [

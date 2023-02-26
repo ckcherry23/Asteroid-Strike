@@ -24,35 +24,35 @@ class PaletteButton: UIButton {
         }
     }
 
-    func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {{ _ in () }}
+    func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void { { _ in () } }
 }
 
 class BluePegButton: PaletteButton {
     override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
-        { (tappedLocation) in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .blue) }
+        { tappedLocation in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .blue) }
     }
 }
 
 class OrangePegButton: PaletteButton {
     override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
-        { (tappedLocation) in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .orange) }
+        { tappedLocation in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .orange) }
     }
 }
 
 class GreenPegButton: PaletteButton {
     override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
-        { (tappedLocation) in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .green) }
+        { tappedLocation in levelDesigner.addPegToGameboard(pegLocation: tappedLocation, pegType: .green) }
     }
 }
 
 class BlockButton: PaletteButton {
     override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
-        { (tappedLocation) in levelDesigner.addBlockToGameboard(blockLocation: tappedLocation) }
+        { tappedLocation in levelDesigner.addBlockToGameboard(blockLocation: tappedLocation) }
     }
 }
 
 class EraseButton: PaletteButton {
     override func getModifyGameboardClosure(levelDesigner: LevelDesigner) -> (CGPoint) -> Void {
-        { (tappedLocation) in levelDesigner.eraseObjectFromGameboard(tappedLocation: tappedLocation) }
+        { tappedLocation in levelDesigner.eraseObjectFromGameboard(tappedLocation: tappedLocation) }
     }
 }
