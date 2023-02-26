@@ -170,8 +170,10 @@ class GameplayController: UIViewController {
 
     private func fadeOutViews(views: [UIView], delay: TimeInterval = 0.0) {
         for (index, view) in views.enumerated() {
-            isDisappearAnimationComplete = false
             let animationDelay = delay * Double(index)
+            if animationDelay > 0 {
+                isDisappearAnimationComplete = false
+            }
             UIView.animate(withDuration: GameplayController.pegViewAnimationDuration, delay: animationDelay,
                            animations: { view.alpha = 0.0 }, completion: { _ in
                 if index == views.count - 1 {
