@@ -196,6 +196,14 @@ class LevelDesignController: UIViewController {
         }
     }
 
+    @IBAction private func onTapStartButton(_ sender: UIButton) {
+        guard levelDesigner.gameboard.isValidLevel() else {
+            showInvalidLevelDesignModal()
+            return
+        }
+        self.performSegue(withIdentifier: "showSegueWithGameboard", sender: self)
+    }
+
     @IBAction private func unwindToLevelDesign(sender: UIStoryboardSegue) {
         guard let levelSelectController = sender.source as? LevelSelectController,
               let loadedLevel = levelSelectController.loadedLevel
