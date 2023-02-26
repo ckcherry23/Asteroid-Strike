@@ -6,6 +6,7 @@
 //
 
 import CoreGraphics
+import Foundation
 
 class ExplosionDelegate: PhysicsCollisionDelegate {
     func onCollision(physicsCollision: PhysicsCollision) {
@@ -13,7 +14,9 @@ class ExplosionDelegate: PhysicsCollisionDelegate {
     }
 
     private func applyExplosionImpulse(physicsCollision: PhysicsCollision) {
-        let explosionImpulse = CGVector(dx: -800, dy: -800)
+        let xComponent = Double.random(in: -800...800)
+        let yComponent = Double.random(in: 400...800) * (-1)
+        let explosionImpulse = CGVector(dx: xComponent, dy: yComponent)
         if physicsCollision.firstBody.categoryBitmask == PhysicsBodyCategory.activePowerup {
             physicsCollision.secondBody.applyImpulse(impulse: explosionImpulse)
         } else if physicsCollision.secondBody.categoryBitmask == PhysicsBodyCategory.activePowerup {
