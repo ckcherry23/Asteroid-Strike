@@ -19,7 +19,11 @@ extension CGPoint {
         sqrt(pow((x - other.x), 2) + pow((y - other.y), 2))
     }
 
-    public func rotatedUpsideDown(frame: CGRect) -> CGPoint {
-        CGPoint(x: frame.maxX - x, y: frame.maxY - y)
+    public func rotatedUpsideDown(frame: CGRect, superFrame: CGRect?) -> CGPoint {
+        guard let superFrameRect = superFrame else {
+            return CGPoint(x: frame.maxX - x, y: frame.maxY - y)
+        }
+        let bottomOffset = superFrameRect.maxY - frame.maxY - frame.minY + 20
+        return CGPoint(x: frame.maxX - x, y: frame.maxY - y - bottomOffset)
     }
 }

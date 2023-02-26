@@ -128,7 +128,8 @@ class GameplayController: UIViewController {
             if !isGameboardUpsideDown {
                 ballViews[index].center = ball.location
             } else {
-                ballViews[index].center = ball.location.rotatedUpsideDown(frame: gameplayArea.frame)
+                ballViews[index].center = ball.location.rotatedUpsideDown(
+                    frame: gameplayArea.frame, superFrame: gameplayArea.superview?.frame)
             }
         }
     }
@@ -282,7 +283,8 @@ extension GameplayController: RendererDelegate {
     func toggleGameboardOrientation() {
         isGameboardUpsideDown.toggle()
         canvasObjects.forEach({
-            $0.center = $0.center.rotatedUpsideDown(frame: gameplayArea.frame)
+            $0.center = $0.center.rotatedUpsideDown(frame: gameplayArea.frame,
+                                                    superFrame: gameplayArea.superview?.frame)
         })
     }
 

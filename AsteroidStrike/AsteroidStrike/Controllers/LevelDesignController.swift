@@ -41,6 +41,10 @@ class LevelDesignController: UIViewController {
     @IBOutlet private var heightSlider: UISlider!
     @IBOutlet private var rotationSlider: UISlider!
 
+    override func viewDidLayoutSubviews() {
+        levelDesigner.updateCanvasSize(canvas.frame.size)
+    }
+
     @IBAction private func onTapCanvas(_ gestureRecognizer: UITapGestureRecognizer) {
         let taplocation: CGPoint = gestureRecognizer.location(in: canvas)
         guard let modifyGameboard =
@@ -158,7 +162,7 @@ class LevelDesignController: UIViewController {
             showInvalidLevelNameModal()
             return
         }
-        guard levelDesigner.gameboard.pegs.contains(where: { $0.type == .orange }) else {
+        guard levelDesigner.gameboard.isValidLevel() else {
             showInvalidLevelDesignModal()
             return
         }

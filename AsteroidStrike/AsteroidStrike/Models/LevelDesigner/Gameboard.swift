@@ -8,11 +8,15 @@
 import CoreGraphics
 
 struct Gameboard {
-    static let defaultRect = CGRect(origin: CGPoint.zero, size: CGSize(width: 800, height: 600))
+    static let defaultRect = CGRect(origin: CGPoint.zero, size: CGSize(width: 800, height: 800))
 
     private(set) var pegs: Set<Peg> = Set<Peg>()
     private(set) var blocks: Set<Block> = Set<Block>()
     private(set) var board = CGPath(rect: Gameboard.defaultRect, transform: nil)
+
+    func isValidLevel() -> Bool {
+        pegs.contains(where: { $0.type == .orange })
+    }
 
     mutating func addPeg(addedPeg: Peg) {
         guard pegCanBeAdded(addedPeg: addedPeg) else {

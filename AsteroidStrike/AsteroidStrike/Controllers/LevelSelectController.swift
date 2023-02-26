@@ -10,8 +10,14 @@ import UIKit
 class LevelSelectController: UITableViewController {
     private let numberOfSections = 2
     private let sectionTitles = ["Default Levels", "Your Saved Levels"]
+
+    private var preloadedLevelNames: [String] = []
     private var savedLevelNames: [String] = []
     private(set) var loadedLevel: SavedLevel?
+
+    private var levelCounts: [Int] {
+        [preloadedLevelNames.count, savedLevelNames.count]
+    }
 
     private var levelStorage: LevelStorage = JSONLevelStorage()
 
@@ -21,12 +27,12 @@ class LevelSelectController: UITableViewController {
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-    numberOfSections
+        numberOfSections
     }
 
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        savedLevelNames.count
+        levelCounts[section]
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -44,12 +50,17 @@ class LevelSelectController: UITableViewController {
         let selectedLevelName = savedLevelNames[indexPath.row]
         levelStorage.loadLevel(levelName: selectedLevelName, completion: { result in
             switch result {
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self.showInvalidLevelModal()
+                return
             case .success(let level):
                 self.loadedLevel = level
             }
         })
+        guard loadedLevel?.gameBoard.isValidLevel() != false else {
+            showInvalidLevelModal()
+            return
+        }
         self.performSegue(withIdentifier: "unwindToLevelDesign", sender: self)
         self.performSegue(withIdentifier: "showSegueWithLoadedLevel", sender: self)
     }
@@ -79,6 +90,7 @@ class LevelSelectController: UITableViewController {
 
     private func fetchTableData() {
         getSavedLevelNames()
+        getPreloadedLevelNames()
     }
 
     private func getSavedLevelNames() {
@@ -88,6 +100,17 @@ class LevelSelectController: UITableViewController {
                 print(error)
             case .success(let levelNames):
                 self.savedLevelNames = levelNames
+            }
+        }
+    }
+
+    private func getPreloadedLevelNames() {
+        levelStorage.getAllLevelNames { result in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let levelNames):
+                self.preloadedLevelNames = levelNames
             }
         }
     }
