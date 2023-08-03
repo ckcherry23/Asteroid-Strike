@@ -1,8 +1,85 @@
-# CS3217 Problem Set 4
+# Asteroid Strike
 
-**Name:** Charisma Kausar
+## How to Play
+*Asteroid Strike* is a space-themed Peggle clone where the player launches a cannon and tries to hit all the targets with a limited number of balls. 
 
-**Matric No:** A0226593X
+You can watch a demo of the gameplay at:  [Asteroid Strike](https://youtu.be/dvfQEP6nmpc)
+
+ [![Asteroid Strike](https://i.ytimg.com/vi/dvfQEP6nmpc/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAMYuUOqJnofltRZqCGcIHNme8vLA)](https://youtu.be/dvfQEP6nmpc)
+
+### Cannon Direction
+The ball can be launched by first aiming the cannon and then triggering the launch as follows:
+
+1. Pan/drag across the gameplay area, to aim the cannon towards the location of the pan gesture. The cannon will tilt to indicate the direction it is pointing towards.
+
+2. Tap on the gameplay area to launch the cannon in the existing direction of the cannon. 
+
+By dragging/panning across the screen, the cannon can be aimed in all directions from left to down to right. It cannot be aimed upwards. In usual mathematical graphs, if the cannon is at the origin, the angles allowed are in the third and fourth quadrants.
+
+The cannon cannot be launched when the previous launch is not completed yet.
+
+### Win and Lose Conditions
+
+#### Classic Mode
+* Win condition: All orange pegs (Mars planets) are cleared.
+* Lose condition: All balls are used up and there is at least one orange peg (Mars planet) left.
+
+#### Beat The Score Mode
+* Win condition: The player's score is higher than the target score before or at the time when the timer is complete. If the ball has not exited the gameplay area yet when the timer is up, the glowing pegs are still counted in the score.
+* Lose condition: The player's score is lower than the target score when the timer is complete. 
+
+#### Siam Left, Siam Right Mode
+* Win condition: No more balls are left and none of the pegs were hit or lit up.
+* Lose condition: A peg has been hit or lit up.
+
+
+### Powerups
+
+#### Ka-Boom
+The ka-boom powerup is the default powerup for all modes except 'Classic Spooky Ball'. On hitting a green peg, the peg explodes and lights up all nearby pegs. This explosion could also be a chain reaction.
+
+#### Spooky Ball
+For every time a green peg is hit, the ball appears on the top of the screen with the same x coordinate as it left. If multiple green pegs are hit in the same launch, the ball reappears at the top multiple times according to the powerup count.
+
+### Spicy Pegs
+
+#### Zombie pegs
+In a peg with at least 10 pegs, a random non-orange peg is converted to a zombie peg. When the ball hits a zombie peg, it is converted to another ball. The zombie peg is removed from the screen.
+
+#### Confusement pegs (Inverter peg)
+In a peg with at least 20 pegs, a random non-orange peg is converted to an inverter peg. When the ball hits a inverter peg, the gameplay area is rotated 180 degrees. The cannon and bucket are still in the same location. However, the ball is launched from below and the bucket catches from above, causing 'confusion'.
+
+### Moving Bucket
+The bucket oscillates between the left and right edges of the screen at constant speed. When the ball enters the bucket from the top, it disappears from the gameboard. When the ball hits the side of the bucket, it will get deflected. 
+
+For classic mode, a ball is given. For beat the score mode, 5 seconds are added. For siam mode, a ball is reduced. 
+
+When spooky ball is on, the bucket adds a ball and teleports the ball to the top of the board. When inverted (confusement) peg is activated, the bucket is shown below but is actually on top of the screen.
+## Level Designer Additional Features
+
+### Peg Rotation
+Both circular pegs and rectangular blocks can be rotated. 
+
+To rotate a peg or block, tap on it in the level designer. There will be a rotation slider in the bottom-right UI of the screen. The peg or block can be roatted to a full 360 degrees or any angle in between.
+
+### Peg Resizing
+To resize a peg or block, tap on it in the level designer. There will be resize sliders in the bottom-right UI of the screen. For circular pegs, there is a size slider, and for rectangular blocks, there are 2 sliders for both height and width. The peg or block can be resized to any size upto 4 times its original size in area.
+
+## Bells and Whistles
+### Theme
+Space theme is used throughout the game. 
+* Balls are asteroids
+* Pegs are planets
+* Rectangular blocks are unarmed spaceships
+* The bucket is a blackhole
+
+### Gameplay UI
+Added UI to show the user the following information:
+* Number of balls left
+* Number of orange pegs left
+* Score
+* Timer
+These are shown or hidden based on the game mode.
 
 ## Dev Guide
 *Asteroid Strike* is an iPad app built following the **Model-View-Controller (MVC)** framework. It uses **Storyboards** with auto-layout for responsive UI views. For updating the views based on the model, it follows the Observer pattern. Responsibilities are segregated using the Delegate pattern. The app was built as an extension to the *Level Designer* app from Problem Set 2 and *Core Gameplay* from Problem Set 3.
@@ -106,60 +183,6 @@ This is how the game loop works:
 The sequence diagram of how a cannon ball is launched is as follows:
 
 ![Cannon Launch](./CannonLaunch.png)
-
-## Rules of the Game
-*Asteroid Strike* is a space-themed Peggle clone where the player launches a cannon and tries to hit all the targets with a limited number of balls. 
-
-### Cannon Direction
-The ball can be launched by first aiming the cannon and then triggering the launch as follows:
-
-1. Pan/drag across the gameplay area, to aim the cannon towards the location of the pan gesture. The cannon will tilt to indicate the direction it is pointing towards.
-
-2. Tap on the gameplay area to launch the cannon in the existing direction of the cannon. 
-
-By dragging/panning across the screen, the cannon can be aimed in all directions from left to down to right. It cannot be aimed upwards. In usual mathematical graphs, if the cannon is at the origin, the angles allowed are in the third and fourth quadrants.
-
-The cannon cannot be launched when the previous launch is not completed yet.
-
-### Win and Lose Conditions
-
-### Classic Mode
-* Win condition: All orange pegs (Mars planets) are cleared.
-* Lose condition: All balls are used up and there is at least one orange peg (Mars planet) left.
-
-### Beat The Score Mode
-* Win condition: The player's score is higher than the target score before or at the time when the timer is complete. If the ball has not exited the gameplay area yet when the timer is up, the glowing pegs are still counted in the score.
-* Lose condition: The player's score is lower than the target score when the timer is complete. 
-
-### Siam Left, Siam Right Mode
-* Win condition: No more balls are left and none of the pegs were hit or lit up.
-* Lose condition: A peg has been hit or lit up.
-
-## Level Designer Additional Features
-
-### Peg Rotation
-Both circular pegs and rectangular blocks can be rotated. 
-
-To rotate a peg or block, tap on it in the level designer. There will be a rotation slider in the bottom-right UI of the screen. The peg or block can be roatted to a full 360 degrees or any angle in between.
-
-### Peg Resizing
-To resize a peg or block, tap on it in the level designer. There will be resize sliders in the bottom-right UI of the screen. For circular pegs, there is a size slider, and for rectangular blocks, there are 2 sliders for both height and width. The peg or block can be resized to any size upto 4 times its original size in area.
-
-## Bells and Whistles
-### Theme
-Space theme is used throughout the game. 
-* Balls are asteroids
-* Pegs are planets
-* Rectangular blocks are unarmed spaceships
-* The bucket is a blackhole
-
-### Gameplay UI
-Added UI to show the user the following information:
-* Number of balls left
-* Number of orange pegs left
-* Score
-* Timer
-These are shown or hidden based on the game mode.
 
 ## Tests
 The test plan for *Asteroid Strike* consists on unit tests and end-to-end testing. The models can be unit tested whereas the contorllers and views and tested during manual playtesting.
@@ -403,34 +426,3 @@ Go to the Gameplay page by clicking on the 'Start Game' button on the Home Scree
 * https://pixabay.com/illustrations/planet-astronaut-desert-fantasy-4513223/
 * https://www.vecteezy.com/vector-art/17125591-outer-space-background-with-planets-and-stars
 * https://craftpix.net/freebies/free-sci-fi-icons-space-objects/?num=1&count=11&sq=space&pos=1
-
-
-## Written Answers
-
-### Reflecting on your Design
-
-1. Do you think you have designed your code in the previous problem sets well enough?
-
-Not really. 
-- Yes, there were a few useful things a did like use protocols for any object that can be places on a canvas. This helped me reuse the protocol for blocks and all the new canvas objects.
-- For the not so good things, see below.
-
-2. Is there any technical debt that you need to clean in this problem set?
-
-Yes. 
-- For pset 2:
-  - I did not handle edge cases during level storage. So this required a lot of work now to add alerts for all the cases where things could go wrong.
-  - I had a lot of switch case logic in the code. This was not very extensible, so I had to refactor a lot of code, for example, create separate classes for each palette button type to make use of polymorphism. 
-- For pset 3:
-  - I did not have any way to add logic on collision. So I had to add in a collision delegate for this pset.
-  - I could have looked into polygon body collision then itself to reduce the burden in this pset, and perhaps impelemnt more bells and whistles.
-
-
-3. If you were to redo the entire application, is there anything you would have done differently?
-
-Yes.
-- Currently my game engine checks whether an object has been hit in the physics world, and applies its own logic. I thought of not overriding the collision repsonse functions and instead add any behaviour usinga delegate on collion. However, this made it difficult to implement powerups and spicy pegs collision as they are very differemt from general physics. So overriding the collision response functions would have been better.
-
-- I could have also used the visitor pattern for collision detection resolution to avoid the switch case. However my current design handles collsiions in a compeltely different class, which wpuld need a switch case to initialise the respective functions.
-
-
